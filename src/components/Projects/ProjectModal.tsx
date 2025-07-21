@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { Project } from './types';
+import { Project } from './core/types';
 import { getStatusColor, getStatusLabel } from './core/data';
 import { styles } from './core/styles';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Project } from './types';
+import { Project } from './core/types';
 import ProjectCard from './ProjectCard';
 import { styles } from './core/styles';
 

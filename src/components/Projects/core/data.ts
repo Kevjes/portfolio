@@ -1,6 +1,6 @@
 import { FaMobile, FaDesktop, FaCode } from 'react-icons/fa';
 import { SiFlutter, SiReact, SiTypescript, SiFirebase, SiNodedotjs, SiMongodb } from 'react-icons/si';
-import { Project, Category } from '../types';
+import { Project, Category } from './types';
 
 export const projects: Project[] = [
   {
