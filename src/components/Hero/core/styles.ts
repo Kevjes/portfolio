@@ -49,7 +49,6 @@ export const expertiseContainerStyles = {
   minWidth: '300px',
   display: 'flex',
   flexDirection: 'column',
-  gap: '1.25rem'
 } as const;
 
 export const scrollIndicatorStyles = {

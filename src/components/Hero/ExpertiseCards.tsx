@@ -9,6 +9,7 @@ interface ExpertiseCardsProps {
 }
 
 const ExpertiseCards: React.FC<ExpertiseCardsProps> = ({ expertiseControls }) => {
+
   const [activeCard, setActiveCard] = useState<number | null>(null);
   
   // Motion values for liquid glass effect
@@ -33,17 +34,11 @@ const ExpertiseCards: React.FC<ExpertiseCardsProps> = ({ expertiseControls }) =>
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 50 }}
+      initial={{ opacity: 1, x: 50 }}
       animate={{ opacity: 1, x: 0, ...expertiseControls }}
       transition={{ duration: 0.8, delay: 0.7 }}
       style={{
         ...expertiseContainerStyles,
-        background: 'rgba(255, 255, 255, 0.08)',
-        backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255, 255, 255, 0.2)',
-        boxShadow: '0 10px 30px -10px rgba(0,0,0,0.2), inset 0 1px 0 0 rgba(255,255,255,0.3)',
-        position: 'relative',
-        overflow: 'hidden',
       }}
       onMouseMove={handleMouseMove}
     >
