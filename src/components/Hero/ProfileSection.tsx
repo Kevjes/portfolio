@@ -469,7 +469,6 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ scrollToProjects }) => 
               }}
               whileTap={{ scale: 0.9, rotate: 5 }}
               style={{
-                width: '50px',
                 height: '50px',
                 borderRadius: '50%',
                 display: 'flex',
