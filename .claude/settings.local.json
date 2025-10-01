@@ -5,7 +5,10 @@
       "Bash(python:*)",
       "Bash(start notepad:*)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:kevjes.github.io)",
+      "Bash(curl:*)",
+      "Read(//c/**)"
     ],
     "deny": [],
     "ask": []

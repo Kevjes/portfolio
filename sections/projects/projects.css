@@ -33,27 +33,24 @@
 
 .project-card {
     background: rgba(26, 26, 26, 0.8);
-    border-radius: 20px;
+    border-radius: 0;
     overflow: hidden;
     border: 2px solid rgba(197, 151, 100, 0.1);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     position: relative;
     opacity: 0;
-    transform: translateY(30px) scale(0.95);
+    transform: translateY(30px);
     cursor: pointer;
 }
 
 .project-card.animate-in {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
 }
 
 .project-card:hover {
-    transform: translateY(-15px) scale(1.02);
-    border-color: rgba(197, 151, 100, 0.3);
-    box-shadow:
-        0 25px 50px rgba(0, 0, 0, 0.5),
-        0 0 80px rgba(197, 151, 100, 0.15);
+    border: 2px solid #c59764;
+    box-shadow: 0 0 0 4px rgba(197, 151, 100, 0.1);
 }
 
 .project-image {
@@ -72,7 +69,7 @@
 }
 
 .project-card:hover .project-image img {
-    transform: scale(1.15);
+    transform: scale(1.05);
     filter: grayscale(0%);
 }
 
@@ -82,19 +79,19 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg,
-        rgba(197, 151, 100, 0.9),
-        rgba(212, 175, 55, 0.9));
+    background: rgba(0, 0, 0, 0);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
     opacity: 0;
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.3s ease, background 0.3s ease;
+    pointer-events: none;
 }
 
 .project-card:hover .project-overlay {
     opacity: 1;
+    pointer-events: auto;
 }
 
 .project-link,
@@ -103,7 +100,7 @@
     height: 55px;
     background: rgba(10, 10, 10, 0.9);
     border: 2px solid #c59764;
-    border-radius: 50%;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -194,7 +191,7 @@
     padding: 6px 14px;
     background: rgba(197, 151, 100, 0.1);
     border: 1px solid rgba(197, 151, 100, 0.3);
-    border-radius: 20px;
+    border-radius: 0;
     font-size: 12px;
     font-weight: 600;
     color: #c59764;
@@ -242,7 +239,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 20px;
+    border-radius: 0;
     opacity: 0;
     background: linear-gradient(45deg,
         #c59764,
@@ -293,7 +290,7 @@
     background: linear-gradient(135deg, #c59764, #d4af37);
     color: #0a0a0a;
     padding: 6px 12px;
-    border-radius: 20px;
+    border-radius: 0;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -408,7 +405,7 @@
 .project-modal-content {
     background: rgba(26, 26, 26, 0.95);
     border: 2px solid rgba(197, 151, 100, 0.3);
-    border-radius: 20px;
+    border-radius: 0;
     max-width: 800px;
     width: 100%;
     max-height: 90vh;
@@ -431,7 +428,7 @@
     height: 40px;
     background: rgba(197, 151, 100, 0.1);
     border: 2px solid #c59764;
-    border-radius: 50%;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -57,6 +57,7 @@
     position: relative;
     padding: 5px 0;
     transition: color 0.3s ease;
+    text-transform: uppercase;
 }
 
 .nav-link::before {
@@ -89,7 +90,7 @@
 .theme-toggle {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 0;
     background: rgba(197, 151, 100, 0.1);
     border: 1px solid var(--gray);
     color: var(--gold);
@@ -120,7 +121,7 @@
     height: 2px;
     background: var(--gold);
     transition: all 0.3s ease;
-    border-radius: 2px;
+    border-radius: 0;
 }
 
 .hamburger.active span:nth-child(1) {
