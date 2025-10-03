@@ -26,6 +26,10 @@
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
     <!-- Global CSS -->
     <link rel="stylesheet" href="assets/css/global.css">
 
@@ -127,6 +131,11 @@
             }
 
             console.log('✅ All scripts loaded');
+
+            // Load Firebase portfolio script
+            const firebaseScript = document.createElement('script');
+            firebaseScript.src = 'js/firebase-portfolio.js';
+            document.body.appendChild(firebaseScript);
 
             // Dispatch custom event when everything is loaded
             document.dispatchEvent(new CustomEvent('sectionsLoaded'));

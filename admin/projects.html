@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Projets - Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard Admin</h2>
+                <p id="userEmail">admin@example.com</p>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="projects.html" class="active"><i class="fas fa-project-diagram"></i> Projets</a></li>
+                <li><a href="skills.html"><i class="fas fa-code"></i> Compétences</a></li>
+                <li><a href="experience.html"><i class="fas fa-briefcase"></i> Expériences</a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1>Gestion des Projets</h1>
+                <p>Ajoutez, modifiez ou supprimez vos projets</p>
+            </div>
+
+            <div class="data-section">
+                <div class="section-header">
+                    <h2 class="section-title">Liste des projets</h2>
+                    <button class="btn-primary" onclick="openModal()">
+                        <i class="fas fa-plus"></i> Ajouter un projet
+                    </button>
+                </div>
+
+                <div id="projectsList">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Ajouter un projet</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+
+            <form id="projectForm">
+                <div class="form-group">
+                    <label for="title">Titre *</label>
+                    <input type="text" id="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea id="description" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageUrl">URL de l'image *</label>
+                    <input type="url" id="imageUrl" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Catégorie *</label>
+                    <input type="text" id="category" placeholder="ex: mobile, web, backend" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tags">Technologies (séparées par des virgules) *</label>
+                    <input type="text" id="tags" placeholder="ex: Flutter, Firebase, API" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="links">Liens (JSON array)</label>
+                    <textarea id="links" placeholder='[{"icon":"fab fa-google-play","url":"https://..."}]'></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Annuler</button>
+                    <button type="submit" class="btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script src="js/firebase-config.js"></script>
+    <script>
+        let editingProjectId = null;
+
+        checkAuth().then(user => {
+            if (user) {
+                document.getElementById('userEmail').textContent = user.email;
+                loadProjects();
+            }
+        });
+
+        async function loadProjects() {
+            try {
+                const snapshot = await db.collection('projects').orderBy('createdAt', 'desc').get();
+                const projectsDiv = document.getElementById('projectsList');
+
+                if (snapshot.empty) {
+                    projectsDiv.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 20px;">Aucun projet pour le moment</p>';
+                    return;
+                }
+
+                let html = '<table class="data-table"><thead><tr><th>Titre</th><th>Catégorie</th><th>Tags</th><th>Actions</th></tr></thead><tbody>';
+
+                snapshot.forEach(doc => {
+                    const project = doc.data();
+                    const tags = Array.isArray(project.tags) ? project.tags.join(', ') : '';
+
+                    html += `
+                        <tr>
+                            <td>${project.title}</td>
+                            <td><span class="badge badge-success">${project.category}</span></td>
+                            <td>${tags}</td>
+                            <td class="table-actions">
+                                <button class="btn-secondary" onclick="editProject('${doc.id}')">Modifier</button>
+                                <button class="btn-danger" onclick="deleteProject('${doc.id}')">Supprimer</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                html += '</tbody></table>';
+                projectsDiv.innerHTML = html;
+            } catch (error) {
+                console.error('Error loading projects:', error);
+            }
+        }
+
+        function openModal() {
+            editingProjectId = null;
+            document.getElementById('modalTitle').textContent = 'Ajouter un projet';
+            document.getElementById('projectForm').reset();
+            document.getElementById('projectModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').classList.remove('show');
+        }
+
+        async function editProject(id) {
+            try {
+                const doc = await db.collection('projects').doc(id).get();
+                const project = doc.data();
+
+                editingProjectId = id;
+                document.getElementById('modalTitle').textContent = 'Modifier le projet';
+                document.getElementById('title').value = project.title;
+                document.getElementById('description').value = project.description;
+                document.getElementById('imageUrl').value = project.imageUrl;
+                document.getElementById('category').value = project.category;
+                document.getElementById('tags').value = Array.isArray(project.tags) ? project.tags.join(', ') : '';
+                document.getElementById('links').value = project.links ? JSON.stringify(project.links) : '';
+
+                document.getElementById('projectModal').classList.add('show');
+            } catch (error) {
+                console.error('Error loading project:', error);
+                alert('Erreur lors du chargement du projet');
+            }
+        }
+
+        async function deleteProject(id) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')) return;
+
+            try {
+                await db.collection('projects').doc(id).delete();
+                loadProjects();
+            } catch (error) {
+                console.error('Error deleting project:', error);
+                alert('Erreur lors de la suppression');
+            }
+        }
+
+        document.getElementById('projectForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const projectData = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                imageUrl: document.getElementById('imageUrl').value,
+                category: document.getElementById('category').value,
+                tags: document.getElementById('tags').value.split(',').map(t => t.trim()),
+                links: document.getElementById('links').value ? JSON.parse(document.getElementById('links').value) : [],
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                if (editingProjectId) {
+                    await db.collection('projects').doc(editingProjectId).update(projectData);
+                } else {
+                    projectData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection('projects').add(projectData);
+                }
+
+                closeModal();
+                loadProjects();
+            } catch (error) {
+                console.error('Error saving project:', error);
+                alert('Erreur lors de l\'enregistrement');
+            }
+        });
+    </script>
+</body>
+</html>

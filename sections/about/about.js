@@ -41,24 +41,10 @@ function animateCounter(element, target) {
     }, stepTime);
 }
 
-// Parallax effect for about section
+// Parallax effect for about section - DISABLED to prevent z-index issues
 function initAboutParallax() {
-    const aboutSection = document.querySelector('.about');
-    if (!aboutSection) return;
-
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const aboutTop = aboutSection.offsetTop;
-        const aboutHeight = aboutSection.offsetHeight;
-
-        if (scrolled > aboutTop - window.innerHeight && scrolled < aboutTop + aboutHeight) {
-            const imageFrame = aboutSection.querySelector('.about-image-frame');
-            if (imageFrame) {
-                const offset = (scrolled - aboutTop + window.innerHeight) * 0.1;
-                imageFrame.style.transform = `translateY(${offset}px)`;
-            }
-        }
-    });
+    // Disabled - the transform creates a stacking context that causes stats to overlay the image
+    return;
 }
 
 // Animate highlights on scroll

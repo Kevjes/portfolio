@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Kevin Portfolio</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard Admin</h2>
+                <p id="userEmail">admin@example.com</p>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="projects.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
+                <li><a href="skills.html"><i class="fas fa-code"></i> Compétences</a></li>
+                <li><a href="experience.html"><i class="fas fa-briefcase"></i> Expériences</a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1>Tableau de bord</h1>
+                <p>Bienvenue sur votre dashboard de gestion de portfolio</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard-cards">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Projets</span>
+                        <div class="card-icon"><i class="fas fa-project-diagram"></i></div>
+                    </div>
+                    <div class="card-value" id="projectCount">0</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Compétences</span>
+                        <div class="card-icon"><i class="fas fa-code"></i></div>
+                    </div>
+                    <div class="card-value" id="skillCount">0</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Expériences</span>
+                        <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                    </div>
+                    <div class="card-value" id="experienceCount">0</div>
+                </div>
+            </div>
+
+            <!-- Recent Projects -->
+            <div class="data-section">
+                <div class="section-header">
+                    <h2 class="section-title">Projets récents</h2>
+                    <a href="projects.html" class="btn-primary">Voir tout</a>
+                </div>
+                <div id="recentProjects">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script src="js/firebase-config.js"></script>
+    <script>
+        // Check authentication
+        checkAuth().then(user => {
+            if (user) {
+                document.getElementById('userEmail').textContent = user.email;
+                loadDashboardData();
+            }
+        });
+
+        async function loadDashboardData() {
+            try {
+                // Count projects
+                const projectsSnapshot = await db.collection('projects').get();
+                document.getElementById('projectCount').textContent = projectsSnapshot.size;
+
+                // Count skills
+                const skillsSnapshot = await db.collection('skills').get();
+                document.getElementById('skillCount').textContent = skillsSnapshot.size;
+
+                // Count experiences
+                const experiencesSnapshot = await db.collection('experiences').get();
+                document.getElementById('experienceCount').textContent = experiencesSnapshot.size;
+
+                // Load recent projects
+                const recentProjectsSnapshot = await db.collection('projects')
+                    .orderBy('createdAt', 'desc')
+                    .limit(5)
+                    .get();
+
+                const recentProjectsDiv = document.getElementById('recentProjects');
+
+                if (recentProjectsSnapshot.empty) {
+                    recentProjectsDiv.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 20px;">Aucun projet pour le moment</p>';
+                } else {
+                    let html = '<table class="data-table"><thead><tr><th>Titre</th><th>Catégorie</th><th>Date</th></tr></thead><tbody>';
+
+                    recentProjectsSnapshot.forEach(doc => {
+                        const project = doc.data();
+                        const date = project.createdAt ? new Date(project.createdAt.toDate()).toLocaleDateString('fr-FR') : 'N/A';
+                        html += `
+                            <tr>
+                                <td>${project.title || 'Sans titre'}</td>
+                                <td><span class="badge badge-success">${project.category || 'N/A'}</span></td>
+                                <td>${date}</td>
+                            </tr>
+                        `;
+                    });
+
+                    html += '</tbody></table>';
+                    recentProjectsDiv.innerHTML = html;
+                }
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+            }
+        }
+    </script>
+</body>
+</html>

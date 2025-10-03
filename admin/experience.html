@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Expériences - Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard Admin</h2>
+                <p id="userEmail">admin@example.com</p>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="projects.html"><i class="fas fa-project-diagram"></i> Projets</a></li>
+                <li><a href="skills.html"><i class="fas fa-code"></i> Compétences</a></li>
+                <li><a href="experience.html" class="active"><i class="fas fa-briefcase"></i> Expériences</a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1>Gestion des Expériences</h1>
+                <p>Ajoutez, modifiez ou supprimez vos expériences professionnelles</p>
+            </div>
+
+            <div class="data-section">
+                <div class="section-header">
+                    <h2 class="section-title">Liste des expériences</h2>
+                    <button class="btn-primary" onclick="openModal()">
+                        <i class="fas fa-plus"></i> Ajouter une expérience
+                    </button>
+                </div>
+
+                <div id="experiencesList">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="experienceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Ajouter une expérience</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+
+            <form id="experienceForm">
+                <div class="form-group">
+                    <label for="title">Titre du poste *</label>
+                    <input type="text" id="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Entreprise *</label>
+                    <input type="text" id="company" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="period">Période *</label>
+                    <input type="text" id="period" placeholder="ex: 2020 - 2023" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea id="description" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="technologies">Technologies utilisées (séparées par des virgules)</label>
+                    <input type="text" id="technologies" placeholder="ex: React, Node.js, MongoDB">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Annuler</button>
+                    <button type="submit" class="btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script src="js/firebase-config.js"></script>
+    <script>
+        let editingExperienceId = null;
+
+        checkAuth().then(user => {
+            if (user) {
+                document.getElementById('userEmail').textContent = user.email;
+                loadExperiences();
+            }
+        });
+
+        async function loadExperiences() {
+            try {
+                const snapshot = await db.collection('experiences').orderBy('createdAt', 'desc').get();
+                const experiencesDiv = document.getElementById('experiencesList');
+
+                if (snapshot.empty) {
+                    experiencesDiv.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 20px;">Aucune expérience pour le moment</p>';
+                    return;
+                }
+
+                let html = '<table class="data-table"><thead><tr><th>Titre</th><th>Entreprise</th><th>Période</th><th>Actions</th></tr></thead><tbody>';
+
+                snapshot.forEach(doc => {
+                    const exp = doc.data();
+                    html += `
+                        <tr>
+                            <td>${exp.title}</td>
+                            <td>${exp.company}</td>
+                            <td><span class="badge badge-warning">${exp.period}</span></td>
+                            <td class="table-actions">
+                                <button class="btn-secondary" onclick="editExperience('${doc.id}')">Modifier</button>
+                                <button class="btn-danger" onclick="deleteExperience('${doc.id}')">Supprimer</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                html += '</tbody></table>';
+                experiencesDiv.innerHTML = html;
+            } catch (error) {
+                console.error('Error loading experiences:', error);
+            }
+        }
+
+        function openModal() {
+            editingExperienceId = null;
+            document.getElementById('modalTitle').textContent = 'Ajouter une expérience';
+            document.getElementById('experienceForm').reset();
+            document.getElementById('experienceModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('experienceModal').classList.remove('show');
+        }
+
+        async function editExperience(id) {
+            try {
+                const doc = await db.collection('experiences').doc(id).get();
+                const exp = doc.data();
+
+                editingExperienceId = id;
+                document.getElementById('modalTitle').textContent = 'Modifier l\'expérience';
+                document.getElementById('title').value = exp.title;
+                document.getElementById('company').value = exp.company;
+                document.getElementById('period').value = exp.period;
+                document.getElementById('description').value = exp.description;
+                document.getElementById('technologies').value = Array.isArray(exp.technologies) ? exp.technologies.join(', ') : '';
+
+                document.getElementById('experienceModal').classList.add('show');
+            } catch (error) {
+                console.error('Error loading experience:', error);
+                alert('Erreur lors du chargement de l\'expérience');
+            }
+        }
+
+        async function deleteExperience(id) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer cette expérience ?')) return;
+
+            try {
+                await db.collection('experiences').doc(id).delete();
+                loadExperiences();
+            } catch (error) {
+                console.error('Error deleting experience:', error);
+                alert('Erreur lors de la suppression');
+            }
+        }
+
+        document.getElementById('experienceForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const experienceData = {
+                title: document.getElementById('title').value,
+                company: document.getElementById('company').value,
+                period: document.getElementById('period').value,
+                description: document.getElementById('description').value,
+                technologies: document.getElementById('technologies').value ?
+                    document.getElementById('technologies').value.split(',').map(t => t.trim()) : [],
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                if (editingExperienceId) {
+                    await db.collection('experiences').doc(editingExperienceId).update(experienceData);
+                } else {
+                    experienceData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection('experiences').add(experienceData);
+                }
+
+                closeModal();
+                loadExperiences();
+            } catch (error) {
+                console.error('Error saving experience:', error);
+                alert('Erreur lors de l\'enregistrement');
+            }
+        });
+    </script>
+</body>
+</html>
