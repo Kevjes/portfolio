@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Firebase - Vérification de la connexion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #c59764;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            margin: 10px 0;
+            background: #0a0a0a;
+            border-radius: 8px;
+            border-left: 4px solid #3a3a3a;
+        }
+
+        .status-item.success {
+            border-left-color: #10b981;
+        }
+
+        .status-item.error {
+            border-left-color: #ef4444;
+        }
+
+        .status-item.loading {
+            border-left-color: #3b82f6;
+        }
+
+        .status-label {
+            font-weight: 500;
+        }
+
+        .status-icon {
+            font-size: 20px;
+        }
+
+        .success .status-icon {
+            color: #10b981;
+        }
+
+        .error .status-icon {
+            color: #ef4444;
+        }
+
+        .loading .status-icon {
+            color: #3b82f6;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-container {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #c59764, #d4af37);
+            color: #0a0a0a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(197, 151, 100, 0.3);
+        }
+
+        .btn-secondary {
+            background: #2a2a2a;
+            color: #e0e0e0;
+            border: 1px solid #3a3a3a;
+        }
+
+        .btn-secondary:hover {
+            background: #3a3a3a;
+        }
+
+        .details {
+            margin-top: 20px;
+            padding: 15px;
+            background: #0a0a0a;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: monospace;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .details pre {
+            color: #9a9a9a;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1><i class="fas fa-fire"></i> Test de Connexion Firebase</h1>
+
+            <div id="statusList">
+                <div class="status-item loading">
+                    <span class="status-label">Firebase SDK</span>
+                    <i class="fas fa-spinner status-icon"></i>
+                </div>
+                <div class="status-item loading">
+                    <span class="status-label">Firebase Auth</span>
+                    <i class="fas fa-spinner status-icon"></i>
+                </div>
+                <div class="status-item loading">
+                    <span class="status-label">Firebase Firestore</span>
+                    <i class="fas fa-spinner status-icon"></i>
+                </div>
+                <div class="status-item loading">
+                    <span class="status-label">Connexion à Firestore</span>
+                    <i class="fas fa-spinner status-icon"></i>
+                </div>
+            </div>
+
+            <div id="details" class="details" style="display: none;">
+                <pre id="detailsContent"></pre>
+            </div>
+
+            <div class="btn-container">
+                <a href="migrate-data.html" class="btn btn-primary">
+                    <i class="fas fa-database"></i> Migrer les données
+                </a>
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        const statusItems = document.querySelectorAll('.status-item');
+        const detailsDiv = document.getElementById('details');
+        const detailsContent = document.getElementById('detailsContent');
+        let testResults = {};
+
+        async function runTests() {
+            // Test 1: Firebase SDK loaded
+            await testFirebaseSDK();
+
+            // Test 2: Firebase Auth available
+            await testFirebaseAuth();
+
+            // Test 3: Firebase Firestore available
+            await testFirebaseFirestore();
+
+            // Test 4: Connect to Firestore
+            await testFirestoreConnection();
+
+            // Show details
+            detailsDiv.style.display = 'block';
+            detailsContent.textContent = JSON.stringify(testResults, null, 2);
+        }
+
+        async function testFirebaseSDK() {
+            try {
+                if (typeof firebase !== 'undefined') {
+                    updateStatus(0, 'success', 'Firebase SDK chargé');
+                    testResults.firebaseSDK = { status: 'success', version: firebase.SDK_VERSION };
+                } else {
+                    updateStatus(0, 'error', 'Firebase SDK non trouvé');
+                    testResults.firebaseSDK = { status: 'error', message: 'SDK not loaded' };
+                }
+            } catch (error) {
+                updateStatus(0, 'error', 'Erreur SDK');
+                testResults.firebaseSDK = { status: 'error', error: error.message };
+            }
+        }
+
+        async function testFirebaseAuth() {
+            try {
+                if (typeof firebase.auth === 'function') {
+                    updateStatus(1, 'success', 'Firebase Auth disponible');
+                    testResults.firebaseAuth = { status: 'success' };
+                } else {
+                    updateStatus(1, 'error', 'Firebase Auth non disponible');
+                    testResults.firebaseAuth = { status: 'error', message: 'Auth not available' };
+                }
+            } catch (error) {
+                updateStatus(1, 'error', 'Erreur Auth');
+                testResults.firebaseAuth = { status: 'error', error: error.message };
+            }
+        }
+
+        async function testFirebaseFirestore() {
+            try {
+                if (typeof firebase.firestore === 'function') {
+                    updateStatus(2, 'success', 'Firebase Firestore disponible');
+                    testResults.firebaseFirestore = { status: 'success' };
+                } else {
+                    updateStatus(2, 'error', 'Firebase Firestore non disponible');
+                    testResults.firebaseFirestore = { status: 'error', message: 'Firestore not available' };
+                }
+            } catch (error) {
+                updateStatus(2, 'error', 'Erreur Firestore');
+                testResults.firebaseFirestore = { status: 'error', error: error.message };
+            }
+        }
+
+        async function testFirestoreConnection() {
+            try {
+                const firebaseConfig = {
+                    apiKey: "AIzaSyA5CAKLdJhjLKYJRZD44t40E4rujoibnHo",
+                    authDomain: "kevin-portfolio-ff759.firebaseapp.com",
+                    projectId: "kevin-portfolio-ff759",
+                    storageBucket: "kevin-portfolio-ff759.firebasestorage.app",
+                    messagingSenderId: "375485286350",
+                    appId: "1:375485286350:web:1d05bfb69f7975e985cd9f",
+                    measurementId: "G-TX04ZCSQ3G"
+                };
+
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+
+                const db = firebase.firestore();
+
+                // Try to read from Firestore
+                const snapshot = await db.collection('projects').limit(1).get();
+
+                updateStatus(3, 'success', `Connexion OK (${snapshot.size} projet${snapshot.size > 1 ? 's' : ''})`);
+                testResults.firestoreConnection = {
+                    status: 'success',
+                    projectsCount: snapshot.size,
+                    message: 'Successfully connected to Firestore'
+                };
+
+                // Get all collections count
+                const collections = await Promise.all([
+                    db.collection('projects').get(),
+                    db.collection('skills').get(),
+                    db.collection('experiences').get()
+                ]);
+
+                testResults.collectionsCount = {
+                    projects: collections[0].size,
+                    skills: collections[1].size,
+                    experiences: collections[2].size
+                };
+
+            } catch (error) {
+                updateStatus(3, 'error', 'Erreur de connexion');
+                testResults.firestoreConnection = { status: 'error', error: error.message };
+            }
+        }
+
+        function updateStatus(index, status, label) {
+            const item = statusItems[index];
+            item.className = `status-item ${status}`;
+            item.querySelector('.status-label').textContent = label;
+
+            const icon = item.querySelector('.status-icon');
+            icon.className = 'fas status-icon';
+
+            if (status === 'success') {
+                icon.classList.add('fa-check-circle');
+            } else if (status === 'error') {
+                icon.classList.add('fa-times-circle');
+            } else {
+                icon.classList.add('fa-spinner');
+            }
+        }
+
+        // Run tests on page load
+        window.addEventListener('load', () => {
+            setTimeout(runTests, 500);
+        });
+    </script>
+</body>
+</html>

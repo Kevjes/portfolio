@@ -71,13 +71,37 @@
 
                 <div class="form-group">
                     <label for="period">Période *</label>
-                    <input type="text" id="period" placeholder="ex: 2020 - 2023" required>
+                    <input type="text" id="period" placeholder="ex: Août 2025 - Présent" required>
+                    <small style="color: #9a9a9a;">Ex: Janvier 2020 - Décembre 2023</small>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description *</label>
-                    <textarea id="description" required></textarea>
+                    <textarea id="description" rows="3" required></textarea>
                 </div>
+
+                <div class="form-group">
+                    <label for="order">Ordre d'affichage *</label>
+                    <input type="number" id="order" min="1" value="1" required>
+                    <small style="color: #9a9a9a;">Plus petit = affiché en premier</small>
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="current" style="width: auto;">
+                    <label for="current" style="margin: 0;">Poste actuel</label>
+                </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 20px 0;">
+
+                <h3 style="color: #c59764; margin-bottom: 15px; font-size: 16px;">Tâches et réalisations</h3>
+
+                <div id="tasksContainer"></div>
+
+                <button type="button" class="btn-secondary" style="width: auto; margin-top: 10px;" onclick="addTaskField()">
+                    <i class="fas fa-plus"></i> Ajouter une tâche
+                </button>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 20px 0;">
 
                 <div class="form-group">
                     <label for="technologies">Technologies utilisées (séparées par des virgules)</label>
@@ -110,7 +134,7 @@
 
         async function loadExperiences() {
             try {
-                const snapshot = await db.collection('experiences').orderBy('createdAt', 'desc').get();
+                const snapshot = await db.collection('experiences').orderBy('order', 'asc').get();
                 const experiencesDiv = document.getElementById('experiencesList');
 
                 if (snapshot.empty) {
@@ -124,9 +148,9 @@
                     const exp = doc.data();
                     html += `
                         <tr>
-                            <td>${exp.title}</td>
-                            <td>${exp.company}</td>
-                            <td><span class="badge badge-warning">${exp.period}</span></td>
+                            <td>${exp.title || ''}</td>
+                            <td>${exp.company || ''}</td>
+                            <td><span class="badge badge-warning">${exp.period || ''}</span></td>
                             <td class="table-actions">
                                 <button class="btn-secondary" onclick="editExperience('${doc.id}')">Modifier</button>
                                 <button class="btn-danger" onclick="deleteExperience('${doc.id}')">Supprimer</button>
@@ -139,13 +163,31 @@
                 experiencesDiv.innerHTML = html;
             } catch (error) {
                 console.error('Error loading experiences:', error);
+                experiencesDiv.innerHTML = '<p style="text-align: center; color: #ef4444; padding: 20px;">Erreur: ' + error.message + '</p>';
             }
+        }
+
+        function addTaskField(task = '') {
+            const container = document.getElementById('tasksContainer');
+            const taskDiv = document.createElement('div');
+            taskDiv.className = 'task-field';
+            taskDiv.style.cssText = 'display: flex; gap: 10px; margin-bottom: 10px; align-items: center;';
+            taskDiv.innerHTML = `
+                <input type="text" class="task-input" placeholder="Tâche ou réalisation" value="${task}" required style="flex: 1;">
+                <button type="button" class="btn-danger" onclick="this.parentElement.remove()" style="width: auto; padding: 8px 12px;">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            container.appendChild(taskDiv);
         }
 
         function openModal() {
             editingExperienceId = null;
             document.getElementById('modalTitle').textContent = 'Ajouter une expérience';
             document.getElementById('experienceForm').reset();
+            document.getElementById('tasksContainer').innerHTML = '';
+            // Add one empty task field by default
+            addTaskField();
             document.getElementById('experienceModal').classList.add('show');
         }
 
@@ -160,11 +202,23 @@
 
                 editingExperienceId = id;
                 document.getElementById('modalTitle').textContent = 'Modifier l\'expérience';
-                document.getElementById('title').value = exp.title;
-                document.getElementById('company').value = exp.company;
-                document.getElementById('period').value = exp.period;
-                document.getElementById('description').value = exp.description;
-                document.getElementById('technologies').value = Array.isArray(exp.technologies) ? exp.technologies.join(', ') : '';
+                document.getElementById('title').value = exp.title || '';
+                document.getElementById('company').value = exp.company || '';
+                document.getElementById('period').value = exp.period || '';
+                document.getElementById('description').value = exp.description || '';
+                document.getElementById('order').value = exp.order || 1;
+                document.getElementById('current').checked = exp.current || false;
+                document.getElementById('technologies').value = Array.isArray(exp.tags) ? exp.tags.join(', ') : '';
+
+                // Load tasks
+                document.getElementById('tasksContainer').innerHTML = '';
+                if (Array.isArray(exp.tasks) && exp.tasks.length > 0) {
+                    exp.tasks.forEach(task => {
+                        addTaskField(task);
+                    });
+                } else {
+                    addTaskField();
+                }
 
                 document.getElementById('experienceModal').classList.add('show');
             } catch (error) {
@@ -188,13 +242,32 @@
         document.getElementById('experienceForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // Collect all tasks from the form
+            const taskFields = document.querySelectorAll('.task-input');
+            const tasks = [];
+
+            taskFields.forEach(field => {
+                const task = field.value.trim();
+                if (task) {
+                    tasks.push(task);
+                }
+            });
+
+            if (tasks.length === 0) {
+                alert('Ajoutez au moins une tâche ou réalisation');
+                return;
+            }
+
             const experienceData = {
                 title: document.getElementById('title').value,
                 company: document.getElementById('company').value,
                 period: document.getElementById('period').value,
                 description: document.getElementById('description').value,
-                technologies: document.getElementById('technologies').value ?
-                    document.getElementById('technologies').value.split(',').map(t => t.trim()) : [],
+                tasks: tasks,
+                tags: document.getElementById('technologies').value ?
+                    document.getElementById('technologies').value.split(',').map(t => t.trim()).filter(t => t) : [],
+                order: parseInt(document.getElementById('order').value) || 1,
+                current: document.getElementById('current').checked,
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
 

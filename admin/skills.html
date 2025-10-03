@@ -60,31 +60,38 @@
 
             <form id="skillForm">
                 <div class="form-group">
-                    <label for="name">Nom de la compétence *</label>
-                    <input type="text" id="name" required>
+                    <label for="categoryTitle">Nom de la catégorie *</label>
+                    <input type="text" id="categoryTitle" placeholder="ex: Mobile, Backend, Frontend" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="category">Catégorie *</label>
-                    <select id="category" required>
-                        <option value="">Sélectionnez une catégorie</option>
-                        <option value="frontend">Frontend</option>
-                        <option value="backend">Backend</option>
-                        <option value="mobile">Mobile</option>
-                        <option value="tools">Outils & DevOps</option>
-                        <option value="other">Autre</option>
-                    </select>
+                    <label for="categorySlug">Identifiant (slug) *</label>
+                    <input type="text" id="categorySlug" placeholder="ex: mobile, backend, frontend" required>
+                    <small style="color: #9a9a9a;">Utilisé pour le filtre. En minuscules, sans espaces.</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="level">Niveau (0-100) *</label>
-                    <input type="number" id="level" min="0" max="100" required>
+                    <label for="categoryIcon">Icône Font Awesome *</label>
+                    <input type="text" id="categoryIcon" placeholder="ex: fa-mobile-alt, fa-code" required>
+                    <small style="color: #9a9a9a;">
+                        <a href="https://fontawesome.com/icons" target="_blank" style="color: #c59764;">Voir les icônes</a>
+                    </small>
                 </div>
 
                 <div class="form-group">
-                    <label for="icon">Icône (classe Font Awesome)</label>
-                    <input type="text" id="icon" placeholder="ex: fab fa-react">
+                    <label for="categoryOrder">Ordre d'affichage *</label>
+                    <input type="number" id="categoryOrder" min="1" value="1" required>
                 </div>
+
+                <hr style="border: 1px solid #2a2a2a; margin: 20px 0;">
+
+                <h3 style="color: #c59764; margin-bottom: 15px; font-size: 16px;">Compétences de cette catégorie</h3>
+
+                <div id="skillsContainer"></div>
+
+                <button type="button" class="btn-secondary" style="width: auto; margin-top: 10px;" onclick="addSkillField()">
+                    <i class="fas fa-plus"></i> Ajouter une compétence
+                </button>
 
                 <div class="modal-footer">
                     <button type="button" class="btn-secondary" onclick="closeModal()">Annuler</button>
@@ -112,7 +119,7 @@
 
         async function loadSkills() {
             try {
-                const snapshot = await db.collection('skills').orderBy('category').get();
+                const snapshot = await db.collection('skills').orderBy('order', 'asc').get();
                 const skillsDiv = document.getElementById('skillsList');
 
                 if (snapshot.empty) {
@@ -120,15 +127,21 @@
                     return;
                 }
 
-                let html = '<table class="data-table"><thead><tr><th>Nom</th><th>Catégorie</th><th>Niveau</th><th>Actions</th></tr></thead><tbody>';
+                let html = '<table class="data-table"><thead><tr><th>Catégorie</th><th>Compétences</th><th>Actions</th></tr></thead><tbody>';
 
                 snapshot.forEach(doc => {
-                    const skill = doc.data();
+                    const skillCategory = doc.data();
+                    const skillsList = Array.isArray(skillCategory.skills)
+                        ? skillCategory.skills.map(s => `${s.name} (${s.level}%)`).join(', ')
+                        : '';
+
                     html += `
                         <tr>
-                            <td>${skill.icon ? '<i class="' + skill.icon + '"></i> ' : ''}${skill.name}</td>
-                            <td><span class="badge badge-success">${skill.category}</span></td>
-                            <td>${skill.level}%</td>
+                            <td>
+                                ${skillCategory.icon ? '<i class="fas ' + skillCategory.icon + '"></i> ' : ''}
+                                ${skillCategory.title || ''}
+                            </td>
+                            <td>${skillsList}</td>
                             <td class="table-actions">
                                 <button class="btn-secondary" onclick="editSkill('${doc.id}')">Modifier</button>
                                 <button class="btn-danger" onclick="deleteSkill('${doc.id}')">Supprimer</button>
@@ -141,13 +154,32 @@
                 skillsDiv.innerHTML = html;
             } catch (error) {
                 console.error('Error loading skills:', error);
+                skillsDiv.innerHTML = '<p style="text-align: center; color: #ef4444; padding: 20px;">Erreur: ' + error.message + '</p>';
             }
+        }
+
+        function addSkillField(name = '', level = 0) {
+            const container = document.getElementById('skillsContainer');
+            const skillDiv = document.createElement('div');
+            skillDiv.className = 'skill-field';
+            skillDiv.style.cssText = 'display: flex; gap: 10px; margin-bottom: 10px; align-items: center;';
+            skillDiv.innerHTML = `
+                <input type="text" class="skill-name" placeholder="Nom" value="${name}" required style="flex: 2;">
+                <input type="number" class="skill-level" placeholder="Niveau" value="${level}" min="0" max="100" required style="flex: 1;">
+                <button type="button" class="btn-danger" onclick="this.parentElement.remove()" style="width: auto; padding: 8px 12px;">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            container.appendChild(skillDiv);
         }
 
         function openModal() {
             editingSkillId = null;
-            document.getElementById('modalTitle').textContent = 'Ajouter une compétence';
+            document.getElementById('modalTitle').textContent = 'Ajouter une catégorie de compétences';
             document.getElementById('skillForm').reset();
+            document.getElementById('skillsContainer').innerHTML = '';
+            // Add one empty skill field by default
+            addSkillField();
             document.getElementById('skillModal').classList.add('show');
         }
 
@@ -158,19 +190,29 @@
         async function editSkill(id) {
             try {
                 const doc = await db.collection('skills').doc(id).get();
-                const skill = doc.data();
+                const skillCategory = doc.data();
 
                 editingSkillId = id;
-                document.getElementById('modalTitle').textContent = 'Modifier la compétence';
-                document.getElementById('name').value = skill.name;
-                document.getElementById('category').value = skill.category;
-                document.getElementById('level').value = skill.level;
-                document.getElementById('icon').value = skill.icon || '';
+                document.getElementById('modalTitle').textContent = 'Modifier la catégorie';
+                document.getElementById('categoryTitle').value = skillCategory.title || '';
+                document.getElementById('categorySlug').value = skillCategory.category || '';
+                document.getElementById('categoryIcon').value = skillCategory.icon || '';
+                document.getElementById('categoryOrder').value = skillCategory.order || 1;
+
+                // Load skills
+                document.getElementById('skillsContainer').innerHTML = '';
+                if (Array.isArray(skillCategory.skills)) {
+                    skillCategory.skills.forEach(skill => {
+                        addSkillField(skill.name, skill.level);
+                    });
+                } else {
+                    addSkillField();
+                }
 
                 document.getElementById('skillModal').classList.add('show');
             } catch (error) {
                 console.error('Error loading skill:', error);
-                alert('Erreur lors du chargement de la compétence');
+                alert('Erreur lors du chargement de la catégorie');
             }
         }
 
@@ -189,26 +231,45 @@
         document.getElementById('skillForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const skillData = {
-                name: document.getElementById('name').value,
-                category: document.getElementById('category').value,
-                level: parseInt(document.getElementById('level').value),
-                icon: document.getElementById('icon').value,
+            // Collect all skills from the form
+            const skillFields = document.querySelectorAll('.skill-field');
+            const skills = [];
+
+            skillFields.forEach(field => {
+                const name = field.querySelector('.skill-name').value.trim();
+                const level = parseInt(field.querySelector('.skill-level').value);
+
+                if (name && level) {
+                    skills.push({ name, level });
+                }
+            });
+
+            if (skills.length === 0) {
+                alert('Ajoutez au moins une compétence à cette catégorie');
+                return;
+            }
+
+            const skillCategoryData = {
+                title: document.getElementById('categoryTitle').value,
+                category: document.getElementById('categorySlug').value,
+                icon: document.getElementById('categoryIcon').value,
+                skills: skills,
+                order: parseInt(document.getElementById('categoryOrder').value) || 1,
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
 
             try {
                 if (editingSkillId) {
-                    await db.collection('skills').doc(editingSkillId).update(skillData);
+                    await db.collection('skills').doc(editingSkillId).update(skillCategoryData);
                 } else {
-                    skillData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-                    await db.collection('skills').add(skillData);
+                    skillCategoryData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection('skills').add(skillCategoryData);
                 }
 
                 closeModal();
                 loadSkills();
             } catch (error) {
-                console.error('Error saving skill:', error);
+                console.error('Error saving skill category:', error);
                 alert('Erreur lors de l\'enregistrement');
             }
         });
