@@ -1,0 +1,512 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ==================== CSS VARIABLES ==================== */
+:root {
+    /* Colors */
+    --gold: #c59764;
+    --gold-light: #d4a574;
+    --gold-dark: #b08050;
+    --black: #0a0a0a;
+    --dark-gray: #1a1a1a;
+    --gray: #2a2a2a;
+    --light-gray: #d0d0d0;
+    --white: #e6d5b8;
+    --text-light: #b0b0b0;
+    --bg-color: #0f0f0f;
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, #c59764 0%, #d4af37 100%);
+    --gradient-dark: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+
+    /* Transitions */
+    --transition-fast: all 0.2s ease;
+    --transition-normal: all 0.3s ease;
+    --transition-slow: all 0.5s ease;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.3);
+    --shadow-gold: 0 5px 20px rgba(197, 151, 100, 0.3);
+
+    /* Spacing */
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+    --spacing-xl: 48px;
+    --spacing-xxl: 64px;
+
+    /* Border Radius - SHARP EDGES ONLY */
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
+    --radius-xl: 0;
+    --radius-full: 0;
+
+    /* Font Sizes */
+    --font-xs: 0.75rem;
+    --font-sm: 0.875rem;
+    --font-base: 1rem;
+    --font-lg: 1.125rem;
+    --font-xl: 1.25rem;
+    --font-2xl: 1.5rem;
+    --font-3xl: 1.875rem;
+    --font-4xl: 2.25rem;
+    --font-5xl: 3rem;
+
+    /* Z-index */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+}
+
+/* ==================== RESET & BASE ==================== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-color);
+    color: var(--light-gray);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--white);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: var(--font-5xl);
+}
+
+h2 {
+    font-size: var(--font-4xl);
+}
+
+h3 {
+    font-size: var(--font-3xl);
+}
+
+h4 {
+    font-size: var(--font-2xl);
+}
+
+h5 {
+    font-size: var(--font-xl);
+}
+
+h6 {
+    font-size: var(--font-lg);
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-light);
+}
+
+a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: var(--transition-normal);
+}
+
+a:hover {
+    color: var(--gold-light);
+}
+
+/* ==================== UTILITIES ==================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.gold-text {
+    color: var(--gold);
+}
+
+/* Section Styles */
+section {
+    padding: var(--spacing-xxl) var(--spacing-md);
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+    font-size: var(--font-4xl);
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    display: inline-block;
+}
+
+.title-underline {
+    width: 80px;
+    height: 4px;
+    background: var(--gradient-gold);
+    margin: 0 auto var(--spacing-md);
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: var(--font-lg);
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ==================== BUTTONS ==================== */
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid;
+    border-radius: 0;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: var(--gradient-gold);
+    color: var(--black);
+    box-shadow: var(--shadow-gold);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(197, 151, 100, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+}
+
+.btn-secondary:hover {
+    background: var(--gold);
+    color: var(--black);
+    transform: translateY(-3px);
+}
+
+/* ==================== CARDS ==================== */
+.card {
+    background: var(--dark-gray);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    border: 1px solid var(--gray);
+    transition: var(--transition-normal);
+}
+
+.card:hover {
+    border-color: var(--gold);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-gold);
+}
+
+/* ==================== TAGS ==================== */
+.tag {
+    display: inline-block;
+    padding: 5px 15px;
+    background: rgba(197, 151, 100, 0.1);
+    color: var(--gold);
+    border: 1px solid rgba(197, 151, 100, 0.3);
+    border-radius: 20px;
+    font-size: var(--font-sm);
+    font-weight: 500;
+    margin: 5px;
+    transition: var(--transition-normal);
+}
+
+.tag:hover {
+    background: rgba(197, 151, 100, 0.2);
+    border-color: var(--gold);
+    transform: scale(1.05);
+}
+
+/* ==================== SCROLLBAR ==================== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-light);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) var(--black);
+}
+
+/* ==================== SELECTION ==================== */
+::selection {
+    background: var(--gold);
+    color: var(--black);
+}
+
+::-moz-selection {
+    background: var(--gold);
+    color: var(--black);
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+}
+
+/* ==================== RESPONSIVE BREAKPOINTS ==================== */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 968px) {
+    :root {
+        --font-5xl: 2.5rem;
+        --font-4xl: 2rem;
+        --font-3xl: 1.75rem;
+    }
+
+    section {
+        padding: var(--spacing-xl) var(--spacing-sm);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (max-width: 576px) {
+    :root {
+        --font-5xl: 2rem;
+        --font-4xl: 1.75rem;
+        --font-3xl: 1.5rem;
+    }
+
+    html {
+        font-size: 14px;
+    }
+
+    section {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus styles */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ==================== LOADING STATES ==================== */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(197, 151, 100, 0.1);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ==================== OVERLAYS ==================== */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: var(--z-modal-backdrop);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-normal);
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==================== PRINT STYLES ==================== */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    .navbar,
+    .scroll-top,
+    .social-links {
+        display: none !important;
+    }
+}
