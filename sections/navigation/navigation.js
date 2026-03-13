@@ -121,30 +121,63 @@ function initSmoothScroll() {
     }
 }
 
-// Theme toggle (optional feature)
-function initThemeToggle() {
-    const themeToggle = document.getElementById('themeToggle');
-    if (!themeToggle) return;
+// Language switcher
+function initLangSwitcher() {
+    const wrapper = document.querySelector('.lang-selector-wrapper');
+    const currentBtn = document.getElementById('langCurrent');
+    const options = document.querySelectorAll('.lang-option');
+    const currentFlag = document.getElementById('currentFlag');
+    const currentLabel = document.getElementById('currentLangLabel');
 
-    // Check for saved theme preference
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (!wrapper || !currentBtn) return;
 
-    themeToggle.addEventListener('click', () => {
-        const theme = document.documentElement.getAttribute('data-theme');
-        const newTheme = theme === 'dark' ? 'light' : 'dark';
-
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-
-        // Update icon
-        const icon = themeToggle.querySelector('i');
-        icon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+    // Toggle dropdown
+    currentBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        wrapper.classList.toggle('active');
     });
 
-    // Set initial icon
-    const icon = themeToggle.querySelector('i');
-    icon.className = currentTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+    // Handle language change
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            const flagSrc = option.querySelector('img').src;
+            
+            // Update UI
+            currentFlag.src = flagSrc;
+            currentLabel.textContent = lang.toUpperCase();
+            
+            // Highlight active option
+            options.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
+
+            // Dispatch event to i18n
+            if (window.i18n) {
+                window.i18n.changeLanguage(lang);
+            }
+            
+            // Save preference
+            localStorage.setItem('portfolio_lang', lang);
+            
+            // Close dropdown
+            wrapper.classList.remove('active');
+        });
+    });
+
+    // Close on click outside
+    document.addEventListener('click', () => {
+        wrapper.classList.remove('active');
+    });
+
+    // Initialize from saved preference
+    const savedLang = localStorage.getItem('portfolio_lang') || 'fr';
+    const activeOption = document.querySelector(`.lang-option[data-lang="${savedLang}"]`);
+    if (activeOption) {
+        options.forEach(opt => opt.classList.remove('active'));
+        activeOption.classList.add('active');
+        currentFlag.src = activeOption.querySelector('img').src;
+        currentLabel.textContent = savedLang.toUpperCase();
+    }
 }
 
 // Hide navbar on scroll down, show on scroll up
@@ -173,7 +206,7 @@ function initNavigation() {
     initActiveSection();
     initScrollProgress();
     initSmoothScroll();
-    initThemeToggle();
+    initLangSwitcher();
     // initHideNavbar(); // Uncomment if you want auto-hide navbar
 }
 
