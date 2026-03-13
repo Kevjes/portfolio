@@ -222,7 +222,7 @@
 
     function showConsoleMessage() {
         const styles = [
-            'color: #c59764',
+            'color: #38bdf8',
             'font-size: 16px',
             'font-weight: bold',
             'padding: 10px'
@@ -230,7 +230,7 @@
 
         console.log('%c👋 Salut développeur!', styles);
         console.log('%cIntéressé par le code? Contactez-moi: kevinjessi10@gmail.com', 'color: #b0b0b0');
-        console.log('%c🚀 Built with passion by Kevin Tene', 'color: #c59764');
+        console.log('%c🚀 Built with passion by Kevin Tene', 'color: #38bdf8');
     }
 
     // ==================== PERFORMANCE MONITORING ====================

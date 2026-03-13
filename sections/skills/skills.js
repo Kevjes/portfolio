@@ -107,7 +107,7 @@
                 const ripple = document.createElement('div');
                 ripple.style.position = 'absolute';
                 ripple.style.borderRadius = '50%';
-                ripple.style.background = 'rgba(197, 151, 100, 0.3)';
+                ripple.style.background = 'rgba(56, 189, 248, 0.3)';
                 ripple.style.width = '100px';
                 ripple.style.height = '100px';
                 ripple.style.left = '50%';
@@ -175,9 +175,9 @@
             button.dataset.filter = cat;
             button.style.cssText = `
                 padding: 10px 25px;
-                background: ${cat === 'all' ? 'linear-gradient(135deg, #c59764, #d4af37)' : 'rgba(197, 151, 100, 0.1)'};
-                color: ${cat === 'all' ? '#0a0a0a' : '#c59764'};
-                border: 2px solid ${cat === 'all' ? '#c59764' : 'rgba(197, 151, 100, 0.3)'};
+                background: ${cat === 'all' ? 'linear-gradient(135deg, #38bdf8, #8b5cf6)' : 'rgba(56, 189, 248, 0.1)'};
+                color: ${cat === 'all' ? '#0a0a0a' : '#38bdf8'};
+                border: 2px solid ${cat === 'all' ? '#38bdf8' : 'rgba(56, 189, 248, 0.3)'};
                 border-radius: 25px;
                 cursor: pointer;
                 font-weight: 600;
@@ -187,15 +187,15 @@
 
             button.addEventListener('mouseenter', function() {
                 if (!this.classList.contains('active')) {
-                    this.style.background = 'rgba(197, 151, 100, 0.2)';
-                    this.style.borderColor = 'rgba(197, 151, 100, 0.5)';
+                    this.style.background = 'rgba(56, 189, 248, 0.2)';
+                    this.style.borderColor = 'rgba(56, 189, 248, 0.5)';
                 }
             });
 
             button.addEventListener('mouseleave', function() {
                 if (!this.classList.contains('active')) {
-                    this.style.background = 'rgba(197, 151, 100, 0.1)';
-                    this.style.borderColor = 'rgba(197, 151, 100, 0.3)';
+                    this.style.background = 'rgba(56, 189, 248, 0.1)';
+                    this.style.borderColor = 'rgba(56, 189, 248, 0.3)';
                 }
             });
 
@@ -205,15 +205,15 @@
                 // Update active state
                 document.querySelectorAll('.filter-btn').forEach(btn => {
                     btn.classList.remove('active');
-                    btn.style.background = 'rgba(197, 151, 100, 0.1)';
-                    btn.style.color = '#c59764';
-                    btn.style.borderColor = 'rgba(197, 151, 100, 0.3)';
+                    btn.style.background = 'rgba(56, 189, 248, 0.1)';
+                    btn.style.color = '#38bdf8';
+                    btn.style.borderColor = 'rgba(56, 189, 248, 0.3)';
                 });
 
                 this.classList.add('active');
-                this.style.background = 'linear-gradient(135deg, #c59764, #d4af37)';
+                this.style.background = 'linear-gradient(135deg, #38bdf8, #8b5cf6)';
                 this.style.color = '#0a0a0a';
-                this.style.borderColor = '#c59764';
+                this.style.borderColor = '#38bdf8';
             });
 
             filterContainer.appendChild(button);
