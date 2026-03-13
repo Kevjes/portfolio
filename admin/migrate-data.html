@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migration des données vers Firestore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #c59764;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            width: 100%;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #c59764, #d4af37);
+            color: #0a0a0a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(197, 151, 100, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .log {
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .log-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .log-success {
+            color: #10b981;
+        }
+
+        .log-error {
+            color: #ef4444;
+        }
+
+        .log-info {
+            color: #3b82f6;
+        }
+
+        .progress {
+            width: 100%;
+            height: 30px;
+            background: #0a0a0a;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #c59764, #d4af37);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a0a0a;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .warning h3 {
+            color: #ef4444;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-database"></i> Migration des données vers Firestore</h1>
+
+        <div class="warning">
+            <h3><i class="fas fa-exclamation-triangle"></i> Attention</h3>
+            <p>Cette opération va migrer toutes les données actuelles du site vers Firestore. Assurez-vous d'avoir configuré Firebase correctement avant de continuer.</p>
+        </div>
+
+        <div class="card">
+            <h2 style="color: #c59764; margin-bottom: 20px;">Étapes de migration</h2>
+            <ul style="line-height: 2; padding-left: 20px;">
+                <li>Migration des projets (6 projets)</li>
+                <li>Migration des compétences (4 catégories)</li>
+                <li>Migration des expériences (5 expériences)</li>
+                <li>Configuration initiale des paramètres</li>
+            </ul>
+
+            <button class="btn btn-primary" id="startMigration" onclick="startMigration()">
+                <i class="fas fa-rocket"></i>
+                Démarrer la migration
+            </button>
+
+            <div class="progress" id="progressContainer" style="display: none;">
+                <div class="progress-bar" id="progressBar" style="width: 0%;">0%</div>
+            </div>
+        </div>
+
+        <div class="card" id="logCard" style="display: none;">
+            <h2 style="color: #c59764; margin-bottom: 15px;">Journal de migration</h2>
+            <div class="log" id="migrationLog"></div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Config - Inline pour éviter les problèmes de chargement -->
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA5CAKLdJhjLKYJRZD44t40E4rujoibnHo",
+            authDomain: "kevin-portfolio-ff759.firebaseapp.com",
+            projectId: "kevin-portfolio-ff759",
+            storageBucket: "kevin-portfolio-ff759.firebasestorage.app",
+            messagingSenderId: "375485286350",
+            appId: "1:375485286350:web:1d05bfb69f7975e985cd9f",
+            measurementId: "G-TX04ZCSQ3G"
+        };
+
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+    </script>
+
+    <!-- Migration Script -->
+    <script>
+        let migrationProgress = 0;
+
+        // Data to migrate
+        const projectsData = [
+            {
+                id: 'hidima',
+                title: 'Hidima',
+                description: 'Plateforme mobile connectant prestataires de services et clients camerounais. Disponible sur iOS et Android.',
+                image: 'https://hidima.fredchess.com/images/logo.png',
+                category: ['mobile', 'services'],
+                tags: ['Flutter', 'iOS & Android', 'Marketplace'],
+                links: [
+                    { type: 'playstore', url: 'https://play.google.com/store/apps/details?id=com.empireplus.hidima' },
+                    { type: 'appstore', url: 'https://apps.apple.com/cm/app/hidima/id6596765556' }
+                ],
+                order: 1,
+                featured: true
+            },
+            {
+                id: 'spideli',
+                title: 'Spideli',
+                description: 'Plateforme de livraison multi-services en Afrique. Une app, mille services : livraison, taxi, restauration, e-commerce.',
+                image: 'https://spideli.com/shop/wp-content/uploads/2023/07/spideli-livraison-domicile1.jpg',
+                category: ['mobile', 'delivery'],
+                tags: ['Flutter', 'Multi-Services', 'Géolocalisation'],
+                links: [
+                    { type: 'playstore', url: 'https://play.google.com/store/apps/details?id=com.spideli.client.service.plus&hl=fr' },
+                    { type: 'website', url: 'https://spideli.com' }
+                ],
+                order: 2,
+                featured: true
+            },
+            {
+                id: 'menosi-cli',
+                title: 'Menosi CLI',
+                description: 'Outil en ligne de commande pour la génération et gestion de projets avec templates personnalisables.',
+                image: 'https://i.ibb.co/fdKvshJt/Capture.png',
+                category: ['web', 'tools'],
+                tags: ['CLI Tool', 'Node.js', 'DevOps'],
+                links: [
+                    { type: 'website', url: 'https://cli.menosi.net/home' }
+                ],
+                order: 3,
+                featured: false
+            },
+            {
+                id: 'spideli-store',
+                title: 'Spideli Store',
+                description: 'Extension e-commerce de Spideli permettant aux commerçants de gérer leur boutique et leurs commandes.',
+                image: 'https://i.ibb.co/YTbK2TxL/unnamed.webp',
+                category: ['mobile', 'ecommerce'],
+                tags: ['Flutter', 'E-commerce', 'Dashboard'],
+                links: [
+                    { type: 'playstore', url: 'https://play.google.com/store/apps/details?id=com.spideli.store&hl=fr' }
+                ],
+                order: 4,
+                featured: false
+            },
+            {
+                id: 'flexparent',
+                title: 'FlexParent',
+                description: 'Application mobile pour parents permettant le suivi scolaire, communication avec enseignants et gestion des activités.',
+                image: 'https://i.ibb.co/k6DhNdtN/Capture.png',
+                category: ['mobile', 'education'],
+                tags: ['Flutter', 'Education', 'Real-time'],
+                links: [
+                    { type: 'playstore', url: 'https://play.google.com/store/apps/details?id=com.nashtech.flexparent' }
+                ],
+                order: 5,
+                featured: false
+            },
+            {
+                id: 'gschool',
+                title: 'GSchool',
+                description: 'Plateforme de gestion scolaire complète : notes, absences, emplois du temps et communication école-parents.',
+                image: 'https://i.ibb.co/zWr384Sw/Capture.png',
+                category: ['mobile', 'education'],
+                tags: ['Flutter', 'School Management', 'API REST'],
+                links: [
+                    { type: 'playstore', url: 'https://play.google.com/store/apps/details?id=com.etsgtech.gschool' }
+                ],
+                order: 6,
+                featured: false
+            }
+        ];
+
+        const skillsData = [
+            {
+                id: 'mobile',
+                category: 'mobile',
+                title: 'Mobile',
+                icon: 'fa-mobile-alt',
+                skills: [
+                    { name: 'Flutter', level: 95 },
+                    { name: 'Clean Architecture', level: 90 },
+                    { name: 'Dart', level: 95 }
+                ],
+                order: 1
+            },
+            {
+                id: 'backend',
+                category: 'backend',
+                title: 'Backend',
+                icon: 'fa-code',
+                skills: [
+                    { name: 'FastAPI', level: 90 },
+                    { name: 'Spring Boot', level: 85 },
+                    { name: 'Node.js / Express', level: 88 }
+                ],
+                order: 2
+            },
+            {
+                id: 'frontend',
+                category: 'frontend',
+                title: 'Frontend',
+                icon: 'fa-laptop-code',
+                skills: [
+                    { name: 'React / Next.js', level: 88 },
+                    { name: 'JavaScript / TypeScript', level: 90 },
+                    { name: 'HTML / CSS', level: 92 }
+                ],
+                order: 3
+            },
+            {
+                id: 'devops',
+                category: 'devops',
+                title: 'DevOps & Outils',
+                icon: 'fa-tools',
+                skills: [
+                    { name: 'CI/CD (GitLab)', level: 85 },
+                    { name: 'Docker', level: 80 },
+                    { name: 'Git', level: 95 }
+                ],
+                order: 4
+            }
+        ];
+
+        const experiencesData = [
+            {
+                id: 'kimia',
+                period: 'Août 2025 - Présent',
+                title: 'Développeur Full-stack',
+                company: 'KIMIA TECHNOLOGIES',
+                description: 'Développement complet de solutions digitales en environnement collaboratif.',
+                tasks: [
+                    'Conception et développement d\'applications mobiles multiplateformes avec Flutter',
+                    'Développement d\'applications web modernes avec Next.js, React.js et Express.js',
+                    'Création de chatbots WhatsApp pour automatiser les interactions clients',
+                    'Collaboration en équipe agile avec gestion des sprints et livrables'
+                ],
+                tags: ['Flutter', 'Next.js', 'React', 'Express.js'],
+                order: 1,
+                current: true
+            },
+            {
+                id: 'sosan',
+                period: 'Mai 2025 - Octobre 2025',
+                title: 'Chef de Projet & Développeur Flutter',
+                company: 'Sosan Med',
+                description: 'Application mobile dédiée aux rendez-vous médicaux et téléconsultations.',
+                tasks: [
+                    'Gestion de projet agile & coordination d\'équipe',
+                    'Développement mobile avec Flutter + Clean Architecture',
+                    'Intégration sécurisée des API pour les consultations'
+                ],
+                tags: ['Flutter', 'Clean Architecture', 'Agile'],
+                order: 2,
+                current: false
+            },
+            {
+                id: 'menosi',
+                period: 'Novembre 2023 - Juin 2025',
+                title: 'Chef de Projet & Développeur Backend FastAPI',
+                company: 'MENOSI',
+                description: 'Supervision d\'équipe et développement backend.',
+                tasks: [
+                    'Supervision d\'une équipe de 4 développeurs pour des projets Flutter/Web',
+                    'Conception d\'API avec FastAPI : endpoints RESTful, sécurité JWT',
+                    'Gestion du projet de génération de CV en ligne'
+                ],
+                tags: ['FastAPI', 'Leadership', 'JWT'],
+                order: 3,
+                current: false
+            },
+            {
+                id: 'itsas',
+                period: 'Août 2022 - Novembre 2023',
+                title: 'Développeur Mobile Flutter Senior',
+                company: 'IT Solutions & Advisory Services',
+                description: 'Développement Flutter senior en respectant les bonnes pratiques.',
+                tasks: [
+                    'Architecture Clean et patterns de conception avancés',
+                    'Développement d\'applications critiques pour le secteur bancaire',
+                    'Optimisation des performances et de la maintenabilité'
+                ],
+                tags: ['Flutter', 'Clean Architecture', 'MVC'],
+                order: 4,
+                current: false
+            },
+            {
+                id: 'gohze',
+                period: 'Mars 2020 - Juillet 2022',
+                title: 'Développeur Mobile',
+                company: 'GOHZE',
+                description: 'Développement d\'applications mobiles innovantes.',
+                tasks: [
+                    'Premiers pas dans le développement mobile professionnel',
+                    'Apprentissage des frameworks modernes',
+                    'Contribution à plusieurs projets client'
+                ],
+                tags: ['Mobile Development', 'Flutter'],
+                order: 5,
+                current: false
+            }
+        ];
+
+        const settingsData = {
+            profile: {
+                name: 'Kevin Tene Landry',
+                email: 'kevintenelandry@gmail.com',
+                phone: '+237 6 XX XX XX XX',
+                bio: 'Développeur Fullstack passionné par l\'innovation technologique et le développement mobile.',
+                title: 'Développeur Full-stack',
+                location: 'Douala, Cameroun'
+            },
+            site: {
+                title: 'Kevin Tene - Portfolio Développeur Fullstack',
+                description: 'Développeur Fullstack spécialisé en Flutter, React, et FastAPI',
+                contactEmail: 'kevintenelandry@gmail.com',
+                metaKeywords: 'développeur fullstack, flutter, react, fastapi, développeur mobile, développeur web'
+            },
+            social: {
+                linkedin: '',
+                github: '',
+                twitter: '',
+                portfolio: ''
+            }
+        };
+
+        function addLog(message, type = 'info') {
+            const log = document.getElementById('migrationLog');
+            const logItem = document.createElement('div');
+            logItem.className = `log-item log-${type}`;
+            logItem.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'times' : 'info'}-circle"></i> ${message}`;
+            log.appendChild(logItem);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function updateProgress(percent) {
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percent + '%';
+            progressBar.textContent = Math.round(percent) + '%';
+        }
+
+        async function startMigration() {
+            const btn = document.getElementById('startMigration');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Migration en cours...';
+
+            document.getElementById('progressContainer').style.display = 'block';
+            document.getElementById('logCard').style.display = 'block';
+
+            try {
+                addLog('Démarrage de la migration...', 'info');
+                updateProgress(0);
+
+                // Migrate Projects
+                addLog('Migration des projets...', 'info');
+                for (const project of projectsData) {
+                    const { id, ...data } = project;
+                    // Ajouter les timestamps
+                    data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    data.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection('projects').doc(id).set(data);
+                    addLog(`✓ Projet "${project.title}" migré`, 'success');
+                }
+                updateProgress(30);
+
+                // Migrate Skills
+                addLog('Migration des compétences...', 'info');
+                for (const skill of skillsData) {
+                    const { id, ...data } = skill;
+                    // Ajouter les timestamps
+                    data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    data.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection('skills').doc(id).set(data);
+                    addLog(`✓ Catégorie "${skill.title}" migrée`, 'success');
+                }
+                updateProgress(60);
+
+                // Migrate Experiences
+                addLog('Migration des expériences...', 'info');
+                for (const experience of experiencesData) {
+                    const { id, ...data } = experience;
+                    // Ajouter les timestamps
+                    data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    data.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection('experiences').doc(id).set(data);
+                    addLog(`✓ Expérience "${experience.company}" migrée`, 'success');
+                }
+                updateProgress(85);
+
+                // Migrate Settings
+                addLog('Migration des paramètres...', 'info');
+                await db.collection('settings').doc('site').set(settingsData);
+                addLog('✓ Paramètres migrés', 'success');
+                updateProgress(100);
+
+                addLog('Migration terminée avec succès !', 'success');
+                btn.innerHTML = '<i class="fas fa-check"></i> Migration réussie';
+                btn.style.background = '#10b981';
+
+                setTimeout(() => {
+                    alert('Migration réussie ! Vous pouvez maintenant utiliser le dashboard pour gérer vos données.');
+                    window.location.href = 'index.html';
+                }, 2000);
+
+            } catch (error) {
+                console.error('Migration error:', error);
+                addLog(`Erreur: ${error.message}`, 'error');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Réessayer';
+                btn.style.background = '#ef4444';
+            }
+        }
+    </script>
+</body>
+</html>

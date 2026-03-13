@@ -117,15 +117,15 @@
             <div class="modal-image" style="margin-bottom: 30px; border-radius: 15px; overflow: hidden;">
                 <img src="${image}" alt="${title}" style="width: 100%; height: auto; display: block;">
             </div>
-            <h2 style="font-size: 32px; color: #c59764; margin-bottom: 20px;">${title}</h2>
+            <h2 style="font-size: 32px; color: #38bdf8; margin-bottom: 20px;">${title}</h2>
             <p style="font-size: 16px; line-height: 1.8; color: #b0b0b0; margin-bottom: 25px;">${description}</p>
             <div style="margin-bottom: 20px;">
                 <h3 style="font-size: 18px; color: #e0e0e0; margin-bottom: 15px;">Technologies utilisées</h3>
                 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
                     ${tags.map(tag => `
-                        <span style="padding: 8px 16px; background: rgba(197, 151, 100, 0.1);
-                                     border: 1px solid rgba(197, 151, 100, 0.3); border-radius: 20px;
-                                     font-size: 13px; color: #c59764; font-weight: 600;">${tag}</span>
+                        <span style="padding: 8px 16px; background: rgba(56, 189, 248, 0.1);
+                                     border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px;
+                                     font-size: 13px; color: #38bdf8; font-weight: 600;">${tag}</span>
                     `).join('')}
                 </div>
             </div>
@@ -134,7 +134,7 @@
                 <ul style="list-style: none; padding: 0;">
                     ${generateFeatures(title).map(feature => `
                         <li style="padding: 10px 0 10px 25px; position: relative; color: #9a9a9a; line-height: 1.6;">
-                            <i class="fas fa-check-circle" style="position: absolute; left: 0; color: #c59764;"></i>
+                            <i class="fas fa-check-circle" style="position: absolute; left: 0; color: #38bdf8;"></i>
                             ${feature}
                         </li>
                     `).join('')}
@@ -155,6 +155,27 @@
     // Generate features based on project title
     function generateFeatures(title) {
         const features = {
+            'Whatsapp Banking': [
+                'Conception globale et développement de logiciel hautement sécurisé',
+                'Intégration fluide avec le Core Banking System d\'Afriland First Bank',
+                'Plus de 30 000 utilisateurs actifs avec forte réactivité',
+                'Mise en place de couches de sécurité très strictes (Fintech)',
+                'Collaboration étroite avec la Direction Informatique et les développeurs cœurs'
+            ],
+            'PosiaCrea': [
+                'Développement Fullstack complet (Backend, Frontend, Modélisation)',
+                'Génération de texte et d\'image par Intelligence Artificielle',
+                'Système de planification et publication automatique sur LinkedIn',
+                'Architecture scalable pour gérer des volumes de contenu élevés',
+                'Interface utilisateur moderne conçue avec Next.js'
+            ],
+            'Assiste-Moi': [
+                'Développeur mobile principal et architecte logiciel',
+                'Mise sur pied d\'une architecture évolutive (Clean Architecture)',
+                'Gestion d\'état robuste avec GetX et intégrations API fluides',
+                'Développement complet du code jusqu\'au déploiement store',
+                'Interface utilisateur optimisée pour l\'apprentissage mobile'
+            ],
             'Sosan Med': [
                 'Téléconsultation en temps réel avec vidéo HD',
                 'Gestion intelligente des rendez-vous',
@@ -240,9 +261,9 @@
             button.dataset.filter = filter.value;
             button.style.cssText = `
                 padding: 10px 22px;
-                background: ${filter.value === 'all' ? 'linear-gradient(135deg, #c59764, #d4af37)' : 'rgba(197, 151, 100, 0.1)'};
-                color: ${filter.value === 'all' ? '#0a0a0a' : '#c59764'};
-                border: 2px solid ${filter.value === 'all' ? '#c59764' : 'rgba(197, 151, 100, 0.3)'};
+                background: ${filter.value === 'all' ? 'linear-gradient(135deg, #38bdf8, #8b5cf6)' : 'rgba(56, 189, 248, 0.1)'};
+                color: ${filter.value === 'all' ? '#0a0a0a' : '#38bdf8'};
+                border: 2px solid ${filter.value === 'all' ? '#38bdf8' : 'rgba(56, 189, 248, 0.3)'};
                 border-radius: 25px;
                 cursor: pointer;
                 font-weight: 600;
@@ -265,15 +286,15 @@
         // Update button states
         filterButtons.forEach(btn => {
             btn.classList.remove('active');
-            btn.style.background = 'rgba(197, 151, 100, 0.1)';
-            btn.style.color = '#c59764';
-            btn.style.borderColor = 'rgba(197, 151, 100, 0.3)';
+            btn.style.background = 'rgba(56, 189, 248, 0.1)';
+            btn.style.color = '#38bdf8';
+            btn.style.borderColor = 'rgba(56, 189, 248, 0.3)';
         });
 
         activeButton.classList.add('active');
-        activeButton.style.background = 'linear-gradient(135deg, #c59764, #d4af37)';
+        activeButton.style.background = 'linear-gradient(135deg, #38bdf8, #8b5cf6)';
         activeButton.style.color = '#0a0a0a';
-        activeButton.style.borderColor = '#c59764';
+        activeButton.style.borderColor = '#38bdf8';
 
         // Filter cards
         projectCards.forEach(card => {
@@ -374,7 +395,7 @@
             text-align: center;
             margin-top: 50px;
             font-size: 18px;
-            color: #c59764;
+            color: #38bdf8;
             font-weight: 600;
         `;
         counter.innerHTML = `

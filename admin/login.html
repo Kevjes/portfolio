@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Login - Kevin Portfolio</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Dashboard Admin</h1>
+            <p>Connectez-vous pour gérer votre portfolio</p>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="btn-login" id="loginBtn">Se connecter</button>
+        </form>
+
+        <div class="login-footer">
+            <p>&copy; 2024 Kevin Tene Portfolio</p>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script src="js/firebase-config.js"></script>
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const loginBtn = document.getElementById('loginBtn');
+
+        // Redirect if already logged in
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                window.location.href = 'index.html';
+            }
+        });
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            loginBtn.classList.add('loading');
+            loginBtn.textContent = 'Connexion...';
+            errorMessage.classList.remove('show');
+
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+                window.location.href = 'index.html';
+            } catch (error) {
+                let message = 'Erreur de connexion. Vérifiez vos identifiants.';
+
+                if (error.code === 'auth/user-not-found') {
+                    message = 'Aucun utilisateur trouvé avec cet email.';
+                } else if (error.code === 'auth/wrong-password') {
+                    message = 'Mot de passe incorrect.';
+                } else if (error.code === 'auth/invalid-email') {
+                    message = 'Email invalide.';
+                }
+
+                errorMessage.textContent = message;
+                errorMessage.classList.add('show');
+
+                loginBtn.classList.remove('loading');
+                loginBtn.textContent = 'Se connecter';
+            }
+        });
+    </script>
+</body>
+</html>
