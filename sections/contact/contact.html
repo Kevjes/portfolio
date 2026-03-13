@@ -2,9 +2,9 @@
 <section id="contact" class="contact">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title">Contactez-moi</h2>
+            <h2 class="section-title" data-i18n="contact_title">Contactez-moi</h2>
             <div class="title-underline"></div>
-            <p class="section-subtitle">Vous avez un projet en tête ? Discutons-en !</p>
+            <p class="section-subtitle" data-i18n="contact_subtitle">Vous avez un projet en tête ? Discutons-en !</p>
         </div>
         <div class="contact-content">
             <div class="contact-info">
@@ -13,8 +13,8 @@
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
                     <div class="contact-details">
-                        <h3>Localisation</h3>
-                        <p>Yaoundé, Cameroun</p>
+                        <h3 data-i18n="about_info_location">Localisation</h3>
+                        <p data-i18n="contact_info_loc">Yaoundé, Cameroun</p>
                     </div>
                 </div>
                 <div class="contact-item" data-aos="fade-right" data-aos-delay="100">
@@ -40,7 +40,7 @@
                         <i class="fas fa-globe"></i>
                     </div>
                     <div class="contact-details">
-                        <h3>Sites Web</h3>
+                        <h3 data-i18n="about_info_sites">Sites Web</h3>
                         <p>
                             <a href="https://menosi.net" target="_blank">menosi.net</a><br>
                             <a href="https://cli.menosi.net" target="_blank">cli.menosi.net</a>
@@ -50,27 +50,27 @@
             </div>
             <form class="contact-form" id="contactForm" data-aos="fade-left">
                 <div class="form-group">
-                    <input type="text" name="name" id="name" placeholder="Votre nom" required>
+                    <input type="text" name="name" id="name" placeholder="Votre nom" data-i18n="contact_form_name" required>
                     <i class="fas fa-user"></i>
                     <span class="error-message"></span>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" id="email" placeholder="Votre email" required>
+                    <input type="email" name="email" id="email" placeholder="Votre email" data-i18n="contact_form_email" required>
                     <i class="fas fa-envelope"></i>
                     <span class="error-message"></span>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="subject" id="subject" placeholder="Sujet" required>
+                    <input type="text" name="subject" id="subject" placeholder="Sujet" data-i18n="contact_form_subject" required>
                     <i class="fas fa-tag"></i>
                     <span class="error-message"></span>
                 </div>
                 <div class="form-group">
-                    <textarea name="message" id="message" rows="6" placeholder="Votre message" required></textarea>
+                    <textarea name="message" id="message" rows="6" placeholder="Votre message" data-i18n="contact_form_message" required></textarea>
                     <i class="fas fa-comment-dots"></i>
                     <span class="error-message"></span>
                 </div>
                 <button type="submit" class="btn btn-primary" id="submitBtn">
-                    <span class="btn-text">Envoyer le message</span>
+                    <span class="btn-text" data-i18n="contact_btn_send">Envoyer le message</span>
                     <i class="fab fa-whatsapp"></i>
                     <span class="btn-loader"></span>
                 </button>

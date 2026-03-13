@@ -121,30 +121,37 @@ function initSmoothScroll() {
     }
 }
 
-// Theme toggle (optional feature)
-function initThemeToggle() {
-    const themeToggle = document.getElementById('themeToggle');
-    if (!themeToggle) return;
+// Language switcher
+function initLangSwitcher() {
+    const langBtns = document.querySelectorAll('.lang-btn');
+    if (!langBtns.length) return;
 
-    // Check for saved theme preference
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', currentTheme);
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            
+            // Highlight active button
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
-    themeToggle.addEventListener('click', () => {
-        const theme = document.documentElement.getAttribute('data-theme');
-        const newTheme = theme === 'dark' ? 'light' : 'dark';
-
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-
-        // Update icon
-        const icon = themeToggle.querySelector('i');
-        icon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+            // Dispatch language change event
+            if (window.i18n) {
+                window.i18n.changeLanguage(lang);
+            }
+            
+            // Save preference
+            localStorage.setItem('portfolio_lang', lang);
+        });
     });
 
-    // Set initial icon
-    const icon = themeToggle.querySelector('i');
-    icon.className = currentTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+    // Load saved preference or default to French
+    const savedLang = localStorage.getItem('portfolio_lang') || 'fr';
+    const activeBtn = document.querySelector(`.lang-btn[data-lang="${savedLang}"]`);
+    if (activeBtn) {
+        langBtns.forEach(b => b.classList.remove('active'));
+        activeBtn.classList.add('active');
+        // Initial language set will be handled by i18n script
+    }
 }
 
 // Hide navbar on scroll down, show on scroll up
@@ -173,7 +180,7 @@ function initNavigation() {
     initActiveSection();
     initScrollProgress();
     initSmoothScroll();
-    initThemeToggle();
+    initLangSwitcher();
     // initHideNavbar(); // Uncomment if you want auto-hide navbar
 }
 
