@@ -85,7 +85,7 @@
         });
 
         // Form submission
-        form.addEventListener('submit', async (e) => {
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
 
             // Validate all fields
@@ -104,17 +104,47 @@
             // Show loading state
             submitBtn.classList.add('loading');
 
-            // Simulate form submission (replace with actual API call)
-            try {
-                await submitForm(form);
-                showFormStatus('Message envoyé avec succès !', 'success');
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // Formater le message pour WhatsApp
+            const whatsappNumber = "237691231554";
+            const messageText = `*NOUVEAU MESSAGE DEPUIS LE PORTFOLIO*\n` +
+                               `------------------------------------------\n` +
+                               `👤 *Nom:* ${data.name}\n` +
+                               `📧 *Email:* ${data.email}\n` +
+                               `🏷️ *Sujet:* ${data.subject}\n\n` +
+                               `💬 *Message:*\n${data.message}\n` +
+                               `------------------------------------------\n` +
+                               `_Envoyé depuis le portfolio de Kevin Tene_`;
+            
+            const encodedMessage = encodeURIComponent(messageText);
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            // Rediriger immédiatement
+            showFormStatus('Redirection vers WhatsApp...', 'success');
+            
+            // Utiliser une méthode plus robuste pour la redirection
+            setTimeout(() => {
+                const link = document.createElement('a');
+                link.href = whatsappUrl;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Fallback si le lien ne s'ouvre pas
+                setTimeout(() => {
+                    if (!document.hidden) {
+                        window.location.href = whatsappUrl;
+                    }
+                }, 500);
+
+                submitBtn.classList.remove('loading');
                 form.reset();
                 inputs.forEach(input => input.classList.remove('error'));
-            } catch (error) {
-                showFormStatus('Une erreur est survenue. Veuillez réessayer.', 'error');
-            } finally {
-                submitBtn.classList.remove('loading');
-            }
+            }, 800);
         });
     }
 
@@ -166,44 +196,6 @@
         }
 
         return isValid;
-    }
-
-    // Submit form (replace with actual API call)
-    async function submitForm(form) {
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-
-        // Simulate API call
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // Log form data (replace with actual API call)
-                console.log('Form submitted:', data);
-
-                // Simulate success (95% success rate for demo)
-                if (Math.random() > 0.05) {
-                    resolve();
-                } else {
-                    reject(new Error('Simulation error'));
-                }
-            }, 2000);
-        });
-
-        // Example API call:
-        /*
-        const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-            throw new Error('Form submission failed');
-        }
-
-        return response.json();
-        */
     }
 
     // Show form status message
