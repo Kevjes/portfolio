@@ -123,34 +123,60 @@ function initSmoothScroll() {
 
 // Language switcher
 function initLangSwitcher() {
-    const langBtns = document.querySelectorAll('.lang-btn');
-    if (!langBtns.length) return;
+    const wrapper = document.querySelector('.lang-selector-wrapper');
+    const currentBtn = document.getElementById('langCurrent');
+    const options = document.querySelectorAll('.lang-option');
+    const currentFlag = document.getElementById('currentFlag');
+    const currentLabel = document.getElementById('currentLangLabel');
 
-    langBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const lang = btn.getAttribute('data-lang');
+    if (!wrapper || !currentBtn) return;
+
+    // Toggle dropdown
+    currentBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        wrapper.classList.toggle('active');
+    });
+
+    // Handle language change
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const lang = option.getAttribute('data-lang');
+            const flagSrc = option.querySelector('img').src;
             
-            // Highlight active button
-            langBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            // Update UI
+            currentFlag.src = flagSrc;
+            currentLabel.textContent = lang.toUpperCase();
+            
+            // Highlight active option
+            options.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
 
-            // Dispatch language change event
+            // Dispatch event to i18n
             if (window.i18n) {
                 window.i18n.changeLanguage(lang);
             }
             
             // Save preference
             localStorage.setItem('portfolio_lang', lang);
+            
+            // Close dropdown
+            wrapper.classList.remove('active');
         });
     });
 
-    // Load saved preference or default to French
+    // Close on click outside
+    document.addEventListener('click', () => {
+        wrapper.classList.remove('active');
+    });
+
+    // Initialize from saved preference
     const savedLang = localStorage.getItem('portfolio_lang') || 'fr';
-    const activeBtn = document.querySelector(`.lang-btn[data-lang="${savedLang}"]`);
-    if (activeBtn) {
-        langBtns.forEach(b => b.classList.remove('active'));
-        activeBtn.classList.add('active');
-        // Initial language set will be handled by i18n script
+    const activeOption = document.querySelector(`.lang-option[data-lang="${savedLang}"]`);
+    if (activeOption) {
+        options.forEach(opt => opt.classList.remove('active'));
+        activeOption.classList.add('active');
+        currentFlag.src = activeOption.querySelector('img').src;
+        currentLabel.textContent = savedLang.toUpperCase();
     }
 }
 

@@ -13,13 +13,22 @@
             <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="lang-switcher">
-                <button class="lang-btn active" data-lang="fr" aria-label="Passer en français">
-                    <img src="https://flagcdn.com/w20/fr.png" alt="Français">
+            <div class="lang-selector-wrapper">
+                <button class="lang-current" id="langCurrent" aria-label="Choisir la langue">
+                    <img src="https://flagcdn.com/w20/fr.png" alt="FR" id="currentFlag">
+                    <span id="currentLangLabel">FR</span>
+                    <i class="fas fa-chevron-down"></i>
                 </button>
-                <button class="lang-btn" data-lang="en" aria-label="Switch to English">
-                    <img src="https://flagcdn.com/w20/us.png" alt="English">
-                </button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-option active" data-lang="fr">
+                        <img src="https://flagcdn.com/w20/fr.png" alt="Français">
+                        <span>Français</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <img src="https://flagcdn.com/w20/us.png" alt="English">
+                        <span>English</span>
+                    </button>
+                </div>
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
