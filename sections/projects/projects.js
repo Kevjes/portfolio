@@ -155,6 +155,13 @@
     // Generate features based on project title
     function generateFeatures(title) {
         const features = {
+            'Whatsapp Banking': [
+                'Conception globale et développement de logiciel hautement sécurisé',
+                'Intégration fluide avec le Core Banking System d\'Afriland First Bank',
+                'Plus de 30 000 utilisateurs actifs avec forte réactivité',
+                'Mise en place de couches de sécurité très strictes (Fintech)',
+                'Collaboration étroite avec la Direction Informatique et les développeurs cœurs'
+            ],
             'Sosan Med': [
                 'Téléconsultation en temps réel avec vidéo HD',
                 'Gestion intelligente des rendez-vous',
