@@ -162,6 +162,20 @@
                 'Mise en place de couches de sécurité très strictes (Fintech)',
                 'Collaboration étroite avec la Direction Informatique et les développeurs cœurs'
             ],
+            'PosiaCrea': [
+                'Développement Fullstack complet (Backend, Frontend, Modélisation)',
+                'Génération de texte et d\'image par Intelligence Artificielle',
+                'Système de planification et publication automatique sur LinkedIn',
+                'Architecture scalable pour gérer des volumes de contenu élevés',
+                'Interface utilisateur moderne conçue avec Next.js'
+            ],
+            'Assiste-Moi': [
+                'Développeur mobile principal et architecte logiciel',
+                'Mise sur pied d\'une architecture évolutive (Clean Architecture)',
+                'Gestion d\'état robuste avec GetX et intégrations API fluides',
+                'Développement complet du code jusqu\'au déploiement store',
+                'Interface utilisateur optimisée pour l\'apprentissage mobile'
+            ],
             'Sosan Med': [
                 'Téléconsultation en temps réel avec vidéo HD',
                 'Gestion intelligente des rendez-vous',
