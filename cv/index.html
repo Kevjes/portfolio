@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Kevin Tene</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS Reset & Print Configuration */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #e0e0e0;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #333;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: 20px auto;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+            display: flex;
+            /* overflow: hidden supprimé pour permettre le multi-page */
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                /* La hauteur fixe a été supprimée pour que le PDF s'étende sur plusieurs pages */
+            }
+        }
+
+        /* Layout Sidebar (Left) */
+        .sidebar {
+            width: 35%;
+            background: #eef1f3;
+            position: relative;
+        }
+
+        .sidebar-header {
+            background: #3B5E8B;
+            color: white;
+            text-align: center;
+            padding: 30px 15px 90px;
+            clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%);
+        }
+
+        .sidebar-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-header h2 {
+            font-size: 13.5px;
+            font-weight: 400;
+        }
+
+        .photo-container {
+            width: 150px;
+            height: 160px;
+            margin: -70px auto 20px;
+            position: relative;
+            z-index: 2;
+            background: white;
+            padding: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sidebar-content {
+            padding: 0 25px 25px;
+        }
+
+        .section-title-left {
+            color: #55779c;
+            font-size: 16px;
+            font-weight: 400;
+            border-bottom: 1px solid #d0d7de;
+            padding-bottom: 5px;
+            margin: 20px 0 12px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 12.5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .info-list i {
+            color: #3B5E8B;
+            width: 25px;
+            font-size: 14px;
+            text-align: center;
+            margin-right: 12px;
+        }
+
+        .info-list-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-list-details strong {
+            display: block;
+            color: #3B5E8B;
+            margin-bottom: 2px;
+        }
+
+        /* Language dots */
+        .skill-dots-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 12.5px;
+            font-weight: 600;
+        }
+
+        .dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+        }
+
+        .dot.fill {
+            background: #3B5E8B;
+        }
+
+        /* Interests Checkmarks */
+        .interest-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 12.5px;
+            font-weight: 600;
+        }
+
+        .square-icon {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #55779c;
+            margin-right: 12px;
+        }
+
+        /* Layout Main Content (Right) */
+        .main-content {
+            width: 65%;
+            padding: 30px 40px;
+            background: white;
+        }
+
+        .section-title-right {
+            color: #55779c;
+            font-size: 18px;
+            font-weight: 400;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 8px;
+            margin: 20px 0 15px;
+        }
+
+        .section-title-right:first-child {
+            margin-top: 5px;
+        }
+
+        p.profile-text {
+            font-size: 13px;
+            text-align: justify;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            font-weight: 500;
+            color: #222;
+        }
+
+        .exp-item {
+            margin-bottom: 18px;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .exp-title {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .exp-date {
+            font-size: 12px;
+            color: #3B5E8B;
+            font-weight: 600;
+        }
+
+        .exp-company {
+            font-size: 13px;
+            color: #55779c;
+            margin-bottom: 6px;
+        }
+
+        .exp-desc,
+        .exp-desc ul {
+            font-size: 12.5px;
+        }
+
+        .exp-desc ul {
+            padding-left: 20px;
+            margin-top: 3px;
+        }
+
+        .exp-desc li {
+            margin-bottom: 4px;
+            color: #333;
+        }
+
+        .project-tags {
+            font-style: italic;
+            color: #666;
+            margin-top: 2px;
+            font-size: 11.5px;
+        }
+
+        .space-top {
+            margin-top: 100px;
+        }
+
+        .white {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- Sidebar (Left Column) -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>Kevin Landry TENE DJOUNTU</h1>
+                <h2>Développeur Fullstack Senior</h2>
+            </div>
+            <div class="photo-container">
+                <img src="https://i.ibb.co/BVfQBGyz/IMG-2821.png" alt="Kevin Tene">
+            </div>
+
+            <div class="sidebar-content">
+                <h3 class="section-title-left">Informations personnelles</h3>
+                <ul class="info-list">
+                    <li><i class="fas fa-user"></i> Kevin Landry TENE DJOUNTU</li>
+                    <li><i class="fas fa-envelope"></i> kevinjessi10@gmail.com</li>
+                    <li><i class="fas fa-phone"></i> +237 691 231 554</li>
+                    <li><i class="fas fa-home"></i> Yaoundé, Cameroun</li>
+                    <li><i class="fab fa-linkedin"></i> lnkd.in/kevin-tene</li>
+                    <li><i class="fab fa-github"></i> github.com/kevintene</li>
+                    <li><i class="fas fa-globe"></i> menosi.net</li>
+                </ul>
+
+                <h3 class="section-title-left">Expertise Technique</h3>
+                <div class="info-list-details">
+                    <div>
+                        <strong>Backend & DevOps</strong>
+                        Java Spring Boot, Nest.js, FastAPI, Clean Architecture, CI/CD, Docker.
+                    </div>
+                    <div>
+                        <strong>Mobile & Frontend</strong>
+                        Flutter, GetX, Next.js, React.js, Tailwind CSS.
+                    </div>
+                </div>
+
+                <h3 class="section-title-left">Langues</h3>
+                <div class="skill-dots-item">
+                    <span>Français</span>
+                    <div class="dots">
+                        <div class="dot fill"></div>
+                        <div class="dot fill"></div>
+                        <div class="dot fill"></div>
+                        <div class="dot fill"></div>
+                        <div class="dot fill"></div>
+                    </div>
+                </div>
+                <div class="skill-dots-item">
+                    <span>English</span>
+                    <div class="dots">
+                        <div class="dot fill"></div>
+                        <div class="dot fill"></div>
+                        <div class="dot fill"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+
+                <h3 class="section-title-left">Qualités</h3>
+                <div class="interest-item"><span class="square-icon"></span> Travail en équipe</div>
+                <div class="interest-item"><span class="square-icon"></span> Perfectionniste</div>
+                <div class="interest-item"><span class="square-icon"></span> Travailleur</div>
+                <div class="interest-item"><span class="square-icon"></span> Capacité de travailler sous pression</div>
+                <div class="interest-item"><span class="square-icon"></span> Aimable</div>
+                <div class="space-bottom white">.</div>
+
+                <div class="space-top white">.</div>
+                <h3 class="section-title-left">Centres d'intérêt</h3>
+                <div class="interest-item"><span class="square-icon"></span> Innovation technologique</div>
+                <div class="interest-item"><span class="square-icon"></span> Architecture Cloud / SI</div>
+                <div class="interest-item"><span class="square-icon"></span> Intelligence Artificielle</div>
+                <div class="interest-item"><span class="square-icon"></span> Finance & FinTech</div>
+            </div>
+        </div>
+
+        <!-- Main Content (Right Column) -->
+        <div class="main-content">
+            <h3 class="section-title-right">Profil</h3>
+            <p class="profile-text">
+                Fort de 7 années d’expérience, j’accompagne les entreprises dans la transformation de visions complexes
+                en solutions technologiques robustes. Spécialiste du secteur bancaire et des environnements à haute
+                exigence, je maîtrise l’ensemble du cycle de vie logiciel : de la modélisation à l'orchestration DevOps,
+                en passant par le développement de backends critiques (Spring Boot, Nest.js) et d'interfaces modernes
+                (Next.js, Flutter). Consultant et Développeur en remote, j'aide aujourd'hui les multinationales à scaler
+                leurs infrastructures SI.
+            </p>
+
+            <h3 class="section-title-right">Expérience professionnelle</h3>
+
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-title">Consultant & Développeur Fullstack</span>
+                    <span class="exp-date">janv. 2026 à ce jour</span>
+                </div>
+                <div class="exp-company">Afriland First Bank South Sudan, Remote</div>
+                <div class="exp-desc">
+                    <ul>
+                        <li>Maintenance évolutive et sécurisation continue de la solution Whatsapp Banking.</li>
+                        <li>Digitalisation de nouveaux produits bancaires et accompagnement stratégique.</li>
+                        <li>Expertise sur les architectures backend et mobile pour garantir 100% de la disponibilité du
+                            service.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-title">Développeur Fullstack Senior</span>
+                    <span class="exp-date">août 2025 à fév. 2026</span>
+                </div>
+                <div class="exp-company">KIMIA TECHNOLOGIES, Yaoundé</div>
+                <div class="exp-desc">
+                    <ul>
+                        <li>Développement de backends bancaires critiques avec Spring Boot.</li>
+                        <li>Orchestration complète du DevOps, des pipelines CI/CD et des déploiements.</li>
+                        <li>Mise en place de solutions scalables via Clean Architecture et automatisation IA.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-title">Lead Tech & Mobile Engineer</span>
+                    <span class="exp-date">mai 2025 à oct. 2025</span>
+                </div>
+                <div class="exp-company">Sosan Med, Remote</div>
+                <div class="exp-desc">
+                    <ul>
+                        <li>Pilotage complet d'une application mobile innovante spécialisée dans le suivi de santé et
+                            les téléconsultations (API WebRTC).</li>
+                        <li>Gestion des sprints, encadrement de l'équipe et architecture logicielle stricte.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-title">Chef de Projet & Expert Backend</span>
+                    <span class="exp-date">nov. 2023 à juin 2025</span>
+                </div>
+                <div class="exp-company">MENOSI, Yaoundé</div>
+                <div class="exp-desc">
+                    <ul>
+                        <li>Supervision dynamique d'une équipe de 4 développeurs (Mobile et Web).</li>
+                        <li>Conception de microservices backend robustes via FastAPI avec sécurité JWT.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-title">Développeur Mobile</span>
+                    <span class="exp-date">août 2022 à nov. 2023</span>
+                </div>
+                <div class="exp-company">IT Solutions & Advisory, Yaoundé</div>
+                <div class="exp-desc">
+                    <ul>
+                        <li>Refonte et optimisation de flux applicatifs complexes pour l'industrie bancaire (FinTech).
+                        </li>
+                        <li>Amélioration sensible des performances d'affichage de composants Flutter lourds.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="space-bottom white">.</div>
+
+            <div class="space-top white">.</div>
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-title">Développeur Mobile</span>
+                    <span class="exp-date">mars 2020 à juil. 2022</span>
+                </div>
+                <div class="exp-company">GOHZE, Yaoundé</div>
+                <div class="exp-desc">
+                    <ul>
+                        <li>Conception de A à Z d'applications mobiles répondant à des problématiques métier diverses.
+                        </li>
+                        <li>Forte collaboration avec les équipes Design (UI/UX) pour garantir une expérience utilisateur
+                            fluide.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-title">Professeur Informatique</span>
+                    <span class="exp-date">sept. 2020 à nov. 2020</span>
+                </div>
+                <div class="exp-company">College ShakeSpear, Yaoundé</div>
+                <div class="exp-desc">
+                    <ul>
+                        <li>Enseignement de l'informatique aux élèves de 3ième, 1ère et Tle (Cours du soir).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="section-title-right">Formation</h3>
+
+            <div class="exp-item">
+                <div class="exp-header">
+                    <span class="exp-title">Licence Informatique</span>
+                    <span class="exp-date">sept. 2017 à août 2020</span>
+                </div>
+                <div class="exp-company">Institut Universitaire Siantou, Yaoundé</div>
+                <div class="exp-desc">
+                    Formation professionnelle dans le domaine de l'informatique industrielle et automatisme qui s'est
+                    soldée par l'obtention d'une licence en informatique.
+                </div>
+            </div>
+
+            <h3 class="section-title-right">Projets Sélectionnés</h3>
+
+            <div class="exp-item" style="margin-bottom:12px;">
+                <div class="exp-header">
+                    <span class="exp-title">Whatsapp Banking - Afriland First Bank</span>
+                </div>
+                <div class="exp-company project-tags">Chatbot IA | FinTech | Sécurité Stricte</div>
+                <div class="exp-desc">
+                    Solution bancaire sur WhatsApp conçue de A à Z. Plus de 30 000 utilisateurs quotidiens.
+                </div>
+            </div>
+
+            <div class="exp-item" style="margin-bottom:12px;">
+                <div class="exp-header">
+                    <span class="exp-title">PosiaCrea</span>
+                </div>
+                <div class="exp-company project-tags">Next.js | IA (NLP/Vision) | Automation</div>
+                <div class="exp-desc">
+                    Plateforme SaaS Assistant IA pour LinkedIn professionnel automatisant la création de posts.
+                </div>
+            </div>
+
+            <div class="exp-item" style="margin-bottom:12px;">
+                <div class="exp-header">
+                    <span class="exp-title">Assiste-Moi</span>
+                </div>
+                <div class="exp-company project-tags">Flutter | Clean Architecture | GetX</div>
+                <div class="exp-desc">
+                    Plateforme éducative innovante facilitant l'accès aux ressources pédagogiques pour la réussite des
+                    apprenants.
+                </div>
+            </div>
+
+            <div class="exp-item" style="margin-bottom:12px;">
+                <div class="exp-header">
+                    <span class="exp-title">Hidima</span>
+                </div>
+                <div class="exp-company project-tags">Flutter | iOS & Android | Marketplace</div>
+                <div class="exp-desc">
+                    Plateforme mobile connectant prestataires de services et clients camerounais.
+                </div>
+            </div>
+
+            <div class="exp-item" style="margin-bottom:0;">
+                <div class="exp-header">
+                    <span class="exp-title">Spideli</span>
+                </div>
+                <div class="exp-company project-tags">Flutter | Multi-Services | Géolocalisation</div>
+                <div class="exp-desc">
+                    Plateforme de livraison multi-services en Afrique (livraison, taxi, restauration, e-commerce).
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
