@@ -1,175 +1,312 @@
-/* Skills — Premium Dark */
+/* ═══════════════════════════════════════
+   SKILLS — Architecture premium
+   Bloc IA : vitrine pleine largeur
+   Autres blocs : grille avec depth et matière
+═══════════════════════════════════════ */
 .skills {
     padding: var(--spacing-xxl) 0;
     position: relative;
     overflow: hidden;
 }
 
-.skills .section-header { margin-bottom: 4rem; }
-
-/* Grid */
-.skills-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-}
-
-/* Block */
-.skill-block {
-    background: var(--black-1);
-    padding: 2rem;
-    transition: background 0.2s;
-    position: relative;
-}
-
-.skill-block:hover { background: var(--black-2); }
-
-.skill-block--hero {
-    background: linear-gradient(135deg, rgba(201,169,110,0.1) 0%, rgba(160,122,58,0.04) 40%, var(--black-1) 100%);
-    border-bottom: 1px solid rgba(201,169,110,0.15);
-    position: relative;
-    overflow: hidden;
-}
-
-.skill-block--hero::after {
+/* Halo de fond */
+.skills::before {
     content: '';
     position: absolute;
-    top: -40px; right: -40px;
-    width: 200px; height: 200px;
-    background: radial-gradient(ellipse, rgba(201,169,110,0.1) 0%, transparent 70%);
+    top: 0; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse, rgba(201,169,110,0.05) 0%, transparent 65%);
     pointer-events: none;
 }
 
-/* Header */
-.skill-block__head {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.625rem;
+.skills .section-header { margin-bottom: 4rem; }
+
+/* ───── GRILLE ───── */
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
 }
 
+/* ───── BLOC DE BASE ───── */
+.skill-block {
+    background: var(--black-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s var(--ease-expo), transform 0.3s var(--ease-expo), box-shadow 0.3s var(--ease-expo);
+}
+
+.skill-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, transparent 60%);
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.skill-block:hover {
+    border-color: rgba(201,169,110,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,169,110,0.06);
+}
+
+/* ───── BLOC IA — vitrine principale ───── */
+.skill-block--hero {
+    background: var(--black-1);
+    border-color: rgba(201,169,110,0.2);
+    overflow: hidden;
+    padding: 2.5rem;
+}
+
+/* Fond dégradé chaud dans le coin */
+.skill-block--hero::after {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 340px; height: 340px;
+    background: radial-gradient(ellipse, rgba(201,169,110,0.12) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.skill-block--hero:hover {
+    border-color: rgba(201,169,110,0.35);
+    box-shadow: 0 16px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,169,110,0.06);
+}
+
+/* ───── EN-TÊTE DE BLOC ───── */
+.skill-block__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.125rem;
+    margin-bottom: 1.75rem;
+}
+
+/* Icône */
 .skill-block__icon {
-    width: 40px; height: 40px;
-    min-width: 40px;
-    border-radius: var(--radius-sm);
+    width: 44px; height: 44px;
+    min-width: 44px;
+    border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    position: relative;
+    flex-shrink: 0;
+
+    /* Fond avec gradient subtil */
     background: rgba(201,169,110,0.08);
     border: 1px solid rgba(201,169,110,0.18);
-    display: flex; align-items: center; justify-content: center;
     color: var(--accent);
-    font-size: 0.875rem;
+    transition: var(--t-mid);
 }
 
 .skill-block--hero .skill-block__icon {
-    background: rgba(201,169,110,0.18);
+    width: 52px; height: 52px;
+    min-width: 52px;
+    font-size: 1.125rem;
+    background: rgba(201,169,110,0.14);
     border-color: rgba(201,169,110,0.3);
-    box-shadow: 0 0 20px rgba(201,169,110,0.1);
+    box-shadow: 0 0 24px rgba(201,169,110,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.skill-block:hover .skill-block__icon {
+    background: rgba(201,169,110,0.14);
+    border-color: rgba(201,169,110,0.3);
+}
+
+/* Texte à côté de l'icône */
+.skill-block__head > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
 }
 
 .skill-block__title {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--white);
-    letter-spacing: -0.02em;
-    margin: 0 0 4px;
+    letter-spacing: -0.025em;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.skill-block--hero .skill-block__title {
+    font-size: 1.125rem;
 }
 
 .skill-block__badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     font-size: 0.6rem;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    padding: 2px 8px;
-    background: rgba(201,185,154,0.08);
-    color: var(--accent);
+    letter-spacing: 0.14em;
+    padding: 3px 9px;
     border-radius: 2px;
-    font-weight: 500;
+    font-weight: 600;
+    width: fit-content;
+
+    background: rgba(201,169,110,0.12);
+    color: var(--accent);
+    border: 1px solid rgba(201,169,110,0.2);
+}
+
+.skill-block__badge::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.8;
 }
 
 .skill-block__badge--dim {
     background: rgba(255,255,255,0.04);
     color: var(--dim-gray);
+    border-color: rgba(255,255,255,0.07);
 }
 
-/* Tag cloud */
-.skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.skill-block__badge--dim::before { background: var(--dim-gray); }
+
+/* ───── CLOUD DE TAGS (bloc IA) ───── */
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
 
 .skill-tag {
-    padding: 5px 11px;
-    font-size: 0.6875rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 13px;
+    font-size: 0.75rem;
     border-radius: var(--radius-sm);
-    background: var(--black-3);
-    border: 1px solid var(--border);
-    color: var(--mid-gray);
-    transition: var(--t-fast);
-    letter-spacing: 0.02em;
     font-weight: 400;
+    letter-spacing: 0.01em;
+    transition: var(--t-fast);
+    cursor: default;
+
+    background: var(--black-3);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--mid-gray);
 }
 
 .skill-tag:hover {
-    border-color: var(--border-hover);
-    color: var(--accent);
-    background: rgba(201,185,154,0.05);
+    color: var(--accent-light);
+    border-color: rgba(201,169,110,0.22);
+    background: rgba(201,169,110,0.07);
+    transform: translateY(-1px);
 }
 
+/* Tags mis en avant (core skills) */
 .skill-tag--lit {
     background: rgba(201,169,110,0.1);
     border-color: rgba(201,169,110,0.25);
     color: var(--accent);
+    font-weight: 500;
 }
 
-/* Bars */
-.skill-bars { display: flex; flex-direction: column; gap: 1.125rem; }
+.skill-tag--lit:hover {
+    background: rgba(201,169,110,0.18);
+    border-color: rgba(201,169,110,0.4);
+    color: var(--accent-light);
+}
+
+/* ───── BARRES DE COMPÉTENCE ───── */
+.skill-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1.375rem;
+}
+
+.skill-bar-item { position: relative; }
 
 .skill-bar-item__top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+
+.skill-bar-item__top > span:first-child {
     font-size: 0.8125rem;
-    color: var(--mid-gray);
+    color: var(--warm-gray);
     font-weight: 400;
+    letter-spacing: -0.01em;
 }
 
 .skill-pct {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     color: var(--accent);
-    font-weight: 500;
+    font-weight: 600;
     font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
 }
 
+/* Piste */
 .skill-track {
-    height: 2px;
+    height: 3px;
     background: var(--black-4);
     border-radius: var(--radius-full);
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
 }
 
+/* Barre de remplissage */
 .skill-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+    background: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent) 70%, rgba(232,213,176,0.8) 100%);
     border-radius: var(--radius-full);
     width: 0;
-    transition: width 1.4s var(--ease-expo);
+    transition: width 1.6s var(--ease-expo);
+    position: relative;
+}
+
+/* Curseur lumineux à la fin de la barre */
+.skill-fill::after {
+    content: '';
+    position: absolute;
+    right: -1px; top: 50%;
+    transform: translateY(-50%);
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(201,169,110,0.8), 0 0 3px rgba(201,169,110,0.4);
+    opacity: 0;
+    transition: opacity 0.4s 1.2s;
 }
 
 .skill-block.animate-in .skill-fill {
     width: var(--progress-width) !important;
 }
 
-/* Desktop */
+.skill-block.animate-in .skill-fill::after {
+    opacity: 1;
+}
+
+/* ───── DESKTOP GRID ───── */
 @media (min-width: 768px) {
-    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
     .skill-block--hero { grid-column: 1 / -1; }
 }
 
 @media (min-width: 1100px) {
-    .skills-grid { grid-template-columns: repeat(3, 1fr); }
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
     .skill-block--hero { grid-column: 1 / -1; }
+
+    /* Layout horizontal pour le bloc IA */
+    .skill-block--hero .skill-tags { gap: 9px; }
 }
 
-@media (max-width: 576px) { .skill-block { padding: 1.5rem; } }
+@media (max-width: 576px) {
+    .skill-block { padding: 1.5rem; }
+    .skill-block--hero { padding: 1.75rem; }
+}

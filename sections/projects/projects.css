@@ -1,112 +1,137 @@
-/* Projects — Premium Dark */
+/* ═══════════════════════════════════════
+   PROJECTS — Cards premium
+   Image en fond avec overlay, numérotation,
+   métriques visibles, hover reveal sophistiqué
+═══════════════════════════════════════ */
 .projects {
     padding: var(--spacing-xxl) 0;
     position: relative;
     overflow: hidden;
 }
 
+.projects .section-header { margin-bottom: 4rem; }
+
+/* ───── GRILLE ───── */
 .projects-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
+    gap: 1.25rem;
+    margin-top: 0;
+}
+
+/* ───── CARD ───── */
+.project-card {
+    position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    margin-top: 4rem;
-}
-
-/* Card */
-.project-card {
     background: var(--black-1);
+    border: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    transition: background 0.2s;
-    position: relative;
-    overflow: hidden;
+    transition: border-color 0.4s var(--ease-expo), transform 0.4s var(--ease-expo), box-shadow 0.4s var(--ease-expo);
+    cursor: pointer;
 }
 
-.project-card::after {
+.project-card:hover {
+    border-color: rgba(201,169,110,0.28);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,169,110,0.08);
+}
+
+/* Ligne or en haut — reveal au hover */
+.project-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 1px;
-    background: var(--gradient-gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.5s var(--ease-expo);
-    z-index: 2;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 40%, var(--accent-light) 60%, transparent 100%);
+    opacity: 0;
+    transform: scaleX(0.6);
+    transition: opacity 0.4s var(--ease-expo), transform 0.4s var(--ease-expo);
+    z-index: 3;
 }
 
-.project-card:hover { background: var(--black-2); }
-.project-card:hover::after { transform: scaleX(1); }
+.project-card:hover::before {
+    opacity: 1;
+    transform: scaleX(1);
+}
 
-/* Image */
+/* ───── IMAGE ───── */
 .project-image {
     position: relative;
-    width: 100%; height: 200px;
+    width: 100%;
+    height: 220px;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .project-image img {
     width: 100%; height: 100%;
     object-fit: cover;
-    transition: transform 0.6s var(--ease-expo);
-    filter: grayscale(30%) brightness(0.75);
+    object-position: center top;
+    transition: transform 0.7s var(--ease-expo), filter 0.5s ease;
+    filter: grayscale(20%) brightness(0.7) saturate(0.8);
 }
 
 .project-card:hover .project-image img {
-    transform: scale(1.04);
-    filter: grayscale(0%) brightness(0.9);
+    transform: scale(1.06);
+    filter: grayscale(0%) brightness(0.85) saturate(1);
 }
 
+/* Gradient overlay permanent pour lisibilité */
+.project-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(13,11,9,0.2) 60%,
+        rgba(13,11,9,0.85) 100%
+    );
+    z-index: 1;
+}
+
+/* Numéro de projet */
+.project-num {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    background: rgba(13,11,9,0.75);
+    border: 1px solid rgba(201,169,110,0.2);
+    padding: 4px 9px;
+    border-radius: 2px;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Boutons overlay — apparaissent au hover sur desktop */
 .project-overlay {
-    position: absolute; inset: 0;
-    background: rgba(10,10,10,0.5);
-    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
-    opacity: 1;
-    transition: opacity 0.3s;
-}
-
-/* Content */
-.project-content {
-    padding: 1.5rem;
-    flex: 1;
+    position: absolute;
+    bottom: 1rem; right: 1rem;
     display: flex;
-    flex-direction: column;
+    gap: 6px;
+    z-index: 2;
+    transition: opacity 0.3s, transform 0.3s var(--ease-expo);
 }
 
-.project-title {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--white);
-    letter-spacing: -0.02em;
-    margin-bottom: 0.5rem;
-}
-
-.project-description {
-    font-size: 0.8125rem;
-    color: var(--dim-gray);
-    line-height: 1.65;
-    margin-bottom: 1.25rem;
-    flex: 1;
-}
-
-.project-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-
-/* Links */
 .project-link, .project-info-btn {
-    width: 38px; height: 38px;
-    background: rgba(10,10,10,0.85);
-    border: 1px solid var(--border);
+    width: 36px; height: 36px;
+    background: rgba(13,11,9,0.8);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: var(--radius-sm);
     display: flex; align-items: center; justify-content: center;
-    color: var(--mid-gray); font-size: 0.875rem;
+    color: var(--warm-gray);
+    font-size: 0.8125rem;
     text-decoration: none;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
     transition: var(--t-fast);
     cursor: pointer;
+    background-color: transparent;
 }
 
 .project-link:hover, .project-info-btn:hover {
@@ -115,37 +140,113 @@
     color: var(--black);
 }
 
-/* Modal */
-.project-modal {
-    position: fixed; inset: 0;
-    background: rgba(10,10,10,0.92);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 10000; padding: 1.5rem;
-    opacity: 0; visibility: hidden;
-    transition: all 0.3s;
-    backdrop-filter: blur(12px);
+/* ───── CONTENU ───── */
+.project-content {
+    padding: 1.375rem 1.5rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
 }
 
-.project-modal.active { opacity: 1; visibility: visible; }
+/* Catégorie */
+.project-cat {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.project-title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+    margin: 0;
+    transition: color 0.2s;
+}
+
+.project-card:hover .project-title { color: var(--ivory); }
+
+.project-description {
+    font-size: 0.8125rem;
+    color: var(--dim-gray);
+    line-height: 1.7;
+    margin: 0;
+    flex: 1;
+}
+
+/* Tags */
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+}
+
+.project-tags .tag {
+    font-size: 0.625rem;
+    padding: 3px 8px;
+    letter-spacing: 0.06em;
+}
+
+/* ───── CARD FEATURED (première — Whatsapp Banking) ───── */
+.project-card:first-child {
+    border-color: rgba(201,169,110,0.18);
+}
+
+.project-card:first-child .project-image {
+    height: 260px;
+}
+
+/* ───── MODAL ───── */
+.project-modal {
+    position: fixed; inset: 0;
+    background: rgba(13,11,9,0.92);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10000;
+    padding: 1.5rem;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    backdrop-filter: blur(16px);
+}
+
+.project-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
 
 .project-modal-content {
     background: var(--black-1);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    width: 100%; max-width: 600px; max-height: 90vh;
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: var(--radius-xl);
+    width: 100%; max-width: 580px;
+    max-height: 88vh;
     overflow-y: auto;
-    padding: 2rem;
+    padding: 2.5rem;
     position: relative;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+    animation: modalIn 0.35s var(--ease-expo) both;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .project-modal-close {
     position: absolute; top: 1.25rem; right: 1.25rem;
-    width: 34px; height: 34px;
+    width: 32px; height: 32px;
     background: var(--black-3);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     color: var(--mid-gray);
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     transition: var(--t-fast);
@@ -157,29 +258,54 @@
     border-color: var(--white);
 }
 
-/* Desktop */
-@media (min-width: 640px) {
+/* ───── DESKTOP ───── */
+@media (min-width: 600px) {
     .projects-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Première card sur toute la largeur */
+    .project-card:first-child { grid-column: 1 / -1; }
+    .project-card:first-child .project-image { height: 280px; }
+
+    .project-card:first-child .project-content {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto 1fr auto;
+        gap: 0.75rem 2rem;
+    }
+
+    .project-card:first-child .project-cat   { grid-column: 1; }
+    .project-card:first-child .project-title { grid-column: 1; font-size: 1.25rem; }
+    .project-card:first-child .project-description { grid-column: 1 / -1; }
+    .project-card:first-child .project-tags  { grid-column: 1 / -1; }
 }
 
 @media (min-width: 1024px) {
-    .projects-grid { grid-template-columns: repeat(3, 1fr); }
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
 
+    .project-card:first-child {
+        grid-column: 1 / 3;
+    }
+
+    .project-card:first-child .project-content {
+        grid-template-columns: 1fr;
+    }
+
+    /* Sur desktop, overlay masqué jusqu'au hover */
     .project-overlay {
         opacity: 0;
-        background: rgba(10,10,10,0.7);
+        transform: translateY(6px);
     }
 
-    .project-card:hover .project-overlay { opacity: 1; }
-
-    .project-link, .project-info-btn {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-
-    .project-card:hover .project-link,
-    .project-card:hover .project-info-btn {
+    .project-card:hover .project-overlay {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+@media (max-width: 480px) {
+    .project-image { height: 180px; }
+    .project-content { padding: 1.25rem; }
 }
