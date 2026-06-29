@@ -246,7 +246,7 @@
     display: flex; align-items: center; justify-content: center;
     z-index: 10000;
     padding: 1.5rem;
-    opacity: 0; visibility: hidden;
+    opacity: 0; visibility: hidden; pointer-events: none;
     transition: opacity 0.3s, visibility 0.3s;
     backdrop-filter: blur(16px);
 }
@@ -254,6 +254,7 @@
 .project-modal.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 .project-modal-content {

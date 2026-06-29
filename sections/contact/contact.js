@@ -84,16 +84,13 @@
             });
         });
 
-        // Form submission
-        form.addEventListener('submit', (e) => {
+        function handleSubmit(e) {
             e.preventDefault();
+            e.stopPropagation();
 
-            // Validate all fields
             let isValid = true;
             inputs.forEach(input => {
-                if (!validateField(input)) {
-                    isValid = false;
-                }
+                if (!validateField(input)) isValid = false;
             });
 
             if (!isValid) {
@@ -101,51 +98,38 @@
                 return;
             }
 
-            // Show loading state
+            submitBtn.disabled = true;
             submitBtn.classList.add('loading');
 
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+            const name    = form.querySelector('[name="name"]').value.trim();
+            const email   = form.querySelector('[name="email"]').value.trim();
+            const subject = form.querySelector('[name="subject"]').value.trim();
+            const message = form.querySelector('[name="message"]').value.trim();
 
-            // Formater le message pour WhatsApp
             const whatsappNumber = "237691231554";
             const messageText = `*NOUVEAU MESSAGE DEPUIS LE PORTFOLIO*\n` +
                                `------------------------------------------\n` +
-                               `👤 *Nom:* ${data.name}\n` +
-                               `📧 *Email:* ${data.email}\n` +
-                               `🏷️ *Sujet:* ${data.subject}\n\n` +
-                               `💬 *Message:*\n${data.message}\n` +
+                               `👤 *Nom:* ${name}\n` +
+                               `📧 *Email:* ${email}\n` +
+                               `🏷️ *Sujet:* ${subject}\n\n` +
+                               `💬 *Message:*\n${message}\n` +
                                `------------------------------------------\n` +
                                `_Envoyé depuis le portfolio de Kevin Tene_`;
-            
-            const encodedMessage = encodeURIComponent(messageText);
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
-            // Rediriger immédiatement
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageText)}`;
+
             showFormStatus('Redirection vers WhatsApp...', 'success');
-            
-            // Utiliser une méthode plus robuste pour la redirection
+
             setTimeout(() => {
-                const link = document.createElement('a');
-                link.href = whatsappUrl;
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-
-                // Fallback si le lien ne s'ouvre pas
-                setTimeout(() => {
-                    if (!document.hidden) {
-                        window.location.href = whatsappUrl;
-                    }
-                }, 500);
-
+                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+                submitBtn.disabled = false;
                 submitBtn.classList.remove('loading');
                 form.reset();
                 inputs.forEach(input => input.classList.remove('error'));
-            }, 800);
-        });
+            }, 600);
+        }
+
+        form.addEventListener('submit', handleSubmit);
     }
 
     // Validate individual field
