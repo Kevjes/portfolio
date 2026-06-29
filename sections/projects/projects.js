@@ -1,144 +1,184 @@
-// Projects Section JavaScript
-(function() {
+// Projects Section JS
+(function () {
     'use strict';
 
-    // Initialize projects section
-    function initProjects() {
-        const projectsSection = document.querySelector('.projects');
-        const projectCards = document.querySelectorAll('.project-card');
-
-        if (!projectsSection) return;
-
-        // Intersection Observer for scroll animations
-        observeProjectCards();
-
-        // Add modal functionality
-        initProjectModals();
-
-        // Add filter functionality
-        initProjectFilters();
-
-        // Add parallax effect
-        if (window.innerWidth > 768) {
-            addParallaxEffect();
+    // Données des projets — features pour le modal
+    const PROJECT_DATA = {
+        'WhatsApp Banking': {
+            features: [
+                'Conception et développement complet de la solution de A à Z',
+                'Intégration sécurisée avec le Core Banking System d\'Afriland First Bank',
+                '30 000+ utilisateurs actifs avec haute disponibilité',
+                'Couches de sécurité strictes conformes aux standards FinTech',
+                'Architecture backend Spring Boot haute performance'
+            ]
+        },
+        'First Bank Connect': {
+            features: [
+                'Application Mobile Banking développée de A à Z en Flutter',
+                'Authentification sécurisée multi-facteur (biométrie + PIN)',
+                'Consultation de solde, historique et virements en temps réel',
+                'Intégration Core Banking Afriland First Bank South Sudan',
+                'Interface moderne et accessible, déployée sur Google Play'
+            ]
+        },
+        'PosiaCrea': {
+            features: [
+                'Développement Fullstack complet (Backend, Frontend, Modélisation)',
+                'Génération de texte et d\'image par Intelligence Artificielle (LLM + Vision)',
+                'Système de planification et publication automatique sur LinkedIn',
+                'Architecture scalable Next.js + API NestJS pour volumes élevés',
+                'Gestion multi-compte et analytics de performance des posts'
+            ]
+        },
+        'Assiste-Moi': {
+            features: [
+                'Architecture Clean Architecture Flutter — testabilité garantie',
+                'Gestion d\'état robuste avec GetX et intégrations API fluides',
+                'Accès à des ressources pédagogiques enrichies et personnalisées',
+                'Déployé sur App Store et Google Play',
+                'Interface optimisée pour l\'apprentissage mobile'
+            ]
+        },
+        'Thamani': {
+            features: [
+                'Plateforme e-commerce 100% Made in Cameroun (NestJS + ReactJS)',
+                'Gestion des stocks, entrepôts et livraisons intégrée',
+                'Moteur de recherche et catalogue produits dynamique',
+                'Tableau de bord vendeur avec analytics temps réel',
+                'Système de paiement sécurisé et gestion des commandes'
+            ]
+        },
+        'Hidima': {
+            features: [
+                'Plateforme de mise en relation services & clients au Cameroun',
+                'Géolocalisation des prestataires en temps réel',
+                'Système de notation et gestion des avis clients',
+                'Disponible sur iOS et Android (Flutter)',
+                'Chat intégré entre client et prestataire'
+            ]
+        },
+        'Spideli': {
+            features: [
+                'Super-app multi-services : livraison, taxi, restauration, e-commerce',
+                'Géolocalisation temps réel et tracking de commande',
+                'Intégration de multiples flux de paiement',
+                'Architecture Flutter modulaire et performante',
+                'Déployée et active en Afrique centrale'
+            ]
+        },
+        'Menosi CLI': {
+            features: [
+                'Outil CLI Node.js de génération de projets avec templates',
+                'Support multi-stack : Flutter, NestJS, FastAPI, Next.js',
+                'API FastAPI backend pour gestion et versioning des templates',
+                'Automatisation des boilerplates — gain de temps significatif',
+                'Documentation complète et open source'
+            ]
+        },
+        'Spideli Store': {
+            features: [
+                'Extension commerçant de la super-app Spideli',
+                'Gestion complète de la boutique, des stocks et des commandes',
+                'Tableau de bord analytics pour les performances de vente',
+                'Intégration temps réel avec la plateforme Spideli client',
+                'Interface Flutter optimisée pour les marchands mobiles'
+            ]
+        },
+        'FlexParent': {
+            features: [
+                'Suivi scolaire en temps réel pour les parents',
+                'Communication directe avec les enseignants',
+                'Notifications des absences, notes et événements',
+                'Gestion des activités parascolaires',
+                'Interface Flutter simple et accessible'
+            ]
+        },
+        'GSchool': {
+            features: [
+                'Plateforme SaaS de gestion scolaire complète',
+                'Gestion des notes, absences et emplois du temps',
+                'Communication école-parents intégrée',
+                'Tableaux de bord administrateur et enseignant',
+                'API REST robuste et interface Flutter'
+            ]
         }
+    };
 
-        // Add hover tilt effect
-        addTiltEffect();
-
-        // Add lazy loading for images
-        lazyLoadImages();
+    function initProjects() {
+        if (!document.querySelector('.projects')) return;
+        initModal();
+        initCardClicks();
+        initFilters();
+        observeCards();
     }
 
-    // Observe project cards for scroll animations
-    function observeProjectCards() {
-        const projectCards = document.querySelectorAll('.project-card');
+    // ── Modal ──
+    let modal = null;
 
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const cardObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                    cardObserver.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        projectCards.forEach(card => {
-            cardObserver.observe(card);
-        });
-    }
-
-    // Initialize project modals
-    function initProjectModals() {
-        const projectCards = document.querySelectorAll('.project-card');
-        const infoButtons = document.querySelectorAll('.project-info-btn');
-
-        // Create modal container
-        const modal = createModal();
-        document.body.appendChild(modal);
-
-        infoButtons.forEach((btn, index) => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const card = projectCards[index];
-                showProjectModal(card, modal);
-            });
-        });
-
-        // Close modal on overlay click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal(modal);
-            }
-        });
-
-        // Close modal on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeModal(modal);
-            }
-        });
-    }
-
-    // Create modal element
-    function createModal() {
-        const modal = document.createElement('div');
+    function initModal() {
+        modal = document.createElement('div');
         modal.className = 'project-modal';
         modal.innerHTML = `
             <div class="project-modal-content">
-                <button class="project-modal-close">
-                    <i class="fas fa-times"></i>
-                </button>
+                <button class="project-modal-close" aria-label="Fermer"><i class="fas fa-times"></i></button>
                 <div class="project-modal-body"></div>
             </div>
         `;
+        document.body.appendChild(modal);
 
-        const closeBtn = modal.querySelector('.project-modal-close');
-        closeBtn.addEventListener('click', () => closeModal(modal));
-
-        return modal;
+        modal.querySelector('.project-modal-close').addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
     }
 
-    // Show project modal
-    function showProjectModal(card, modal) {
-        const title = card.querySelector('.project-title').textContent;
-        const description = card.querySelector('.project-description').textContent;
-        const tags = Array.from(card.querySelectorAll('.project-tags .tag'))
-            .map(tag => tag.textContent);
-        const image = card.querySelector('.project-image img').src;
+    // Clic sur toute la card → ouvre le modal
+    function initCardClicks() {
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', e => {
+                // Si clic sur un lien externe, laisser passer
+                if (e.target.closest('a.project-link')) return;
+                e.preventDefault();
+                openModal(card);
+            });
+            card.style.cursor = 'pointer';
+        });
+    }
 
-        const modalBody = modal.querySelector('.project-modal-body');
-        modalBody.innerHTML = `
-            <div class="modal-image" style="margin-bottom: 30px; border-radius: 15px; overflow: hidden;">
-                <img src="${image}" alt="${title}" style="width: 100%; height: auto; display: block;">
+    function openModal(card) {
+        const title       = card.querySelector('.project-title')?.textContent?.trim() || '';
+        const cat         = card.querySelector('.project-cat')?.textContent?.trim() || '';
+        const description = card.querySelector('.project-description')?.textContent?.trim() || '';
+        const tags        = Array.from(card.querySelectorAll('.project-tags .tag')).map(t => t.textContent.trim());
+        const imgSrc      = card.querySelector('.project-image img')?.src || '';
+        const link        = card.querySelector('a.project-link');
+        const features    = (PROJECT_DATA[title] || {}).features || [
+            'Architecture moderne et scalable',
+            'Interface utilisateur soignée',
+            'Performance et maintenabilité',
+            'Tests et documentation',
+            'Déploiement production'
+        ];
+
+        modal.querySelector('.project-modal-body').innerHTML = `
+            <div class="pmodal-img">
+                <img src="${imgSrc}" alt="${title}">
             </div>
-            <h2 style="font-size: 32px; color: #38bdf8; margin-bottom: 20px;">${title}</h2>
-            <p style="font-size: 16px; line-height: 1.8; color: #b0b0b0; margin-bottom: 25px;">${description}</p>
-            <div style="margin-bottom: 20px;">
-                <h3 style="font-size: 18px; color: #e0e0e0; margin-bottom: 15px;">Technologies utilisées</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    ${tags.map(tag => `
-                        <span style="padding: 8px 16px; background: rgba(56, 189, 248, 0.1);
-                                     border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px;
-                                     font-size: 13px; color: #38bdf8; font-weight: 600;">${tag}</span>
-                    `).join('')}
+            <div class="pmodal-info">
+                <span class="pmodal-cat">${cat}</span>
+                <h2 class="pmodal-title">${title}</h2>
+                <p class="pmodal-desc">${description}</p>
+                <div class="pmodal-section-label">Technologies</div>
+                <div class="pmodal-tags">
+                    ${tags.map(t => `<span class="tag">${t}</span>`).join('')}
                 </div>
-            </div>
-            <div style="margin-top: 30px;">
-                <h3 style="font-size: 18px; color: #e0e0e0; margin-bottom: 15px;">Caractéristiques principales</h3>
-                <ul style="list-style: none; padding: 0;">
-                    ${generateFeatures(title).map(feature => `
-                        <li style="padding: 10px 0 10px 25px; position: relative; color: #9a9a9a; line-height: 1.6;">
-                            <i class="fas fa-check-circle" style="position: absolute; left: 0; color: #38bdf8;"></i>
-                            ${feature}
-                        </li>
-                    `).join('')}
+                <div class="pmodal-section-label">Points clés</div>
+                <ul class="pmodal-features">
+                    ${features.map(f => `<li>${f}</li>`).join('')}
                 </ul>
+                ${link ? `<a href="${link.href}" target="_blank" class="btn btn-primary pmodal-cta">
+                    Voir le projet <i class="fas fa-external-link-alt"></i>
+                </a>` : ''}
             </div>
         `;
 
@@ -146,277 +186,82 @@
         document.body.style.overflow = 'hidden';
     }
 
-    // Close modal
-    function closeModal(modal) {
+    function closeModal() {
+        if (!modal) return;
         modal.classList.remove('active');
         document.body.style.overflow = '';
     }
 
-    // Generate features based on project title
-    function generateFeatures(title) {
-        const features = {
-            'Whatsapp Banking': [
-                'Conception globale et développement de logiciel hautement sécurisé',
-                'Intégration fluide avec le Core Banking System d\'Afriland First Bank',
-                'Plus de 30 000 utilisateurs actifs avec forte réactivité',
-                'Mise en place de couches de sécurité très strictes (Fintech)',
-                'Collaboration étroite avec la Direction Informatique et les développeurs cœurs'
-            ],
-            'PosiaCrea': [
-                'Développement Fullstack complet (Backend, Frontend, Modélisation)',
-                'Génération de texte et d\'image par Intelligence Artificielle',
-                'Système de planification et publication automatique sur LinkedIn',
-                'Architecture scalable pour gérer des volumes de contenu élevés',
-                'Interface utilisateur moderne conçue avec Next.js'
-            ],
-            'Assiste-Moi': [
-                'Développeur mobile principal et architecte logiciel',
-                'Mise sur pied d\'une architecture évolutive (Clean Architecture)',
-                'Gestion d\'état robuste avec GetX et intégrations API fluides',
-                'Développement complet du code jusqu\'au déploiement store',
-                'Interface utilisateur optimisée pour l\'apprentissage mobile'
-            ],
-            'Sosan Med': [
-                'Téléconsultation en temps réel avec vidéo HD',
-                'Gestion intelligente des rendez-vous',
-                'Prescriptions électroniques sécurisées',
-                'Historique médical complet',
-                'Notifications push en temps réel'
-            ],
-            'Générateur de CV': [
-                'Interface intuitive de création de CV',
-                'Multiples templates professionnels',
-                'Export PDF haute qualité',
-                'Système de gestion utilisateur',
-                'API RESTful complète'
-            ],
-            'GPS Pour Tous': [
-                'Géolocalisation en temps réel',
-                'Système de matching intelligent',
-                'Paiement intégré sécurisé',
-                'Historique des trajets',
-                'Chat en temps réel'
-            ],
-            'Chatbot WhatsApp': [
-                'Réponses automatisées 24/7',
-                'Intelligence artificielle avancée',
-                'Intégration multi-plateformes',
-                'Analytics et reporting',
-                'Support multilingue'
-            ],
-            'Marketplace Mobile': [
-                'Catalogue produits dynamique',
-                'Panier et commandes en ligne',
-                'Multiples méthodes de paiement',
-                'Suivi de livraison en temps réel',
-                'Système de notation et avis'
-            ],
-            'Application Bancaire': [
-                'Sécurité bancaire renforcée',
-                'Transactions instantanées',
-                'Virements et paiements',
-                'Gestion multi-comptes',
-                'Notifications de transactions'
-            ]
-        };
-
-        return features[title] || [
-            'Architecture moderne et scalable',
-            'Interface utilisateur intuitive',
-            'Performance optimisée',
-            'Tests automatisés',
-            'Documentation complète'
-        ];
-    }
-
-    // Initialize project filters
-    function initProjectFilters() {
-        const projectsSection = document.querySelector('.projects');
-        const container = projectsSection.querySelector('.container');
-        const sectionHeader = projectsSection.querySelector('.section-header');
-
-        // Create filter container
-        const filterContainer = document.createElement('div');
-        filterContainer.className = 'project-filters';
-        filterContainer.style.cssText = `
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 35px;
-            flex-wrap: wrap;
-        `;
+    // ── Filtres ──
+    function initFilters() {
+        const header = document.querySelector('.projects .section-header');
+        if (!header) return;
 
         const filters = [
-            { label: 'Tous', value: 'all' },
-            { label: 'Mobile', value: 'mobile' },
-            { label: 'Web', value: 'web' },
-            { label: 'Backend', value: 'backend' },
-            { label: 'E-commerce', value: 'ecommerce' }
+            { label: 'Tous',       value: 'all' },
+            { label: 'Mobile',     value: 'mobile' },
+            { label: 'Web',        value: 'web' },
+            { label: 'Backend',    value: 'backend' },
+            { label: 'IA',         value: 'ai' },
+            { label: 'E-commerce', value: 'ecommerce' },
         ];
 
-        filters.forEach(filter => {
-            const button = document.createElement('button');
-            button.textContent = filter.label;
-            button.className = 'filter-btn' + (filter.value === 'all' ? ' active' : '');
-            button.dataset.filter = filter.value;
-            button.style.cssText = `
-                padding: 10px 22px;
-                background: ${filter.value === 'all' ? 'linear-gradient(135deg, #38bdf8, #8b5cf6)' : 'rgba(56, 189, 248, 0.1)'};
-                color: ${filter.value === 'all' ? '#0a0a0a' : '#38bdf8'};
-                border: 2px solid ${filter.value === 'all' ? '#38bdf8' : 'rgba(56, 189, 248, 0.3)'};
-                border-radius: 25px;
-                cursor: pointer;
-                font-weight: 600;
-                font-size: 13px;
-                transition: all 0.3s ease;
-            `;
+        const bar = document.createElement('div');
+        bar.className = 'project-filter-bar';
 
-            button.addEventListener('click', () => filterProjects(filter.value, button));
-            filterContainer.appendChild(button);
+        filters.forEach(f => {
+            const btn = document.createElement('button');
+            btn.className = 'project-filter-btn' + (f.value === 'all' ? ' active' : '');
+            btn.dataset.filter = f.value;
+            btn.textContent = f.label;
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.project-filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterCards(f.value);
+            });
+            bar.appendChild(btn);
         });
 
-        sectionHeader.appendChild(filterContainer);
+        header.appendChild(bar);
     }
 
-    // Filter projects
-    function filterProjects(category, activeButton) {
-        const projectCards = document.querySelectorAll('.project-card');
-        const filterButtons = document.querySelectorAll('.filter-btn');
-
-        // Update button states
-        filterButtons.forEach(btn => {
-            btn.classList.remove('active');
-            btn.style.background = 'rgba(56, 189, 248, 0.1)';
-            btn.style.color = '#38bdf8';
-            btn.style.borderColor = 'rgba(56, 189, 248, 0.3)';
-        });
-
-        activeButton.classList.add('active');
-        activeButton.style.background = 'linear-gradient(135deg, #38bdf8, #8b5cf6)';
-        activeButton.style.color = '#0a0a0a';
-        activeButton.style.borderColor = '#38bdf8';
-
-        // Filter cards
-        projectCards.forEach(card => {
-            const cardCategories = card.dataset.category || '';
-
-            if (category === 'all' || cardCategories.includes(category)) {
-                card.style.display = 'block';
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0) scale(1)';
-                }, 10);
+    function filterCards(cat) {
+        document.querySelectorAll('.project-card').forEach(card => {
+            const cats = card.dataset.category || '';
+            const show = cat === 'all' || cats.includes(cat);
+            card.style.transition = 'opacity 0.3s, transform 0.3s';
+            if (show) {
+                card.style.opacity = '1';
+                card.style.transform = '';
+                card.style.pointerEvents = '';
+                card.style.display = '';
             } else {
                 card.style.opacity = '0';
-                card.style.transform = 'translateY(30px) scale(0.95)';
-                setTimeout(() => {
-                    card.style.display = 'none';
-                }, 300);
+                card.style.transform = 'scale(0.97)';
+                card.style.pointerEvents = 'none';
+                setTimeout(() => { if (card.style.opacity === '0') card.style.display = 'none'; }, 300);
             }
         });
     }
 
-    // Add parallax effect
-    function addParallaxEffect() {
-        const projectsSection = document.querySelector('.projects');
-        const projectCards = document.querySelectorAll('.project-card');
-
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const sectionTop = projectsSection.offsetTop;
-            const sectionHeight = projectsSection.offsetHeight;
-
-            if (scrolled > sectionTop - window.innerHeight &&
-                scrolled < sectionTop + sectionHeight) {
-
-                projectCards.forEach((card, index) => {
-                    const speed = 0.2 + (index % 3) * 0.1;
-                    const yPos = (scrolled - sectionTop) * speed * 0.05;
-
-                    if (card.classList.contains('animate-in')) {
-                        card.style.transform = `translateY(${yPos}px)`;
-                    }
-                });
-            }
-        });
-    }
-
-    // Add 3D tilt effect on hover
-    function addTiltEffect() {
-        const projectCards = document.querySelectorAll('.project-card');
-
-        projectCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = (y - centerY) / 20;
-                const rotateY = (centerX - x) / 20;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px) scale(1.02)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = '';
-            });
-        });
-    }
-
-    // Lazy load images
-    function lazyLoadImages() {
-        const images = document.querySelectorAll('.project-image img');
-
-        const imageObserver = new IntersectionObserver((entries) => {
+    // ── Scroll reveal ──
+    function observeCards() {
+        const obs = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.style.animation = 'projectImageLoad 0.6s ease-out';
-                    imageObserver.unobserve(img);
+                    entry.target.classList.add('animate-in');
+                    obs.unobserve(entry.target);
                 }
             });
-        });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-        images.forEach(img => {
-            imageObserver.observe(img);
-        });
+        document.querySelectorAll('.project-card').forEach(c => obs.observe(c));
     }
 
-    // Add count animation
-    function addProjectCounter() {
-        const projectsSection = document.querySelector('.projects');
-        const projectCards = document.querySelectorAll('.project-card');
-
-        const counter = document.createElement('div');
-        counter.style.cssText = `
-            text-align: center;
-            margin-top: 50px;
-            font-size: 18px;
-            color: #38bdf8;
-            font-weight: 600;
-        `;
-        counter.innerHTML = `
-            <span style="font-size: 48px; font-weight: 700; display: block; margin-bottom: 10px;">
-                ${projectCards.length}+
-            </span>
-            Projets réalisés avec succès
-        `;
-
-        projectsSection.querySelector('.container').appendChild(counter);
-    }
-
-    // Initialize when DOM is ready
+    // Init
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            initProjects();
-            addProjectCounter();
-        });
+        document.addEventListener('DOMContentLoaded', initProjects);
     } else {
         initProjects();
-        addProjectCounter();
     }
-
 })();

@@ -204,6 +204,41 @@
     height: 260px;
 }
 
+/* ───── FILTRES ───── */
+.project-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2rem;
+}
+
+.project-filter-btn {
+    padding: 6px 16px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.04em;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--dim-gray);
+    cursor: pointer;
+    transition: var(--t-fast);
+}
+
+.project-filter-btn:hover {
+    border-color: rgba(201,169,110,0.3);
+    color: var(--warm-gray);
+    background: rgba(201,169,110,0.05);
+}
+
+.project-filter-btn.active {
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+    font-weight: 600;
+}
+
 /* ───── MODAL ───── */
 .project-modal {
     position: fixed; inset: 0;
@@ -256,6 +291,101 @@
     background: var(--white);
     color: var(--black);
     border-color: var(--white);
+}
+
+/* ───── CONTENU MODAL ───── */
+.pmodal-img {
+    width: 100%;
+    height: 220px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 1.75rem;
+    border: 1px solid var(--border);
+}
+
+.pmodal-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.pmodal-info { display: flex; flex-direction: column; gap: 0; }
+
+.pmodal-cat {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.pmodal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+}
+
+.pmodal-desc {
+    font-size: 0.9rem;
+    color: var(--dim-gray);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+}
+
+.pmodal-section-label {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--mid-gray);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.pmodal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1.5rem;
+}
+
+.pmodal-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.pmodal-features li {
+    font-size: 0.875rem;
+    color: var(--dim-gray);
+    line-height: 1.65;
+    padding-left: 1.375rem;
+    position: relative;
+}
+
+.pmodal-features li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 7px; height: 1px;
+    background: var(--accent);
+    opacity: 0.7;
+}
+
+.pmodal-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
 }
 
 /* ───── DESKTOP ───── */
