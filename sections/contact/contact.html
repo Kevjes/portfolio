@@ -2,76 +2,88 @@
 <section id="contact" class="contact">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title" data-i18n="contact_title">Contactez-moi</h2>
-            <div class="title-underline"></div>
-            <p class="section-subtitle" data-i18n="contact_subtitle">Vous avez un projet en tête ? Discutons-en !</p>
+            <div class="section-eyebrow" data-i18n="contact_eyebrow">Contact</div>
+            <h2 class="section-title" data-i18n="contact_title">Travaillons <span class="gold-text">ensemble</span></h2>
+            <p class="section-subtitle" data-i18n="contact_subtitle">Un projet IA, une architecture à repenser, une app à construire — je vous réponds sous 24h.</p>
         </div>
+
         <div class="contact-content">
+            <!-- Info column -->
             <div class="contact-info">
-                <div class="contact-item" data-aos="fade-right" data-aos-delay="0">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
+                <div class="contact-info-inner">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-details">
+                            <h3 data-i18n="about_info_location">Localisation</h3>
+                            <p data-i18n="contact_info_loc">Yaoundé, Cameroun — Remote disponible</p>
+                        </div>
                     </div>
-                    <div class="contact-details">
-                        <h3 data-i18n="about_info_location">Localisation</h3>
-                        <p data-i18n="contact_info_loc">Yaoundé, Cameroun</p>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p><a href="mailto:kevinjessi10@gmail.com">kevinjessi10@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-details">
+                            <h3>WhatsApp</h3>
+                            <p><a href="https://wa.me/237691231554">+237 691 231 554</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-globe"></i></div>
+                        <div class="contact-details">
+                            <h3 data-i18n="about_info_sites">Projets</h3>
+                            <p>
+                                <a href="https://menosi.net" target="_blank">menosi.net</a> &nbsp;·&nbsp;
+                                <a href="https://cli.menosi.net" target="_blank">cli.menosi.net</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="contact-item" data-aos="fade-right" data-aos-delay="100">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h3>Email</h3>
-                        <p><a href="mailto:kevinjessi10@gmail.com">kevinjessi10@gmail.com</a></p>
-                    </div>
-                </div>
-                <div class="contact-item" data-aos="fade-right" data-aos-delay="200">
-                    <div class="contact-icon">
-                        <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h3>WhatsApp</h3>
-                        <p><a href="https://wa.me/237691231554">+237 691 231 554</a></p>
-                    </div>
-                </div>
-                <div class="contact-item" data-aos="fade-right" data-aos-delay="300">
-                    <div class="contact-icon">
+
+                <div class="contact-social-strip">
+                    <a href="https://www.linkedin.com/in/kevin-tene-371a6b208" target="_blank" class="contact-social-btn" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/kevintene" target="_blank" class="contact-social-btn" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://menosi.net" target="_blank" class="contact-social-btn" aria-label="Site web">
                         <i class="fas fa-globe"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h3 data-i18n="about_info_sites">Sites Web</h3>
-                        <p>
-                            <a href="https://menosi.net" target="_blank">menosi.net</a><br>
-                            <a href="https://cli.menosi.net" target="_blank">cli.menosi.net</a>
-                        </p>
-                    </div>
+                    </a>
                 </div>
             </div>
-            <form class="contact-form" id="contactForm" data-aos="fade-left">
-                <div class="form-group">
-                    <input type="text" name="name" id="name" placeholder="Votre nom" data-i18n="contact_form_name" required>
-                    <i class="fas fa-user"></i>
+
+            <!-- Form column -->
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="name" data-i18n="form_label_name">Nom</label>
+                        <input type="text" name="name" id="name" placeholder="Kevin Dupont" data-i18n="contact_form_name" required>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email" data-i18n="form_label_email">Email</label>
+                        <input type="email" name="email" id="email" placeholder="email@company.com" data-i18n="contact_form_email" required>
+                        <span class="error-message"></span>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label class="form-label" for="subject" data-i18n="form_label_subject">Sujet</label>
+                    <input type="text" name="subject" id="subject" placeholder="Intégration IA, architecture, développement..." data-i18n="contact_form_subject" required>
                     <span class="error-message"></span>
                 </div>
-                <div class="form-group">
-                    <input type="email" name="email" id="email" placeholder="Votre email" data-i18n="contact_form_email" required>
-                    <i class="fas fa-envelope"></i>
-                    <span class="error-message"></span>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="subject" id="subject" placeholder="Sujet" data-i18n="contact_form_subject" required>
-                    <i class="fas fa-tag"></i>
-                    <span class="error-message"></span>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" id="message" rows="6" placeholder="Votre message" data-i18n="contact_form_message" required></textarea>
-                    <i class="fas fa-comment-dots"></i>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label class="form-label" for="message" data-i18n="form_label_message">Message</label>
+                    <textarea name="message" id="message" rows="6" placeholder="Décrivez votre projet, vos besoins, votre timeline..." data-i18n="contact_form_message" required></textarea>
                     <span class="error-message"></span>
                 </div>
                 <button type="submit" class="btn btn-primary" id="submitBtn">
                     <span class="btn-text" data-i18n="contact_btn_send">Envoyer le message</span>
-                    <i class="fab fa-whatsapp"></i>
+                    <i class="fas fa-arrow-right"></i>
                     <span class="btn-loader"></span>
                 </button>
                 <div class="form-status"></div>
