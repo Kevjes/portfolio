@@ -12,94 +12,121 @@
     align-items: flex-start;
 }
 
-/* ---- Left ---- */
+/* ════════════════════════════════
+   COLONNE GAUCHE — Visual card
+   Photo + stats en overlay interne
+════════════════════════════════ */
 .about-left {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
 }
 
-.about-photo { position: relative; width: 260px; }
-
-.about-photo__frame {
-    width: 260px; height: 320px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 1px solid var(--border);
+/* Card visuelle unique */
+.about-visual {
     position: relative;
-    z-index: 1;
+    width: 100%;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid rgba(201,169,110,0.18);
 }
 
-.about-photo__frame img {
-    width: 100%; height: 100%;
+/* Image */
+.about-visual__img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
     object-position: center top;
-    transition: transform 0.6s var(--ease-expo);
+    display: block;
+    transition: transform 0.9s var(--ease-expo);
 }
 
-.about-photo__frame:hover img { transform: scale(1.03); }
+.about-visual:hover .about-visual__img { transform: scale(1.03); }
 
-.about-photo__line {
+/* Gradient sombre qui monte du bas pour faire respirer les stats */
+.about-visual::before {
+    content: '';
     position: absolute;
-    bottom: -16px; right: -16px;
-    width: 100%; height: 100%;
-    border-radius: var(--radius-lg);
-    border: 1px solid rgba(201,169,110,0.25);
-    background: linear-gradient(135deg, rgba(201,169,110,0.04) 0%, transparent 60%);
-    z-index: 0;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 35%,
+        rgba(13,11,9,0.55) 62%,
+        rgba(13,11,9,0.96) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
 }
 
-/* Stats */
+/* Bordure or interne — par-dessus tout */
+.about-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(201,169,110,0.2);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* ── Stats en overlay bas ── */
 .about-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    width: 100%;
-    max-width: 320px;
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    z-index: 2;
+    display: flex;
+    align-items: stretch;
+    padding: 1.5rem 1.25rem 1.625rem;
+    gap: 0;
 }
 
 .about-stat {
-    background: var(--black-1);
-    padding: 1.25rem 1rem;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
-    transition: background 0.2s;
+    gap: 5px;
 }
 
-.about-stat:hover { background: var(--black-2); }
+/* Séparateurs verticaux */
+.about-stat__sep {
+    width: 1px;
+    background: rgba(201,169,110,0.2);
+    margin: 0 0.25rem;
+    align-self: stretch;
+    flex-shrink: 0;
+}
+
+/* Chiffre + plus sur la même ligne */
+.about-stat__row {
+    display: flex;
+    align-items: baseline;
+    gap: 1px;
+    line-height: 1;
+}
 
 .about-stat__n {
-    font-size: 1.875rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--white);
-    letter-spacing: -0.05em;
+    letter-spacing: -0.06em;
     line-height: 1;
-    display: inline;
+    font-variant-numeric: tabular-nums;
 }
 
 .about-stat__plus {
-    font-size: 1rem;
     color: var(--accent);
     font-weight: 600;
-    vertical-align: super;
-    font-size: 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    margin-bottom: 2px;
 }
 
 .about-stat__l {
-    font-size: 0.6875rem;
-    color: var(--dim-gray);
+    font-size: 0.625rem;
+    color: rgba(196,189,179,0.75);
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.12em;
     text-align: center;
-    margin-top: 6px;
+    font-weight: 500;
     line-height: 1.3;
 }
 
@@ -260,23 +287,21 @@
 @media (min-width: 968px) {
     .about-layout {
         flex-direction: row;
-        gap: 6rem;
+        gap: 5rem;
         align-items: flex-start;
     }
 
     .about-left {
-        width: 280px;
-        min-width: 280px;
+        width: 320px;
+        min-width: 320px;
         position: sticky;
-        top: 100px;
+        top: 90px;
     }
-
-    .about-photo, .about-photo__frame { width: 280px; height: 340px; }
-    .about-stats { max-width: 280px; }
 }
 
 @media (max-width: 576px) {
-    .about-photo, .about-photo__frame { width: 220px; height: 260px; }
     .about-pillars { grid-template-columns: 1fr; }
     .about-meta__k { min-width: 70px; }
+    .about-stat__n { font-size: 2rem; }
+    .about-stats { padding: 1.25rem 1rem 1.375rem; }
 }
