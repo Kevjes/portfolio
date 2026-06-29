@@ -1,43 +1,25 @@
-// Experience Section JavaScript - Progressive Display
-
-(function() {
+// Experience Section JS — Obsidian & Ember
+(function () {
     'use strict';
 
     function initExperience() {
-        const experienceItems = document.querySelectorAll('.experience-item');
-
-        if (!experienceItems.length) return;
-
-        // Intersection Observer for progressive reveal
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -100px 0px'
-        };
+        const items = document.querySelectorAll('.exp-item');
+        if (!items.length) return;
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    // Add delay based on index for stagger effect
-                    const itemIndex = parseInt(entry.target.dataset.index);
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, itemIndex * 200);
-
-                    observer.unobserve(entry.target);
-                }
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-        experienceItems.forEach(item => {
-            observer.observe(item);
-        });
+        items.forEach(item => observer.observe(item));
     }
 
-    // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initExperience);
     } else {
         initExperience();
     }
-
 })();

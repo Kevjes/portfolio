@@ -222,15 +222,15 @@
 
     function showConsoleMessage() {
         const styles = [
-            'color: #38bdf8',
+            'color: #F59E0B',
             'font-size: 16px',
             'font-weight: bold',
             'padding: 10px'
         ].join(';');
 
-        console.log('%c👋 Salut développeur!', styles);
-        console.log('%cIntéressé par le code? Contactez-moi: kevinjessi10@gmail.com', 'color: #b0b0b0');
-        console.log('%c🚀 Built with passion by Kevin Tene', 'color: #38bdf8');
+        console.log('%c👋 Salut développeur !', styles);
+        console.log('%cExpert IA & Fullstack — kevinjessi10@gmail.com', 'color: #6B6B6B');
+        console.log('%c⚡ Built by Kevin Tene', 'color: #F59E0B');
     }
 
     // ==================== PERFORMANCE MONITORING ====================

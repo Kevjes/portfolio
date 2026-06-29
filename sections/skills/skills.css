@@ -1,131 +1,312 @@
-/* Skills Section Styles - Mobile First & Tech Leader */
+/* ═══════════════════════════════════════
+   SKILLS — Architecture premium
+   Bloc IA : vitrine pleine largeur
+   Autres blocs : grille avec depth et matière
+═══════════════════════════════════════ */
 .skills {
-    padding: 60px 0;
-    background: var(--bg-color);
+    padding: var(--spacing-xxl) 0;
     position: relative;
     overflow: hidden;
 }
 
+/* Halo de fond */
 .skills::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80vw;
-    height: 80vw;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.04) 0%, transparent 70%);
+    top: 0; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse, rgba(201,169,110,0.05) 0%, transparent 65%);
     pointer-events: none;
 }
 
-.skills .container {
-    position: relative;
-    z-index: 1;
-}
+.skills .section-header { margin-bottom: 4rem; }
 
-.skills-categories {
-    display: flex;
-    flex-direction: column;
+/* ───── GRILLE ───── */
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 1.5rem;
-    margin-top: 2.5rem;
 }
 
-.skill-category {
-    background: var(--glass-bg);
-    padding: 1.5rem;
+/* ───── BLOC DE BASE ───── */
+.skill-block {
+    background: var(--black-1);
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(12px);
-    transition: var(--transition-normal);
+    padding: 2rem;
     position: relative;
     overflow: hidden;
+    transition: border-color 0.3s var(--ease-expo), transform 0.3s var(--ease-expo), box-shadow 0.3s var(--ease-expo);
 }
 
-.skill-category::before {
+.skill-block::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 3px;
-    background: var(--gradient-gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.015) 0%, transparent 60%);
+    pointer-events: none;
+    border-radius: inherit;
 }
 
-.skill-category:active, .skill-category:hover {
-    border-color: rgba(139, 92, 246, 0.3);
-    background: rgba(30, 41, 59, 0.6);
+.skill-block:hover {
+    border-color: rgba(201,169,110,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,169,110,0.06);
 }
 
-.skill-category.animate-in { opacity: 1; transform: translateY(0); }
+/* ───── BLOC IA — vitrine principale ───── */
+.skill-block--hero {
+    background: var(--black-1);
+    border-color: rgba(201,169,110,0.2);
+    overflow: hidden;
+    padding: 2.5rem;
+}
 
-.category-icon {
-    width: 50px; height: 50px;
-    background: var(--gradient-gold);
+/* Fond dégradé chaud dans le coin */
+.skill-block--hero::after {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 340px; height: 340px;
+    background: radial-gradient(ellipse, rgba(201,169,110,0.12) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.skill-block--hero:hover {
+    border-color: rgba(201,169,110,0.35);
+    box-shadow: 0 16px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,169,110,0.06);
+}
+
+/* ───── EN-TÊTE DE BLOC ───── */
+.skill-block__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.125rem;
+    margin-bottom: 1.75rem;
+}
+
+/* Icône */
+.skill-block__icon {
+    width: 44px; height: 44px;
+    min-width: 44px;
     border-radius: var(--radius-md);
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 1.25rem;
-    font-size: 22px;
-    color: var(--white);
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    font-size: 1rem;
+    position: relative;
+    flex-shrink: 0;
+
+    /* Fond avec gradient subtil */
+    background: rgba(201,169,110,0.08);
+    border: 1px solid rgba(201,169,110,0.18);
+    color: var(--accent);
+    transition: var(--t-mid);
 }
 
-.category-title {
-    font-size: 1.1rem;
-    font-weight: 700;
+.skill-block--hero .skill-block__icon {
+    width: 52px; height: 52px;
+    min-width: 52px;
+    font-size: 1.125rem;
+    background: rgba(201,169,110,0.14);
+    border-color: rgba(201,169,110,0.3);
+    box-shadow: 0 0 24px rgba(201,169,110,0.12), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.skill-block:hover .skill-block__icon {
+    background: rgba(201,169,110,0.14);
+    border-color: rgba(201,169,110,0.3);
+}
+
+/* Texte à côté de l'icône */
+.skill-block__head > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.skill-block__title {
+    font-size: 1rem;
+    font-weight: 600;
     color: var(--white);
-    text-align: center;
-    margin-bottom: 2rem;
-    font-family: 'Outfit', sans-serif;
-    letter-spacing: 0.05em;
+    letter-spacing: -0.025em;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.skill-block--hero .skill-block__title {
+    font-size: 1.125rem;
+}
+
+.skill-block__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.6rem;
     text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 3px 9px;
+    border-radius: 2px;
+    font-weight: 600;
+    width: fit-content;
+
+    background: rgba(201,169,110,0.12);
+    color: var(--accent);
+    border: 1px solid rgba(201,169,110,0.2);
 }
 
-.skill-bars { display: flex; flex-direction: column; gap: 1.25rem; }
-
-.skill-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 0.4rem;
+.skill-block__badge::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.8;
 }
 
-.skill-name { font-size: 0.9rem; font-weight: 600; color: var(--light-gray); }
-.skill-percentage { font-size: 0.8rem; font-weight: 700; color: var(--neon-blue); }
+.skill-block__badge--dim {
+    background: rgba(255,255,255,0.04);
+    color: var(--dim-gray);
+    border-color: rgba(255,255,255,0.07);
+}
 
-.skill-bar {
-    height: 6px;
-    background: rgba(255, 255, 255, 0.05);
+.skill-block__badge--dim::before { background: var(--dim-gray); }
+
+/* ───── CLOUD DE TAGS (bloc IA) ───── */
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 13px;
+    font-size: 0.75rem;
+    border-radius: var(--radius-sm);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    transition: var(--t-fast);
+    cursor: default;
+
+    background: var(--black-3);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--mid-gray);
+}
+
+.skill-tag:hover {
+    color: var(--accent-light);
+    border-color: rgba(201,169,110,0.22);
+    background: rgba(201,169,110,0.07);
+    transform: translateY(-1px);
+}
+
+/* Tags mis en avant (core skills) */
+.skill-tag--lit {
+    background: rgba(201,169,110,0.1);
+    border-color: rgba(201,169,110,0.25);
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.skill-tag--lit:hover {
+    background: rgba(201,169,110,0.18);
+    border-color: rgba(201,169,110,0.4);
+    color: var(--accent-light);
+}
+
+/* ───── BARRES DE COMPÉTENCE ───── */
+.skill-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1.375rem;
+}
+
+.skill-bar-item { position: relative; }
+
+.skill-bar-item__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+
+.skill-bar-item__top > span:first-child {
+    font-size: 0.8125rem;
+    color: var(--warm-gray);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+.skill-pct {
+    font-size: 0.6875rem;
+    color: var(--accent);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+}
+
+/* Piste */
+.skill-track {
+    height: 3px;
+    background: var(--black-4);
     border-radius: var(--radius-full);
-    overflow: hidden;
+    overflow: visible;
     position: relative;
 }
 
-.skill-progress {
+/* Barre de remplissage */
+.skill-fill {
     height: 100%;
-    background: var(--gradient-gold);
+    background: linear-gradient(90deg, var(--accent-dark) 0%, var(--accent) 70%, rgba(232,213,176,0.8) 100%);
     border-radius: var(--radius-full);
     width: 0;
-    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: width 1.6s var(--ease-expo);
+    position: relative;
 }
 
-.skill-category.animate-in .skill-progress { width: var(--progress-width) !important; }
+/* Curseur lumineux à la fin de la barre */
+.skill-fill::after {
+    content: '';
+    position: absolute;
+    right: -1px; top: 50%;
+    transform: translateY(-50%);
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(201,169,110,0.8), 0 0 3px rgba(201,169,110,0.4);
+    opacity: 0;
+    transition: opacity 0.4s 1.2s;
+}
 
-/* Tablet & Desktop Enhancements */
+.skill-block.animate-in .skill-fill {
+    width: var(--progress-width) !important;
+}
+
+.skill-block.animate-in .skill-fill::after {
+    opacity: 1;
+}
+
+/* ───── DESKTOP GRID ───── */
 @media (min-width: 768px) {
-    .skills { padding: 100px 0; }
-    
-    .skills-categories {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 4rem;
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
     }
+    .skill-block--hero { grid-column: 1 / -1; }
+}
 
-    .skill-category { padding: 2.5rem 2rem; }
-    
-    .category-icon { width: 60px; height: 60px; font-size: 28px; }
-    .category-title { font-size: 1.25rem; }
-    
-    .skill-category:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-lg), 0 0 30px rgba(139, 92, 246, 0.1);
+@media (min-width: 1100px) {
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
     }
+    .skill-block--hero { grid-column: 1 / -1; }
+
+    /* Layout horizontal pour le bloc IA */
+    .skill-block--hero .skill-tags { gap: 9px; }
+}
+
+@media (max-width: 576px) {
+    .skill-block { padding: 1.5rem; }
+    .skill-block--hero { padding: 1.75rem; }
 }

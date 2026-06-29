@@ -1,37 +1,95 @@
 <!-- Hero Section -->
 <section id="home" class="hero">
-    <div class="hero-background">
-        <div class="grid-overlay"></div>
-        <div class="hero-blob blob-1"></div>
-        <div class="hero-blob blob-2"></div>
-        <div class="hero-blob blob-3"></div>
+    <div class="hero-bg">
+        <div class="hero-grid"></div>
+        <div class="hero-orb hero-orb--1"></div>
+        <div class="hero-orb hero-orb--2"></div>
     </div>
-    <div class="hero-content">
+
+    <div class="hero-container">
+        <!-- Text -->
         <div class="hero-text">
-            <p class="hero-subtitle fade-in" data-i18n="hero_greeting">Bonjour, je suis</p>
-            <h1 class="hero-title fade-in-delay">TENE Kevin Landry</h1>
-            <h2 class="hero-role fade-in-delay-2" data-i18n="hero_role">Expert <span class="gold-text">Fullstack Senior</span> & Lead Tech</h2>
-            <p class="hero-description fade-in-delay-3" data-i18n="hero_description">
-                Fort de 7 ans d’expertise dans le développement de solutions critiques et d’architectures SI scalables. Spécialiste de la transformation digitale, je conçois des systèmes robustes alliant performance, sécurité et innovation technologique.
+            <div class="hero-badge">
+                <span class="hero-badge__dot"></span>
+                <span>Disponible</span>
+            </div>
+
+            <h1 class="hero-title">
+                <span class="hero-title__sub">Expert IA &amp;</span>
+                <span class="hero-title__main">Développeur</span>
+                <span class="hero-title__serif serif">Fullstack Senior</span>
+            </h1>
+
+            <p class="hero-desc" data-i18n="hero_description">
+                Fort de 7 ans d'expertise dans le développement de solutions critiques et d'architectures SI scalables.
+                Spécialiste de la transformation digitale, je conçois des systèmes robustes alliant performance,
+                sécurité et innovation technologique.
             </p>
-            <div class="hero-buttons fade-in-delay-4">
+
+            <div class="hero-kpis">
+                <div class="hero-kpi">
+                    <span class="hero-kpi__n">7<span class="hero-kpi__plus">+</span></span>
+                    <span class="hero-kpi__l">Ans d'expérience</span>
+                </div>
+                <span class="hero-kpi__sep"></span>
+                <div class="hero-kpi">
+                    <span class="hero-kpi__n">30<span class="hero-kpi__plus">+</span></span>
+                    <span class="hero-kpi__l">Projets livrés</span>
+                </div>
+                <span class="hero-kpi__sep"></span>
+                <div class="hero-kpi">
+                    <span class="hero-kpi__n">30k<span class="hero-kpi__plus">+</span></span>
+                    <span class="hero-kpi__l">Utilisateurs actifs</span>
+                </div>
+            </div>
+
+            <div class="hero-actions">
                 <a href="#projects" class="btn btn-primary" data-i18n="hero_cta_projects">Voir mes projets</a>
                 <a href="#contact" class="btn btn-secondary" data-i18n="hero_cta_contact">Parlons de votre projet</a>
             </div>
-            <div class="social-links fade-in-delay-5">
-                <a href="https://www.linkedin.com/in/kevin-tene-371a6b208" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/kevintene" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://menosi.net" target="_blank"><i class="fas fa-globe"></i></a>
+
+            <div class="hero-socials">
+                <a href="https://www.linkedin.com/in/kevin-tene-371a6b208" target="_blank" class="hero-soc"
+                    aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/kevintene" target="_blank" class="hero-soc" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://menosi.net" target="_blank" class="hero-soc" aria-label="Site web">
+                    <i class="fas fa-globe"></i>
+                </a>
             </div>
         </div>
-        <div class="hero-image fade-in-delay-2">
-            <div class="image-frame">
-                <img src="https://i.ibb.co/BVfQBGyz/IMG-2821.png" alt="Kevin Tene">
-                <div class="image-overlay"></div>
+
+        <!-- Image -->
+        <div class="hero-visual">
+            <div class="hero-img-wrap">
+                <div class="hero-img-ring hero-img-ring--1"></div>
+                <div class="hero-img-ring hero-img-ring--2"></div>
+                <div class="hero-img-frame">
+                    <img src="https://i.ibb.co/BVfQBGyz/IMG-2821.png" alt="Kevin Tene" loading="eager">
+                </div>
+                <div class="hero-chip hero-chip--a">
+                    <i class="fas fa-brain"></i>
+                    <span>AI Integration</span>
+                </div>
+                <div class="hero-chip hero-chip--b">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Fullstack 100%</span>
+                </div>
+                <div class="hero-chip hero-chip--c">
+                    <i class="fas fa-university"></i>
+                    <span>Banking SI</span>
+                </div>
             </div>
         </div>
     </div>
-    <div class="scroll-indicator">
-        <div class="mouse"></div>
+
+    <!-- Scroll -->
+    <div class="hero-scroll">
+        <div class="hero-scroll__mouse">
+            <span class="hero-scroll__wheel"></span>
+        </div>
     </div>
 </section>
