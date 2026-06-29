@@ -8,7 +8,7 @@
     }
 
     function animateStats() {
-        const statValues = document.querySelectorAll('.about-stat__value');
+        const statValues = document.querySelectorAll('.about-stat__n');
         if (!statValues.length) return;
 
         const observer = new IntersectionObserver((entries) => {
