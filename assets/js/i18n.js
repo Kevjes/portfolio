@@ -10,6 +10,7 @@
         fr: {
             // Navigation
             'nav_home': 'Accueil',
+            'nav_offres': 'Offres',
             'nav_about': 'À propos',
             'nav_skills': 'Compétences',
             'nav_experience': 'Expérience',
@@ -17,16 +18,16 @@
             'nav_contact': 'Contact',
 
             // Hero
-            ‘hero_greeting’: ‘Bonjour, je suis’,
-            ‘hero_role’: ‘Expert IA & Développeur Fullstack Senior’,
-            ‘hero_available’: ‘Disponible pour missions’,
-            ‘hero_description’: ‘Fort de 7 ans d\’expertise dans le développement de solutions critiques et d\’architectures SI scalables. Spécialiste de la transformation digitale, je conçois des systèmes robustes alliant performance, sécurité et innovation technologique.’,
-            ‘hero_cta_contact’: ‘Parlons de votre projet’,
-            ‘hero_cta_projects’: ‘Voir mes projets’,
-            ‘hero_kpi_years’: ‘Années d\’expérience’,
-            ‘hero_kpi_projects’: ‘Projets livrés’,
-            ‘hero_kpi_users’: ‘Utilisateurs actifs’,
-            ‘hero_scroll’: ‘Défiler’,
+            'hero_greeting': 'Bonjour, je suis',
+            'hero_role': 'Expert IA & Développeur Fullstack Senior',
+            'hero_available': 'Disponible pour missions',
+            'hero_description': 'Fort de 7 ans d\'expertise dans le développement de solutions critiques et d\'architectures SI scalables. Spécialiste de la transformation digitale, je conçois des systèmes robustes alliant performance, sécurité et innovation technologique.',
+            'hero_cta_contact': 'Parlons de votre projet',
+            'hero_cta_projects': 'Voir mes projets',
+            'hero_kpi_years': 'Années d\'expérience',
+            'hero_kpi_projects': 'Projets livrés',
+            'hero_kpi_users': 'Utilisateurs actifs',
+            'hero_scroll': 'Défiler',
 
             // About
             'about_title': 'À propos de moi',
@@ -62,9 +63,9 @@
             'skills_eyebrow': 'Stack technique',
 
             // Experience
-            ‘experience_eyebrow’: ‘Parcours’,
-            ‘experience_title’: ‘Expérience Professionnelle’,
-            ‘experience_subtitle’: ‘Un parcours tourné vers l\’innovation et l\’excellence technique.’,
+            'experience_eyebrow': 'Parcours',
+            'experience_title': 'Expérience Professionnelle',
+            'experience_subtitle': 'Un parcours tourné vers l\'innovation et l\'excellence technique.',
             'exp_present': 'Présent',
             'exp_remote': 'Remote',
             'exp_role_consultant': 'Consultant & Développeur Fullstack (Remote)',
@@ -134,7 +135,7 @@
             'footer_stat_proj': 'Projets',
             'footer_stat_clients': 'Clients',
             'footer_stat_exp': 'Expertise',
-            'footer_services_title': 'Services',
+            'footer_services_title': 'Offres',
             'footer_service_ai': 'Intégration IA',
             'footer_service_mobile': 'Développement Mobile',
             'footer_service_web': 'Applications Web',
@@ -173,6 +174,7 @@
         en: {
             // Navigation
             'nav_home': 'Home',
+            'nav_offres': 'Offers',
             'nav_about': 'About',
             'nav_skills': 'Skills',
             'nav_experience': 'Experience',
@@ -297,7 +299,7 @@
             'footer_stat_proj': 'Projects',
             'footer_stat_clients': 'Clients',
             'footer_stat_exp': 'Expertise',
-            'footer_services_title': 'Services',
+            'footer_services_title': 'Offers',
             'footer_service_ai': 'AI Integration',
             'footer_service_mobile': 'Mobile Development',
             'footer_service_web': 'Web Applications',
@@ -380,9 +382,9 @@
 
             // Update page title if needed
             if (this.currentLanguage === 'en') {
-                document.title = 'Kevin Tene - Fullstack Developer Portfolio';
+                document.title = 'Kevin Tene — AI Automation & Custom Software, Fixed Prices';
             } else {
-                document.title = 'Kevin Tene - Portfolio Développeur Fullstack';
+                document.title = 'Kevin Tene — Automatisation IA & développement sur mesure, à prix fixe';
             }
         }
     }

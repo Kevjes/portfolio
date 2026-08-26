@@ -1,0 +1,154 @@
+/* ==================== OFFRES SECTION ==================== */
+
+.offres {
+    padding: var(--spacing-xxl, 6rem) 0;
+    background: var(--bg-1);
+    position: relative;
+}
+
+.offres-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.offre-card {
+    position: relative;
+    background: var(--bg-2);
+    border: 1px solid var(--black-4);
+    border-radius: 12px;
+    padding: 2rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.offre-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-dark);
+}
+
+.offre-card--featured {
+    border-color: var(--accent);
+    background: linear-gradient(160deg, var(--black-3), var(--bg-2));
+}
+
+.offre-badge {
+    position: absolute;
+    top: -0.8rem;
+    left: 1.5rem;
+    background: var(--accent);
+    color: var(--black);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+}
+
+.offre-card--start .offre-badge {
+    background: var(--accent-2);
+    color: var(--white);
+}
+
+.offre-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.offre-name i {
+    color: var(--accent);
+    margin-right: 0.4rem;
+}
+
+.offre-prix {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.offre-delai {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--mid-gray);
+    margin-left: 0.4rem;
+}
+
+.offre-promesse {
+    color: var(--text-body);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.offre-note {
+    font-size: 0.85rem;
+    color: var(--accent-light);
+    border-left: 2px solid var(--accent-dark);
+    padding-left: 0.75rem;
+    margin: 0;
+}
+
+.offre-card--agences {
+    border-style: dashed;
+}
+
+.offre-link {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    margin-top: auto;
+}
+
+.offre-link:hover {
+    color: var(--accent-light);
+}
+
+.offres-garanties {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 1.5rem;
+    list-style: none;
+    margin: 3rem 0 0;
+    padding: 1.5rem;
+    border: 1px solid var(--black-4);
+    border-radius: 12px;
+    background: var(--bg-2);
+}
+
+.offres-garanties li {
+    color: var(--text-body);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.offres-garanties i {
+    color: var(--accent);
+}
+
+@media (max-width: 992px) {
+    .offres-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .offres-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .offres-garanties {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

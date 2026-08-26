@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vos process manuels automatisés et en production en 3 semaines, à prix fixe. Concepteur du WhatsApp Banking d'Afriland First Bank (30 000+ utilisateurs), 5 apps publiées sur les stores, SaaS KoriFlow en production. Basé à Yaoundé, sur le fuseau de Paris.">
+    <meta name="keywords" content="automatisation IA, agent IA, développement sur mesure, SaaS, application mobile, flutter, next.js, spring boot, fastapi, whatsapp banking, marque blanche agence, freelance remote">
+    <meta name="author" content="Kevin Tene Landry">
+    <link rel="canonical" href="https://kevintene.vercel.app/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kevintene.vercel.app/">
+    <meta property="og:title" content="Kevin Tene — Automatisation IA &amp; développement sur mesure, à prix fixe">
+    <meta property="og:description" content="Vos process manuels automatisés et en production en 3 semaines. WhatsApp Banking 30 000+ utilisateurs, 5 apps en stores, SaaS KoriFlow. Prix fixes, délais garantis.">
+    <meta property="og:image" content="https://i.ibb.co/BVfQBGyz/IMG-2821.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Kevin Tene — Automatisation IA &amp; développement sur mesure, à prix fixe">
+    <meta property="twitter:description" content="Vos process manuels automatisés et en production en 3 semaines. Prix fixes, délais garantis.">
+
+    <title>Kevin Tene — Automatisation IA &amp; développement sur mesure, à prix fixe</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/css/global.css">
+
+    <!-- Section CSS -->
+    <link rel="stylesheet" href="sections/navigation/navigation.css">
+    <link rel="stylesheet" href="sections/hero/hero.css">
+    <link rel="stylesheet" href="sections/offres/offres.css">
+    <link rel="stylesheet" href="sections/about/about.css">
+    <link rel="stylesheet" href="sections/skills/skills.css">
+    <link rel="stylesheet" href="sections/experience/experience.css">
+    <link rel="stylesheet" href="sections/projects/projects.css">
+    <link rel="stylesheet" href="sections/contact/contact.css">
+    <link rel="stylesheet" href="sections/footer/footer.css">
+
+    <!-- Données structurées -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Kevin Tene — Automatisation IA & développement sur mesure",
+      "url": "https://kevintene.vercel.app/",
+      "email": "kevinjessi10@gmail.com",
+      "telephone": "+237691231554",
+      "address": { "@type": "PostalAddress", "addressLocality": "Yaoundé", "addressCountry": "CM" },
+      "founder": {
+        "@type": "Person",
+        "name": "Kevin Tene Landry",
+        "jobTitle": "Consultant IA & Développeur Fullstack Senior",
+        "sameAs": [
+          "https://www.linkedin.com/in/kevin-tene-371a6b208",
+          "https://github.com/Kevjes"
+        ]
+      },
+      "makesOffer": [
+        { "@type": "Offer", "name": "Diagnostic d'automatisation", "price": "490", "priceCurrency": "EUR", "description": "Vous saurez exactement quoi automatiser, chiffré — et une première automatisation part en production. 5 jours." },
+        { "@type": "Offer", "name": "Sprint d'automatisation", "price": "1900", "priceCurrency": "EUR", "description": "Une automatisation métier en production, monitorée et documentée. 10 jours." },
+        { "@type": "Offer", "name": "Production", "price": "3900", "priceCurrency": "EUR", "description": "Votre outil métier, votre agent IA ou votre site sur mesure, en ligne. 3 semaines." },
+        { "@type": "Offer", "name": "MVP", "price": "5900", "priceCurrency": "EUR", "description": "Votre produit testable par de vrais utilisateurs. 6 semaines." },
+        { "@type": "Offer", "name": "Copilote", "price": "390", "priceCurrency": "EUR", "description": "Corrections et une évolution par mois, sans engagement." }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <div id="navigation-section"><!-- @include sections/navigation/navigation.html --></div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <div id="hero-section"><!-- @include sections/hero/hero.html --></div>
+
+        <!-- Offres Section -->
+        <div id="offres-section"><!-- @include sections/offres/offres.html --></div>
+
+        <!-- About Section -->
+        <div id="about-section"><!-- @include sections/about/about.html --></div>
+
+        <!-- Skills Section -->
+        <div id="skills-section"><!-- @include sections/skills/skills.html --></div>
+
+        <!-- Experience Section -->
+        <div id="experience-section"><!-- @include sections/experience/experience.html --></div>
+
+        <!-- Projects Section -->
+        <div id="projects-section"><!-- @include sections/projects/projects.html --></div>
+
+        <!-- Contact Section -->
+        <div id="contact-section"><!-- @include sections/contact/contact.html --></div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-section"><!-- @include sections/footer/footer.html --></div>
+
+    <!-- Section Loader Script (Must load BEFORE other scripts) -->
+    <script>
+        // Load sections dynamically — skipped when the section is already inlined by build.js
+        async function loadSection(sectionId, sectionPath) {
+            try {
+                const element = document.getElementById(sectionId);
+                if (!element || element.children.length > 0) return; // déjà inliné au build
+                const response = await fetch(sectionPath);
+                if (!response.ok) throw new Error(`Failed to load ${sectionPath}`);
+                const html = await response.text();
+                element.innerHTML = html;
+            } catch (error) {
+                console.error(`Error loading section ${sectionId}:`, error);
+            }
+        }
+
+        // Load all sections first, then load scripts
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Load all HTML sections first (no-op when inlined at build time)
+            await Promise.all([
+                loadSection('navigation-section', 'sections/navigation/navigation.html'),
+                loadSection('hero-section', 'sections/hero/hero.html'),
+                loadSection('offres-section', 'sections/offres/offres.html'),
+                loadSection('about-section', 'sections/about/about.html'),
+                loadSection('skills-section', 'sections/skills/skills.html'),
+                loadSection('experience-section', 'sections/experience/experience.html'),
+                loadSection('projects-section', 'sections/projects/projects.html'),
+                loadSection('contact-section', 'sections/contact/contact.html'),
+                loadSection('footer-section', 'sections/footer/footer.html')
+            ]);
+
+            // Now load all JavaScript files after sections are ready
+            const scripts = [
+                'assets/js/main.js',
+                'assets/js/i18n.js',
+                'sections/navigation/navigation.js',
+                'sections/hero/hero.js',
+                'sections/about/about.js',
+                'sections/skills/skills.js',
+                'sections/experience/experience.js',
+                'sections/projects/projects.js',
+                'sections/contact/contact.js',
+                'sections/footer/footer.js'
+            ];
+
+            // Load scripts sequentially
+            for (const scriptSrc of scripts) {
+                await new Promise((resolve) => {
+                    const script = document.createElement('script');
+                    script.src = scriptSrc;
+                    script.onload = resolve;
+                    script.onerror = resolve; // un script cassé ne bloque pas les suivants
+                    document.body.appendChild(script);
+                });
+            }
+
+            // Load Firebase portfolio script
+            const firebaseScript = document.createElement('script');
+            firebaseScript.src = 'js/firebase-portfolio.js';
+            document.body.appendChild(firebaseScript);
+
+            // Dispatch custom event when everything is loaded
+            document.dispatchEvent(new CustomEvent('sectionsLoaded'));
+        });
+    </script>
+</body>
+</html>
