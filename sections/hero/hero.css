@@ -148,17 +148,20 @@
 .fiche-id {
     display: flex;
     align-items: center;
-    gap: 1.1rem;
-    padding: 1.3rem 1.5rem 1.1rem;
+    gap: 1.15rem;
+    padding: 1.25rem 1.5rem 1.1rem;
 }
 
+/* Format photo d'identité : portrait cadré sur le visage, jamais coupé */
 .fiche-id img {
-    width: 76px;
-    height: 76px;
-    border-radius: 12px;
+    width: 88px;
+    height: 106px;
+    border-radius: 10px;
     object-fit: cover;
+    object-position: center 12%;
     border: 1px solid var(--line);
     background: var(--paper-2);
+    flex: 0 0 auto;
 }
 
 .fiche-id strong {

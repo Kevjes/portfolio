@@ -22,6 +22,15 @@
                 'Interface moderne et accessible, déployée sur Google Play'
             ]
         },
+        'KoriFlow': {
+            features: [
+                'SaaS multi-tenant : une boutique par marchand, sur son propre domaine',
+                'Orchestration complète du cycle de commande entre quatre acteurs',
+                'Gestion de stock et dashboard temps réel',
+                'Paiement à la livraison : machine à états métier et facturation conditionnée',
+                'Produit en production, opéré en continu — dont je suis le fondateur'
+            ]
+        },
         'PosiaCrea': {
             features: [
                 'Développement Fullstack complet (Backend, Frontend, Modélisation)',

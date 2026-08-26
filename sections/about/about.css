@@ -27,6 +27,7 @@
     box-shadow: var(--shadow-lift);
     aspect-ratio: 4 / 4.6;
     object-fit: cover;
+    object-position: center 18%;   /* le visage est dans le tiers haut du cliché */
     background: var(--card);
 }
 
