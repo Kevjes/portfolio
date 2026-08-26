@@ -1,373 +1,304 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap');
+/* =============================================================================
+   DESIGN SYSTEM — « Le dossier de production »
+   L'esthétique des documents d'ingénierie : fiche d'intervenant, bordereau de
+   livraison, tampon de recette. Papier blanc-froid teinté de vert, vert
+   bancaire structurel, bronze (hérité du logo) réservé aux accents.
 
-/* ==================== CSS VARIABLES ==================== */
+   Type    display  Bricolage Grotesque   titres
+           accent   Instrument Serif ital mots soulignés (em.serif)
+           corps    Instrument Sans
+           utilitaire JetBrains Mono      eyebrows, prix, méta, réf.
+   ============================================================================= */
+
 :root {
-    /* Palette — Noir Chaud Profond (pas de noir pur froid) */
-    --black:       #0D0B09;
-    --black-1:     #141210;
-    --black-2:     #1C1916;
-    --black-3:     #26221E;
-    --black-4:     #332E28;
+    /* --- Papier & encres --------------------------------------------------- */
+    --paper:        #F6F7F4;   /* fond général — blanc froid, pointe de vert  */
+    --paper-2:      #EDF0EA;   /* bandes alternées                            */
+    --card:         #FFFFFF;
+    --ink:          #152019;   /* vert-noir, jamais de noir pur               */
+    --ink-2:        #3E4C43;
+    --muted:        #6D7B70;
+    --line:         #DCE1D8;
+    --line-strong:  #C2CABD;
 
-    --white:       #FAF8F5;
-    --ivory:       #F5F1EA;
-    --cream:       #EDE7DC;
-    --warm-gray:   #C4BDB3;
-    --mid-gray:    #948C82;
-    --dim-gray:    #5A534A;
+    /* --- Marque ------------------------------------------------------------ */
+    --green:        #1B4A3B;   /* vert bancaire — structurel, boutons, liens  */
+    --green-deep:   #0E2E24;   /* section contact inversée, footer            */
+    --green-soft:   #E2EBE4;
+    --bronze:       #96671B;   /* l'or du logo, assombri pour le contraste    */
+    --bronze-deep:  #7A5314;
+    --bronze-soft:  #F2E8D2;
+    --alert:        #A3403F;
 
-    /* Accent principal — Or Platine chaud */
-    --accent:      #C9A96E;
-    --accent-light:#E8D5B0;
-    --accent-dark: #A07A3A;
+    /* --- Compat (pages légales & anciens composants) ----------------------- */
+    --accent:       var(--bronze);
+    --accent-light: var(--bronze-soft);
+    --accent-dark:  var(--bronze-deep);
+    --text-primary: var(--ink);
+    --text-body:    var(--ink-2);
+    --mid-gray:     var(--muted);
+    --dim-gray:     var(--muted);
+    --warm-gray:    var(--ink-2);
+    --bg-color:     var(--paper);
+    --bg-1:         var(--paper);
+    --bg-2:         var(--card);
+    --bg-3:         var(--paper-2);
+    --black:        var(--ink);
+    --black-4:      var(--line-strong);
+    --white:        var(--ink);      /* les anciens titres clairs deviennent encre */
+    --ivory:        var(--ink-2);
+    --cream:        var(--ink-2);
 
-    /* Accent secondaire — Cuivre / Terracotta très subtil */
-    --accent-2:    #B5623A;
-    --accent-2-dim:rgba(181,98,58,0.12);
+    /* --- Typographie ------------------------------------------------------- */
+    --f-display: "Bricolage Grotesque", "Segoe UI", Arial, sans-serif;
+    --f-serif:   "Instrument Serif", Georgia, serif;
+    --f-body:    "Instrument Sans", "Segoe UI", Arial, sans-serif;
+    --f-mono:    "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
 
-    /* Semantic */
-    --bg-color:    var(--black);
-    --bg-1:        var(--black-1);
-    --bg-2:        var(--black-2);
-    --bg-3:        var(--black-3);
-    --text-primary:var(--white);
-    --text-body:   var(--warm-gray);
-    --text-muted:  var(--dim-gray);
-    --border:      rgba(201,169,110,0.1);
-    --border-hover:rgba(201,169,110,0.35);
+    --font-6xl: clamp(2.6rem, 5.4vw, 4.1rem);
+    --font-5xl: clamp(2rem, 3.6vw, 2.7rem);
+    --font-4xl: 1.6rem;
+    --font-3xl: 1.3rem;
+    --font-2xl: 1.15rem;
 
-    /* Legacy aliases (pour les sections non retouchées) */
-    --gold:        var(--accent);
-    --neon-blue:   var(--accent);
-    --neon-purple: var(--accent-dark);
-    --neon-pink:   var(--accent-light);
-    --glass-bg:    rgba(255,255,255,0.025);
-    --glass-border:var(--border);
-    --dark-gray:   var(--black-1);
-    --gray:        var(--black-3);
-    --light-gray:  var(--warm-gray);
-    --text-light:  var(--mid-gray);
+    /* --- Rythme ------------------------------------------------------------ */
+    --container: 1140px;
+    --gutter: clamp(1.25rem, 4vw, 2.5rem);
+    --section-y: clamp(4.5rem, 9vw, 7.5rem);
+    --spacing-xxl: var(--section-y);
 
-    /* Gradients */
-    --gradient-gold:  linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 50%, var(--accent-light) 100%);
-    --gradient-dark:  linear-gradient(180deg, var(--black) 0%, var(--black-1) 100%);
-    --gradient-glow:  linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-light));
+    /* --- Matière ----------------------------------------------------------- */
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 2px rgba(21, 32, 25, .05), 0 14px 34px -22px rgba(21, 32, 25, .28);
+    --shadow-lift: 0 2px 4px rgba(21, 32, 25, .06), 0 22px 46px -20px rgba(21, 32, 25, .34);
 
-    /* Transitions */
-    --ease-expo:  cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-inout: cubic-bezier(0.4, 0, 0.2, 1);
-    --t-fast:     all 0.18s var(--ease-expo);
-    --t-mid:      all 0.35s var(--ease-expo);
-    --t-slow:     all 0.6s  var(--ease-expo);
-
-    /* Legacy transition vars */
-    --transition-fast:   var(--t-fast);
-    --transition-normal: var(--t-mid);
-    --transition-slow:   var(--t-slow);
-
-    /* Shadows */
-    --shadow-sm:  0 1px 4px rgba(0,0,0,0.5);
-    --shadow-md:  0 4px 20px rgba(0,0,0,0.6);
-    --shadow-lg:  0 16px 60px rgba(0,0,0,0.7);
-    --shadow-gold:0 0 30px rgba(201,185,154,0.15);
-    --shadow-neon:0 0 20px rgba(201,185,154,0.1);
-
-    /* Spacing */
-    --spacing-xs:  0.5rem;
-    --spacing-sm:  1rem;
-    --spacing-md:  1.5rem;
-    --spacing-lg:  2rem;
-    --spacing-xl:  3rem;
-    --spacing-xxl: 6rem;
-
-    /* Radius */
-    --radius-sm:   3px;
-    --radius-md:   6px;
-    --radius-lg:   10px;
-    --radius-xl:   16px;
-    --radius-2xl:  24px;
-    --radius-full: 9999px;
-
-    /* Type */
-    --font-xs:   0.6875rem;
-    --font-sm:   0.8125rem;
-    --font-base: 1rem;
-    --font-lg:   1.125rem;
-    --font-xl:   1.25rem;
-    --font-2xl:  1.5rem;
-    --font-3xl:  2rem;
-    --font-4xl:  2.75rem;
-    --font-5xl:  3.75rem;
-    --font-6xl:  5rem;
+    /* Quadrillage millimétré — la texture du papier technique */
+    --grid-paper:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
 }
 
-/* ==================== RESET ==================== */
-*, *::before, *::after {
-    margin: 0; padding: 0;
-    box-sizing: border-box;
-}
-html { scroll-behavior: smooth; font-size: 16px; }
+/* =============================================================================
+   BASE
+   ============================================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background-color: var(--black);
-    color: var(--text-body);
-    line-height: 1.7;
-    overflow-x: hidden;
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink-2);
+    font-family: var(--f-body);
+    font-size: 16.5px;
+    line-height: 1.62;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
-/* ==================== TYPOGRAPHY ==================== */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', sans-serif;
+::selection { background: var(--bronze-soft); color: var(--ink); }
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--green); text-decoration: none; }
+a:hover { color: var(--bronze); }
+
+h1, h2, h3, h4 {
+    font-family: var(--f-display);
+    color: var(--ink);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
     font-weight: 700;
-    line-height: 1.1;
-    color: var(--white);
-    margin-bottom: var(--spacing-sm);
-    letter-spacing: -0.03em;
 }
 
-h1 { font-size: var(--font-6xl); }
-h2 { font-size: var(--font-5xl); }
-h3 { font-size: var(--font-4xl); }
-h4 { font-size: var(--font-3xl); }
-h5 { font-size: var(--font-2xl); }
-h6 { font-size: var(--font-xl); }
+p { margin: 0 0 1rem; }
 
-p { margin-bottom: var(--spacing-md); color: var(--text-body); font-size: 1.0625rem; }
+strong { color: var(--ink); font-weight: 600; }
 
-a { color: var(--accent); text-decoration: none; transition: var(--t-fast); }
-a:hover { color: var(--accent-light); }
+:focus-visible {
+    outline: 2px solid var(--bronze);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
 
-/* Italic serif — pour titres de section élégants */
-.serif {
-    font-family: 'Playfair Display', Georgia, serif;
+/* Les mots à l'italique serif — la respiration humaine dans le technique */
+em.serif, .serif {
+    font-family: var(--f-serif);
     font-style: italic;
     font-weight: 400;
-    letter-spacing: -0.01em;
+    color: var(--bronze);
+    letter-spacing: 0;
 }
 
-/* ==================== LAYOUT ==================== */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-section { padding: var(--spacing-xxl) 0; position: relative; z-index: 1; }
+.gold-text { color: var(--bronze); }
 
-/* Sections alternées — chaleur subtile */
-.about, .projects { background: var(--black-1); }
-.skills, .contact { background: var(--black); }
-.experience       { background: linear-gradient(180deg, var(--black-1) 0%, var(--black) 100%); }
-
-/* Warm tint overlay — fil conducteur chaud sur toute la page */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse 120% 60% at 50% 0%, rgba(201,169,110,0.04) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
+.container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
 }
 
-/* ==================== GRADIENT TEXT ==================== */
-.gold-text {
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
+section { position: relative; }
 
-/* ==================== SECTION HEADERS ==================== */
-.section-header { margin-bottom: 4rem; }
+/* =============================================================================
+   EN-TÊTE DE SECTION — la ligne de registre
+   ============================================================================= */
+.section-header {
+    max-width: 720px;
+    margin-bottom: clamp(2.2rem, 5vw, 3.4rem);
+}
 
 .section-eyebrow {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 0.75rem;
-    font-size: 0.7rem;
+    gap: .7rem;
+    font-family: var(--f-mono);
+    font-size: .72rem;
     font-weight: 500;
-    color: var(--accent);
+    letter-spacing: .18em;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    margin-bottom: 1.25rem;
+    color: var(--bronze);
+    margin-bottom: 1.1rem;
 }
 
 .section-eyebrow::before {
-    content: '';
-    display: block;
-    width: 20px; height: 1px;
-    background: var(--accent);
+    content: "";
+    width: 2.2rem;
+    height: 1px;
+    background: var(--bronze);
+    flex: 0 0 auto;
 }
 
 .section-title {
-    font-size: clamp(2rem, 4.5vw, var(--font-5xl));
-    font-weight: 700;
-    color: var(--white);
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-    margin-bottom: 0;
-}
-
-.title-underline {
-    width: 40px; height: 1px;
-    background: var(--accent);
-    margin: 1.5rem 0 0;
+    font-size: var(--font-5xl);
+    font-weight: 750;
+    margin-bottom: .9rem;
 }
 
 .section-subtitle {
-    font-size: 1.0625rem;
-    color: var(--text-muted);
-    max-width: 520px;
-    margin: 1.25rem 0 0;
-    font-weight: 300;
-    line-height: 1.75;
+    color: var(--muted);
+    font-size: 1.02rem;
+    max-width: 58ch;
+    margin: 0;
 }
 
-/* ==================== BUTTONS ==================== */
+/* =============================================================================
+   BOUTONS
+   ============================================================================= */
 .btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 14px 28px;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-align: center;
-    text-decoration: none;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: var(--t-mid);
-    position: relative;
+    gap: .55rem;
+    font-family: var(--f-display);
+    font-size: .95rem;
+    font-weight: 650;
+    letter-spacing: .01em;
+    padding: .78rem 1.5rem;
+    border-radius: 999px;
     border: 1px solid transparent;
-    letter-spacing: -0.01em;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease,
+                background .18s ease, color .18s ease, border-color .18s ease;
+    text-decoration: none;
 }
 
 .btn-primary {
-    background: var(--white);
-    color: var(--black);
-    border-color: var(--white);
-    font-weight: 600;
+    background: var(--green);
+    color: #F4F6F1;
+    box-shadow: var(--shadow);
 }
-
 .btn-primary:hover {
-    background: var(--ivory);
-    border-color: var(--ivory);
-    color: var(--black);
+    background: var(--green-deep);
+    color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(255,255,255,0.12);
+    box-shadow: var(--shadow-lift);
 }
 
 .btn-secondary {
     background: transparent;
-    color: var(--warm-gray);
-    border-color: var(--black-4);
+    color: var(--ink);
+    border-color: var(--line-strong);
 }
-
 .btn-secondary:hover {
-    background: var(--black-2);
-    color: var(--white);
-    border-color: var(--accent);
+    border-color: var(--bronze);
+    color: var(--bronze-deep);
     transform: translateY(-2px);
 }
 
-/* ==================== CARDS ==================== */
-.card {
-    background: var(--black-1);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-lg);
-    border: 1px solid var(--border);
-    transition: var(--t-mid);
-    position: relative;
-    overflow: hidden;
-}
+.btn i { font-size: .85em; }
 
-.card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-}
-
-/* ==================== TAGS ==================== */
+/* =============================================================================
+   ÉTIQUETTES
+   ============================================================================= */
 .tag {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 10px;
-    background: var(--black-3);
-    color: var(--mid-gray);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-size: 0.6875rem;
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: .68rem;
     font-weight: 500;
-    margin: 3px;
-    letter-spacing: 0.04em;
-    transition: var(--t-fast);
+    letter-spacing: .04em;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: .22rem .65rem;
+    white-space: nowrap;
+}
+
+/* =============================================================================
+   LE TAMPON — la signature du site. À n'apposer que sur ce qui est vrai.
+   ============================================================================= */
+.stamp {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: .66rem;
+    font-weight: 700;
+    letter-spacing: .22em;
     text-transform: uppercase;
+    color: var(--bronze-deep);
+    border: 2px solid currentColor;
+    border-radius: 6px;
+    padding: .34rem .8rem .3rem;
+    box-shadow: inset 0 0 0 2px var(--card), inset 0 0 0 3px currentColor;
+    transform: rotate(-5deg);
+    opacity: .92;
+    pointer-events: none;
+    user-select: none;
 }
 
-.tag:hover {
-    border-color: var(--border-hover);
-    color: var(--accent);
-    background: rgba(201,185,154,0.06);
+/* =============================================================================
+   APPARITIONS AU DÉFILEMENT (pilotées par main.js : data-reveal)
+   ============================================================================= */
+.reveal-hidden { opacity: 0; transform: translateY(22px); }
+.revealed {
+    opacity: 1;
+    transform: none;
+    transition: opacity .6s ease, transform .6s cubic-bezier(.2, .7, .25, 1);
 }
 
-/* ==================== SCROLLBAR ==================== */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--black); }
-::-webkit-scrollbar-thumb { background: var(--black-4); border-radius: var(--radius-full); }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-dark); }
-* { scrollbar-width: thin; scrollbar-color: var(--black-4) var(--black); }
-
-/* ==================== ANIMATIONS ==================== */
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-8px); }
-}
-@keyframes spin-slow { to { transform: rotate(360deg); } }
-@keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.6; transform: scale(0.8); }
-}
-@keyframes moveGradient {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-@keyframes scrollThumb {
-    0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
-    100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
-}
-
-.fade-in { animation: fadeUp 0.8s var(--ease-expo) forwards; }
-
-/* ==================== UTILS ==================== */
-.sr-only {
-    position: absolute; width: 1px; height: 1px;
-    padding: 0; margin: -1px; overflow: hidden;
-    clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
-}
-
-/* ==================== RESPONSIVE ==================== */
-@media (max-width: 968px) {
-    :root {
-        --font-6xl: 3.25rem;
-        --font-5xl: 2.5rem;
-        --font-4xl: 2rem;
-        --spacing-xxl: 4rem;
+/* =============================================================================
+   ACCESSIBILITÉ & DIVERS
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
     }
+    .reveal-hidden { opacity: 1; transform: none; }
 }
+
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: var(--paper-2); }
+::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border-radius: 8px;
+    border: 3px solid var(--paper-2);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
 @media (max-width: 576px) {
-    :root {
-        --font-6xl: 2.5rem;
-        --font-5xl: 2rem;
-        --font-4xl: 1.625rem;
-        --spacing-xxl: 3rem;
-    }
-    .container { padding: 0 1.25rem; }
+    body { font-size: 15.5px; }
 }
