@@ -1,154 +1,150 @@
-/* ==================== OFFRES SECTION ==================== */
+/* ==================== OFFRES — la grille tarifaire, format bordereau ====== */
 
 .offres {
-    padding: var(--spacing-xxl, 6rem) 0;
-    background: var(--bg-1);
-    position: relative;
+    padding: var(--section-y) 0;
+    background: var(--paper);
 }
 
 .offres-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
+    gap: 1.1rem;
 }
 
 .offre-card {
     position: relative;
-    background: var(--bg-2);
-    border: 1px solid var(--black-4);
-    border-radius: 12px;
-    padding: 2rem 1.75rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.7rem 1.6rem 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    gap: .8rem;
+    box-shadow: var(--shadow);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
 
 .offre-card:hover {
     transform: translateY(-4px);
-    border-color: var(--accent-dark);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--line-strong);
 }
 
 .offre-card--featured {
-    border-color: var(--accent);
-    background: linear-gradient(160deg, var(--black-3), var(--bg-2));
+    border: 1.5px solid var(--green);
+    background: linear-gradient(175deg, var(--green-soft), var(--card) 42%);
 }
 
 .offre-badge {
     position: absolute;
-    top: -0.8rem;
-    left: 1.5rem;
-    background: var(--accent);
-    color: var(--black);
-    font-size: 0.72rem;
+    top: -0.78rem;
+    left: 1.4rem;
+    font-family: var(--f-mono);
+    font-size: .62rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: .14em;
     text-transform: uppercase;
-    padding: 0.3rem 0.75rem;
-    border-radius: 20px;
+    background: var(--green);
+    color: #F2F5EF;
+    border-radius: 999px;
+    padding: .3rem .8rem;
 }
 
-.offre-card--start .offre-badge {
-    background: var(--accent-2);
-    color: var(--white);
-}
+.offre-card--start .offre-badge { background: var(--bronze); }
 
 .offre-name {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin: 0;
+    font-size: 1.12rem;
+    font-weight: 720;
 }
 
-.offre-name i {
-    color: var(--accent);
-    margin-right: 0.4rem;
-}
+.offre-name i { color: var(--bronze); margin-right: .4rem; font-size: .9em; }
 
 .offre-prix {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--accent);
+    font-family: var(--f-mono);
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--green);
     line-height: 1;
 }
 
 .offre-delai {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--mid-gray);
-    margin-left: 0.4rem;
+    font-family: var(--f-mono);
+    font-size: .78rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--muted);
+    margin-left: .45rem;
 }
 
 .offre-promesse {
-    color: var(--text-body);
-    font-size: 0.95rem;
+    color: var(--ink-2);
+    font-size: .93rem;
     line-height: 1.6;
     margin: 0;
 }
 
 .offre-note {
-    font-size: 0.85rem;
-    color: var(--accent-light);
-    border-left: 2px solid var(--accent-dark);
-    padding-left: 0.75rem;
+    font-size: .84rem;
+    color: var(--bronze-deep);
+    background: var(--bronze-soft);
+    border-radius: var(--radius-sm);
+    padding: .55rem .8rem;
     margin: 0;
 }
 
-.offre-card--agences {
-    border-style: dashed;
-}
+.offre-card--agences { border-style: dashed; box-shadow: none; background: var(--paper); }
 
 .offre-link {
-    color: var(--accent);
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-decoration: none;
     margin-top: auto;
+    font-weight: 600;
+    font-size: .92rem;
 }
 
-.offre-link:hover {
-    color: var(--accent-light);
-}
-
+/* --- Le bandeau des garanties — les clauses, lisibles d'un regard ---------- */
 .offres-garanties {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
     list-style: none;
-    margin: 3rem 0 0;
-    padding: 1.5rem;
-    border: 1px solid var(--black-4);
-    border-radius: 12px;
-    background: var(--bg-2);
+    margin: 2.4rem 0 0;
+    padding: 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
 }
 
 .offres-garanties li {
-    color: var(--text-body);
-    font-size: 0.9rem;
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 1.15rem 1.2rem;
+    font-size: .85rem;
+    line-height: 1.45;
+    color: var(--ink-2);
+    border-left: 1px solid var(--line);
 }
 
+.offres-garanties li:first-child { border-left: 0; }
+
 .offres-garanties i {
-    color: var(--accent);
+    color: var(--bronze);
+    font-size: 1rem;
 }
 
 @media (max-width: 992px) {
-    .offres-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .offres-grid { grid-template-columns: repeat(2, 1fr); }
+    .offres-garanties { grid-template-columns: repeat(2, 1fr); }
+    .offres-garanties li { border-top: 1px solid var(--line); }
+    .offres-garanties li:nth-child(odd) { border-left: 0; }
+    .offres-garanties li:nth-child(-n+2) { border-top: 0; }
 }
 
 @media (max-width: 640px) {
-    .offres-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .offres-garanties {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+    .offres-grid { grid-template-columns: 1fr; }
+    .offres-garanties { grid-template-columns: 1fr; }
+    .offres-garanties li { border-left: 0; }
+    .offres-garanties li:first-child { border-top: 0; }
 }

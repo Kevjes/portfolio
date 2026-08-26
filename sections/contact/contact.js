@@ -298,10 +298,10 @@
                 copyBtn.style.cssText = `
                     margin-left: 10px;
                     padding: 5px 10px;
-                    background: rgba(56, 189, 248, 0.1);
-                    border: 1px solid rgba(56, 189, 248, 0.3);
+                    background: rgba(228, 200, 131, 0.12);
+                    border: 1px solid rgba(228, 200, 131, 0.4);
                     border-radius: 5px;
-                    color: #38bdf8;
+                    color: #E4C883;
                     cursor: pointer;
                     transition: all 0.3s ease;
                     font-size: 12px;
@@ -320,9 +320,9 @@
 
                         setTimeout(() => {
                             copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
-                            copyBtn.style.background = 'rgba(56, 189, 248, 0.1)';
-                            copyBtn.style.borderColor = 'rgba(56, 189, 248, 0.3)';
-                            copyBtn.style.color = '#38bdf8';
+                            copyBtn.style.background = 'rgba(228, 200, 131, 0.12)';
+                            copyBtn.style.borderColor = 'rgba(228, 200, 131, 0.4)';
+                            copyBtn.style.color = '#E4C883';
                         }, 2000);
                     } catch (err) {
                         console.error('Failed to copy:', err);
@@ -330,12 +330,12 @@
                 });
 
                 copyBtn.addEventListener('mouseenter', function() {
-                    this.style.background = 'rgba(56, 189, 248, 0.2)';
+                    this.style.background = 'rgba(228, 200, 131, 0.22)';
                     this.style.transform = 'scale(1.1)';
                 });
 
                 copyBtn.addEventListener('mouseleave', function() {
-                    this.style.background = 'rgba(56, 189, 248, 0.1)';
+                    this.style.background = 'rgba(228, 200, 131, 0.12)';
                     this.style.transform = 'scale(1)';
                 });
 
@@ -366,7 +366,7 @@
             counter.textContent = `${length} caractères`;
 
             if (length >= minLength) {
-                counter.style.color = '#38bdf8';
+                counter.style.color = '#1B4A3B';
             } else {
                 counter.style.color = '#666';
             }

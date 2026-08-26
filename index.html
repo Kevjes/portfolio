@@ -27,7 +27,12 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
 
+    <meta name="theme-color" content="#F6F7F4">
+
     <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Firebase SDKs -->
@@ -129,48 +134,27 @@
 <section id="home" class="hero">
     <div class="hero-bg">
         <div class="hero-grid"></div>
-        <div class="hero-orb hero-orb--1"></div>
-        <div class="hero-orb hero-orb--2"></div>
+        <div class="hero-glow"></div>
     </div>
 
     <div class="hero-container">
-        <!-- Text -->
+        <!-- Thèse -->
         <div class="hero-text">
-            <div class="hero-badge">
-                <span class="hero-badge__dot"></span>
-                <span>Disponible — réponse sous 24 h, fuseau de Paris</span>
-            </div>
+            <p class="hero-topline">
+                <span class="hero-topline__dot"></span>
+                Disponible · réponse sous 24 h · fuseau de Paris
+            </p>
 
             <h1 class="hero-title">
-                <span class="hero-title__sub">Automatisation IA · Web · Mobile</span>
-                <span class="hero-title__main">Vos process automatisés,</span>
-                <span class="hero-title__serif serif">en production en 3 semaines.</span>
+                Vos process automatisés,<br>
+                <em class="serif">en production</em> en 3&nbsp;semaines.
             </h1>
 
             <p class="hero-desc">
-                Prix fixe, sans TJM : <strong>3 900 €</strong> pour un outil métier, un agent IA ou un site
-                sur mesure — livré à la date convenue, <strong>ou le solde est offert</strong>.
-                J'ai conçu le <strong>WhatsApp Banking d'Afriland First Bank</strong> (30 000+ utilisateurs
-                en production), publié <strong>5 applications</strong> sur l'App Store et Google Play,
-                et j'opère <strong>KoriFlow</strong>, un SaaS e-commerce multi-boutiques.
+                Prix fixe, sans TJM : <strong>3 900 €</strong> pour un outil métier, un agent IA
+                ou un site sur mesure — livré à la date convenue,
+                <strong>ou le solde est offert</strong>.
             </p>
-
-            <div class="hero-kpis">
-                <div class="hero-kpi">
-                    <span class="hero-kpi__n">30k<span class="hero-kpi__plus">+</span></span>
-                    <span class="hero-kpi__l">Utilisateurs bancaires</span>
-                </div>
-                <span class="hero-kpi__sep"></span>
-                <div class="hero-kpi">
-                    <span class="hero-kpi__n">5</span>
-                    <span class="hero-kpi__l">Apps publiées en stores</span>
-                </div>
-                <span class="hero-kpi__sep"></span>
-                <div class="hero-kpi">
-                    <span class="hero-kpi__n">7<span class="hero-kpi__plus">+</span></span>
-                    <span class="hero-kpi__l">Ans d'expérience</span>
-                </div>
-            </div>
 
             <div class="hero-actions">
                 <a href="#offres" class="btn btn-primary">Voir les offres &amp; tarifs</a>
@@ -179,47 +163,50 @@
 
             <div class="hero-socials">
                 <a href="https://www.linkedin.com/in/kevin-tene-371a6b208" target="_blank" class="hero-soc"
-                    aria-label="LinkedIn">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://github.com/Kevjes" target="_blank" class="hero-soc" aria-label="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://menosi.net" target="_blank" class="hero-soc" aria-label="Site web">
-                    <i class="fas fa-globe"></i>
-                </a>
+                    aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/Kevjes" target="_blank" class="hero-soc"
+                    aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://koriflow.com" target="_blank" class="hero-soc"
+                    aria-label="KoriFlow"><i class="fas fa-store"></i></a>
             </div>
         </div>
 
-        <!-- Image -->
-        <div class="hero-visual">
-            <div class="hero-img-wrap">
-                <div class="hero-img-ring hero-img-ring--1"></div>
-                <div class="hero-img-ring hero-img-ring--2"></div>
-                <div class="hero-img-frame">
-                    <img src="https://i.ibb.co/BVfQBGyz/IMG-2821.png" alt="Kevin Tene" loading="eager">
-                </div>
-                <div class="hero-chip hero-chip--a">
-                    <i class="fas fa-brain"></i>
-                    <span>Agents IA</span>
-                </div>
-                <div class="hero-chip hero-chip--b">
-                    <i class="fas fa-mobile-alt"></i>
-                    <span>5 apps en stores</span>
-                </div>
-                <div class="hero-chip hero-chip--c">
-                    <i class="fas fa-university"></i>
-                    <span>WhatsApp Banking</span>
+        <!-- Fiche d'intervenant — la preuve, format bordereau -->
+        <aside class="hero-fiche" aria-label="Fiche d'intervenant">
+            <div class="fiche-head">
+                <span>Fiche d'intervenant</span>
+                <span class="fiche-head__ref">Réf. KT-2026</span>
+            </div>
+
+            <div class="fiche-id">
+                <img src="https://i.ibb.co/BVfQBGyz/IMG-2821.png" alt="Kevin Tene" loading="eager">
+                <div>
+                    <strong>Kevin Tene Landry</strong>
+                    <span>Ingénieur fullstack &amp; IA — senior, 7 ans</span>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Scroll -->
-    <div class="hero-scroll">
-        <div class="hero-scroll__mouse">
-            <span class="hero-scroll__wheel"></span>
-        </div>
+            <ul class="fiche-rows">
+                <li>
+                    <span class="fiche-k">Référence bancaire</span>
+                    <span class="fiche-v">WhatsApp Banking, Afriland First Bank — <strong>30 000+ utilisateurs</strong></span>
+                </li>
+                <li>
+                    <span class="fiche-k">En stores</span>
+                    <span class="fiche-v">5 applications publiées, App Store &amp; Google Play</span>
+                </li>
+                <li>
+                    <span class="fiche-k">Produit propre</span>
+                    <span class="fiche-v">KoriFlow — SaaS e-commerce multi-boutiques</span>
+                </li>
+                <li>
+                    <span class="fiche-k">Méthode</span>
+                    <span class="fiche-v">Démo enregistrée chaque vendredi · code sur votre dépôt Git dès le 1<sup>er</sup> commit</span>
+                </li>
+            </ul>
+
+            <span class="stamp fiche-stamp">En production</span>
+        </aside>
     </div>
 </section>
 </div>
@@ -423,7 +410,8 @@
         <div class="section-header">
             <div class="section-eyebrow">Stack technique</div>
             <h2 class="section-title">Maîtrise technique, <em class="serif">de bout en bout</em></h2>
-            <p class="section-subtitle" data-i18n="skills_subtitle">Un arsenal technologique moderne pour des solutions scalables et performantes.</p>
+            <p class="section-subtitle">Du modèle de données au store, en passant par l'agent IA :
+                une seule personne, toute la chaîne — c'est ce qui rend le prix fixe possible.</p>
         </div>
 
         <div class="skills-grid">
@@ -432,19 +420,20 @@
                 <div class="skill-block__head">
                     <div class="skill-block__icon"><i class="fas fa-brain"></i></div>
                     <div>
-                        <h3 class="skill-block__title">IA &amp; Intégration</h3>
-                        <span class="skill-block__badge">Core expertise</span>
+                        <h3 class="skill-block__title">IA &amp; Automatisation</h3>
+                        <span class="skill-block__badge">Cœur d'expertise</span>
                     </div>
                 </div>
+                <p class="skill-block__note">Des agents et des automatisations branchés sur vos
+                    outils réels, avec vos règles métier — pas des démos de chatbot.</p>
                 <div class="skill-tags">
-                    <span class="skill-tag skill-tag--lit">LLM Integration</span>
-                    <span class="skill-tag skill-tag--lit">Agents Autonomes</span>
-                    <span class="skill-tag skill-tag--lit">NLP / Vision IA</span>
-                    <span class="skill-tag">Génération d'Images</span>
-                    <span class="skill-tag">PosiaCrea (LinkedIn AI)</span>
-                    <span class="skill-tag">Automatisation IA</span>
-                    <span class="skill-tag">Prompt Engineering</span>
-                    <span class="skill-tag">RAG / Embeddings</span>
+                    <span class="skill-tag skill-tag--lit">Intégration LLM</span>
+                    <span class="skill-tag skill-tag--lit">Agents autonomes</span>
+                    <span class="skill-tag skill-tag--lit">RAG / Embeddings</span>
+                    <span class="skill-tag">NLP / Vision</span>
+                    <span class="skill-tag">Automatisation de process</span>
+                    <span class="skill-tag">Prompt engineering</span>
+                    <span class="skill-tag">OpenRouter / API Claude &amp; GPT</span>
                 </div>
             </div>
 
@@ -453,29 +442,17 @@
                 <div class="skill-block__head">
                     <div class="skill-block__icon"><i class="fas fa-mobile-alt"></i></div>
                     <div>
-                        <h3 class="skill-block__title" data-i18n="skills_cat_mobile">Mobile Engineering</h3>
-                        <span class="skill-block__badge skill-block__badge--dim">Expert</span>
+                        <h3 class="skill-block__title">Mobile</h3>
+                        <span class="skill-block__badge skill-block__badge--dim">5 apps en stores</span>
                     </div>
                 </div>
-                <div class="skill-bars">
-                    <div class="skill-bar-item">
-                        <div class="skill-bar-item__top">
-                            <span>Flutter &amp; Dart</span><span class="skill-pct">98%</span>
-                        </div>
-                        <div class="skill-track"><div class="skill-fill" data-width="98"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="skill-bar-item__top">
-                            <span>Clean Architecture / GetX</span><span class="skill-pct">96%</span>
-                        </div>
-                        <div class="skill-track"><div class="skill-fill" data-width="96"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="skill-bar-item__top">
-                            <span>SDK &amp; API Integration</span><span class="skill-pct">95%</span>
-                        </div>
-                        <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
-                    </div>
+                <p class="skill-block__note">Du premier écran à la publication App Store &amp; Google Play.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag skill-tag--lit">Flutter &amp; Dart</span>
+                    <span class="skill-tag">Clean Architecture</span>
+                    <span class="skill-tag">GetX</span>
+                    <span class="skill-tag">SDK &amp; paiements</span>
+                    <span class="skill-tag">Publication stores</span>
                 </div>
             </div>
 
@@ -484,29 +461,17 @@
                 <div class="skill-block__head">
                     <div class="skill-block__icon"><i class="fas fa-server"></i></div>
                     <div>
-                        <h3 class="skill-block__title" data-i18n="skills_cat_backend">Backend &amp; SI</h3>
-                        <span class="skill-block__badge skill-block__badge--dim">Senior</span>
+                        <h3 class="skill-block__title">Backend &amp; SI</h3>
+                        <span class="skill-block__badge skill-block__badge--dim">Éprouvé en banque</span>
                     </div>
                 </div>
-                <div class="skill-bars">
-                    <div class="skill-bar-item">
-                        <div class="skill-bar-item__top">
-                            <span>Nest.js / Node.js</span><span class="skill-pct">95%</span>
-                        </div>
-                        <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="skill-bar-item__top">
-                            <span>FastAPI / Python</span><span class="skill-pct">90%</span>
-                        </div>
-                        <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="skill-bar-item__top">
-                            <span>Java Spring Boot</span><span class="skill-pct">92%</span>
-                        </div>
-                        <div class="skill-track"><div class="skill-fill" data-width="92"></div></div>
-                    </div>
+                <p class="skill-block__note">Des systèmes qui tiennent quand les choses se passent mal.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag skill-tag--lit">Spring Boot</span>
+                    <span class="skill-tag skill-tag--lit">NestJS / Node</span>
+                    <span class="skill-tag">FastAPI / Python</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">Sécurité bancaire</span>
                 </div>
             </div>
 
@@ -515,23 +480,16 @@
                 <div class="skill-block__head">
                     <div class="skill-block__icon"><i class="fas fa-laptop-code"></i></div>
                     <div>
-                        <h3 class="skill-block__title" data-i18n="skills_cat_frontend">Frontend Moderne</h3>
+                        <h3 class="skill-block__title">Web</h3>
                         <span class="skill-block__badge skill-block__badge--dim">Senior</span>
                     </div>
                 </div>
-                <div class="skill-bars">
-                    <div class="skill-bar-item">
-                        <div class="skill-bar-item__top">
-                            <span>Next.js / React.js</span><span class="skill-pct">94%</span>
-                        </div>
-                        <div class="skill-track"><div class="skill-fill" data-width="94"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="skill-bar-item__top">
-                            <span>TypeScript / Tailwind</span><span class="skill-pct">92%</span>
-                        </div>
-                        <div class="skill-track"><div class="skill-fill" data-width="92"></div></div>
-                    </div>
+                <p class="skill-block__note">Sites et applications rapides, propres, mesurables.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag skill-tag--lit">Next.js / React</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Tailwind</span>
+                    <span class="skill-tag">SEO technique</span>
                 </div>
             </div>
 
@@ -540,16 +498,15 @@
                 <div class="skill-block__head">
                     <div class="skill-block__icon"><i class="fas fa-gears"></i></div>
                     <div>
-                        <h3 class="skill-block__title" data-i18n="skills_cat_devops">DevOps &amp; Architecture</h3>
+                        <h3 class="skill-block__title">DevOps &amp; Archi</h3>
                         <span class="skill-block__badge skill-block__badge--dim">Confirmé</span>
                     </div>
                 </div>
+                <p class="skill-block__note">Livraison continue, hébergement européen, monitoring.</p>
                 <div class="skill-tags">
                     <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">CI/CD GitLab</span>
-                    <span class="skill-tag">GitHub Actions</span>
+                    <span class="skill-tag">CI/CD</span>
                     <span class="skill-tag">Microservices</span>
-                    <span class="skill-tag">Clean Architecture</span>
                     <span class="skill-tag">JWT / OAuth2</span>
                 </div>
             </div>
@@ -764,6 +721,7 @@
                     <img src="https://i.ibb.co/4g8p11J1/487831639-17889982299213811-5251000801365807965-n.jpg"
                         alt="WhatsApp Banking">
                     <span class="project-num">01</span>
+                    <span class="stamp project-stamp">30 000+ utilisateurs</span>
                     <div class="project-overlay">
                         <a href="https://wa.me/211912442446" class="project-link" target="_blank"
                             aria-label="WhatsApp direct"><i class="fab fa-whatsapp"></i></a>
