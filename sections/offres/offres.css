@@ -68,6 +68,15 @@
     line-height: 1;
 }
 
+.offre-des {
+    font-family: var(--f-mono);
+    font-size: .72rem;
+    font-weight: 400;
+    letter-spacing: .04em;
+    color: var(--muted);
+    margin-right: .3rem;
+}
+
 .offre-delai {
     font-family: var(--f-mono);
     font-size: .78rem;
@@ -100,6 +109,21 @@
     font-weight: 600;
     font-size: .92rem;
 }
+
+/* --- La justification des prix — désamorce le doute « trop beau » ---------- */
+.offres-pourquoi {
+    max-width: 720px;
+    margin: 1.6rem auto 0;
+    font-size: .92rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    text-align: center;
+    padding: .9rem 1.2rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.offres-pourquoi strong { color: var(--green); }
 
 /* --- Le bandeau des garanties — les clauses, lisibles d'un regard ---------- */
 .offres-garanties {
