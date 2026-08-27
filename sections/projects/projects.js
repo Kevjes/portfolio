@@ -24,9 +24,10 @@
         },
         'KoriFlow': {
             features: [
+                'E-commerce automatisé de bout en bout : de l\'acquisition client à la livraison',
+                'Acquisition pilotée depuis la plateforme : campagnes publicitaires intégrées',
                 'SaaS multi-tenant : une boutique par marchand, sur son propre domaine',
-                'Orchestration complète du cycle de commande entre quatre acteurs',
-                'Gestion de stock et dashboard temps réel',
+                'Suivi de stock et dashboard temps réel, livraison sur tout le territoire africain',
                 'Paiement à la livraison : machine à états métier et facturation conditionnée',
                 'Produit en production, opéré en continu — dont je suis le fondateur'
             ]
