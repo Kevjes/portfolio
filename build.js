@@ -44,6 +44,17 @@ html = html.replace(includeRe, (_, relPath) => {
 const banner = '<!-- FICHIER GÉNÉRÉ par build.js — ne pas éditer directement.\n     Modifier index.template.html ou sections/*.html puis relancer : node build.js -->\n';
 html = html.replace(/^(<!DOCTYPE html>\s*\n)/i, `$1${banner}`);
 
+// ---------- cache-busting ----------
+// Chaque build stampe les CSS/JS locaux avec ?v=<horodatage> : les visiteurs
+// (et Kevin) reçoivent TOUJOURS la dernière version après un déploiement,
+// sans Ctrl+Shift+R. Les URLs externes (fonts, CDN) ne sont pas touchées.
+const V = Date.now().toString(36);
+html = html.replace(/(href|src)="((?:assets|sections|js)\/[^"?]+\.(?:css|js))"/g,
+    `$1="$2?v=${V}"`);
+// Les scripts chargés dynamiquement par le loader (tableau de chemins)
+html = html.replace(/'((?:assets|sections|js)\/[^'?]+\.js)'/g, `'$1?v=${V}'`);
+console.log(`✓ cache-busting : ?v=${V}`);
+
 fs.writeFileSync(path.join(ROOT, 'index.html'), html);
 console.log(`✓ index.html généré (${included.length} sections inlinées, ${(html.length / 1024).toFixed(1)} Ko)`);
 
