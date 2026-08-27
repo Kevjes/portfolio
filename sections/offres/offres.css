@@ -104,6 +104,15 @@
 
 .offre-card--agences { border-style: dashed; box-shadow: none; background: var(--paper); }
 
+.offre-choose { margin-top: auto; padding-top: .6rem; }
+
+.offres-tva {
+    margin: 1.2rem auto 0;
+    text-align: center;
+    font-size: .78rem;
+    color: var(--muted);
+}
+
 .offre-link {
     margin-top: auto;
     font-weight: 600;

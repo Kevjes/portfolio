@@ -19,7 +19,7 @@
     <meta property="og:url" content="https://kevintene.menosi.net/">
     <meta property="og:title" content="Kevin Tene — Automatisation IA &amp; développement sur mesure, à prix fixe">
     <meta property="og:description" content="Vos process manuels automatisés et en production en 3 semaines. WhatsApp Banking 30 000+ utilisateurs, 5 apps en stores, SaaS KoriFlow. Prix fixes, délais garantis.">
-    <meta property="og:image" content="https://i.ibb.co/BVfQBGyz/IMG-2821.png">
+    <meta property="og:image" content="https://kevintene.menosi.net/assets/img/kevin-portrait.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -29,7 +29,7 @@
     <title>Kevin Tene — Automatisation IA &amp; développement sur mesure, à prix fixe</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
     <meta name="theme-color" content="#F6F7F4">
 
@@ -38,10 +38,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
     <!-- Global CSS -->
     <link rel="stylesheet" href="assets/css/global.css">
@@ -54,6 +50,7 @@
     <link rel="stylesheet" href="sections/skills/skills.css">
     <link rel="stylesheet" href="sections/experience/experience.css">
     <link rel="stylesheet" href="sections/projects/projects.css">
+    <link rel="stylesheet" href="sections/faq/faq.css">
     <link rel="stylesheet" href="sections/contact/contact.css">
     <link rel="stylesheet" href="sections/footer/footer.css">
 
@@ -97,10 +94,10 @@
         <ul class="nav-menu" id="navMenu">
             <li><a href="#home" class="nav-link active" data-i18n="nav_home">Accueil</a></li>
             <li><a href="#offres" class="nav-link" data-i18n="nav_offres">Offres</a></li>
-            <li><a href="#about" class="nav-link" data-i18n="nav_about">À propos</a></li>
-            <li><a href="#skills" class="nav-link" data-i18n="nav_skills">Compétences</a></li>
-            <li><a href="#experience" class="nav-link" data-i18n="nav_experience">Expérience</a></li>
             <li><a href="#projects" class="nav-link" data-i18n="nav_projects">Projets</a></li>
+            <li><a href="#about" class="nav-link" data-i18n="nav_about">À propos</a></li>
+            <li><a href="#experience" class="nav-link" data-i18n="nav_experience">Références</a></li>
+            <li><a href="#faq" class="nav-link">FAQ</a></li>
             <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a></li>
         </ul>
         <div class="nav-actions">
@@ -183,7 +180,7 @@
             </div>
 
             <div class="fiche-id">
-                <img src="https://i.ibb.co/BVfQBGyz/IMG-2821.png" alt="Kevin Tene" loading="eager">
+                <img src="assets/img/kevin-portrait.jpg" width="480" height="720" alt="Kevin Tene" loading="eager">
                 <div>
                     <strong>Kevin Tene Landry</strong>
                     <span>Ingénieur fullstack &amp; IA — senior, 7 ans</span>
@@ -222,8 +219,8 @@
         <div class="section-header">
             <div class="section-eyebrow">Offres &amp; tarifs</div>
             <h2 class="section-title">Des forfaits, <em class="serif">pas des journées facturées</em></h2>
-            <p class="section-subtitle">Périmètre clair, prix fixe, délai garanti. Pour les clients de l'Union
-                européenne : TVA non applicable — autoliquidation, art. 259-1 du CGI.</p>
+            <p class="section-subtitle">Périmètre clair, prix fixe, délai garanti — vous savez ce que vous payez
+                avant de commencer.</p>
         </div>
 
         <div class="offres-grid">
@@ -234,6 +231,7 @@
                 <p class="offre-promesse">Vous saurez exactement quoi automatiser, chiffré — et une première
                     automatisation part en production dès la première semaine.</p>
                 <p class="offre-note">Intégralement déduit du projet si vous signez sous 30 jours.</p>
+                <a href="#contact" class="offre-link offre-choose" data-offre="Diagnostic — 490 €">Démarrer avec ce forfait →</a>
             </div>
 
             <div class="offre-card">
@@ -241,6 +239,7 @@
                 <div class="offre-prix">1 900 €<span class="offre-delai">· 10 jours</span></div>
                 <p class="offre-promesse">Une automatisation métier en production, monitorée et documentée —
                     relances, devis, reporting, saisies répétitives.</p>
+                <a href="#contact" class="offre-link offre-choose" data-offre="Sprint — 1 900 €">Démarrer avec ce forfait →</a>
             </div>
 
             <div class="offre-card offre-card--featured">
@@ -249,6 +248,7 @@
                 <div class="offre-prix">3 900 €<span class="offre-delai">· 3 semaines</span></div>
                 <p class="offre-promesse">Votre outil métier, votre agent IA ou votre site sur mesure — en ligne,
                     testé, documenté, avec formation de votre équipe.</p>
+                <a href="#contact" class="offre-link offre-choose" data-offre="Production — 3 900 €">Démarrer avec ce forfait →</a>
             </div>
 
             <div class="offre-card">
@@ -258,6 +258,7 @@
                     utilisateurs, prêt pour vos premiers clients.</p>
                 <p class="offre-note">Le périmètre exact (écrans, parcours, intégrations) est écrit et signé
                     avant le premier euro. Une agence facture ce type de produit 40 000 € et plus.</p>
+                <a href="#contact" class="offre-link offre-choose" data-offre="MVP — à partir de 5 900 €">Démarrer avec ce forfait →</a>
             </div>
 
             <div class="offre-card">
@@ -265,6 +266,7 @@
                 <div class="offre-prix">390 €<span class="offre-delai">/ mois</span></div>
                 <p class="offre-promesse">Je reste disponible sur votre système : surveillance, corrections
                     et une évolution par mois — réponse sous 24 h ouvrées. Sans engagement, arrêt à tout moment.</p>
+                <a href="#contact" class="offre-link offre-choose" data-offre="Copilote — 390 €/mois">Démarrer avec ce forfait →</a>
             </div>
 
             <div class="offre-card offre-card--agences">
@@ -278,7 +280,7 @@
 
         <p class="offres-pourquoi"><strong>Pourquoi ces prix sont possibles :</strong> je travaille depuis
             Yaoundé avec une structure légère et des process outillés — même fuseau horaire que Paris, mêmes
-            standards de production (voir les projets ci-dessus). À périmètre égal, une agence française
+            standards de production (voir les projets ci-dessous). À périmètre égal, une agence française
             facture ces projets 10 000 à 50 000 €. Vous payez le travail, pas les bureaux.</p>
 
         <ul class="offres-garanties">
@@ -288,9 +290,329 @@
             <li><i class="fab fa-git-alt"></i> Le code sur votre dépôt Git dès le premier commit</li>
             <li><i class="fas fa-shield-alt"></i> 3 mois de garantie technique après livraison</li>
         </ul>
+
+        <p class="offres-tva">Clients de l'Union européenne : TVA non applicable —
+            autoliquidation, art. 259-1 du CGI.</p>
     </div>
 </section>
 </div>
+
+        <!-- Projects Section — la preuve, juste après les prix -->
+        <div id="projects-section"><!-- Projects Section -->
+<section id="projects" class="projects">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow" data-i18n="projects_title">Projets Récents</div>
+            <h2 class="section-title">Produits livrés, <em class="serif">à fort impact</em></h2>
+            <p class="section-subtitle" data-i18n="projects_subtitle">Découvrez une sélection de mes réalisations les
+                plus marquantes.</p>
+        </div>
+
+        <div class="projects-grid">
+
+            <!-- 01 — WhatsApp Banking — Featured -->
+            <div class="project-card" data-category="web backend">
+                <div class="project-image">
+                    <img src="assets/img/whatsapp-banking.jpg" width="1000" height="1132" loading="lazy"
+                        alt="WhatsApp Banking">
+                    <span class="project-num">01</span>
+                    <span class="stamp project-stamp">30 000+ utilisateurs</span>
+                    <div class="project-overlay">
+                        <a href="https://wa.me/211912442446" class="project-link" target="_blank"
+                            aria-label="WhatsApp direct"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">Banking · FinTech</span>
+                    <h3 class="project-title">WhatsApp Banking</h3>
+                    <p class="project-description" data-i18n="proj_desc_whatsapp">Solution bancaire sur WhatsApp conçue
+                        de A à Z pour Afriland First Bank South Sudan. Plus de 30 000 utilisateurs, avec des couches
+                        strictes de sécurité.</p>
+                    <div class="project-tags">
+                        <span class="tag" data-i18n="tag_chatbot">Chatbot IA</span>
+                        <span class="tag" data-i18n="tag_fintech">FinTech</span>
+                        <span class="tag" data-i18n="tag_security">Sécurité Strict</span>
+                        <span class="tag">Spring Boot</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 02 — First Bank Connect -->
+            <div class="project-card" data-category="mobile backend">
+                <div class="project-image">
+                    <img src="assets/img/first-bank-connect.png" width="1000" height="522" loading="lazy" alt="First Bank Connect">
+                    <span class="project-num">02</span>
+                    <div class="project-overlay">
+                        <a href="https://play.google.com/store/apps/details?id=com.afrilandfirstbankss.mba" class="project-link"
+                            target="_blank"><i class="fab fa-google-play"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">Mobile Banking · Flutter</span>
+                    <h3 class="project-title">First Bank Connect</h3>
+                    <p class="project-description">Application Mobile Banking développée de A à Z pour Afriland First
+                        Bank South Sudan. Authentification sécurisée, virements, consultation de compte en temps réel.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag" data-i18n="tag_fintech">FinTech</span>
+                        <span class="tag" data-i18n="tag_security">Sécurité</span>
+                        <span class="tag">Spring Boot</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 03 — KoriFlow -->
+            <div class="project-card" data-category="web saas ecommerce">
+                <div class="project-image">
+                    <img src="assets/img/koriflow.jpg" width="1000" height="525" loading="lazy" alt="KoriFlow">
+                    <span class="project-num">03</span>
+                    <div class="project-overlay">
+                        <a href="https://koriflow.com" class="project-link" target="_blank"
+                            aria-label="Voir KoriFlow"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">SaaS · E-commerce · Fondateur</span>
+                    <h3 class="project-title">KoriFlow</h3>
+                    <p class="project-description">SaaS multi-tenant en production, dont je suis le fondateur :
+                        il automatise un business e-commerce de bout en bout — acquisition des clients par campagnes
+                        publicitaires, création de la boutique sur son propre domaine, suivi de stock, jusqu'à la
+                        livraison sur tout le territoire africain.</p>
+                    <div class="project-tags">
+                        <span class="tag">SaaS Multi-tenant</span>
+                        <span class="tag">E-commerce</span>
+                        <span class="tag">Next.js</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 04 — PosiaCrea -->
+            <div class="project-card" data-category="web ai">
+                <div class="project-image">
+                    <img src="assets/img/posiacrea.jpg" width="1000" height="642" loading="lazy" alt="PosiaCrea">
+                    <span class="project-num">04</span>
+                    <div class="project-overlay">
+                        <a href="https://posiacrea.com/" class="project-link" target="_blank"><i
+                                class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">IA · LinkedIn Automation</span>
+                    <h3 class="project-title">PosiaCrea</h3>
+                    <p class="project-description" data-i18n="proj_desc_posia">Assistant IA pour LinkedIn professionnel.
+                        Génère, planifie et publie automatiquement des posts personnalisés reflétant votre voix unique.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Next.js</span>
+                        <span class="tag" data-i18n="tag_ai_nlpv">IA (NLP/Vision)</span>
+                        <span class="tag" data-i18n="tag_automation">Automation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 05 — Thamani -->
+            <div class="project-card" data-category="web ecommerce backend">
+                <div class="project-image">
+                    <img src="assets/img/thamani.jpg" width="1000" height="520" loading="lazy" alt="Thamani">
+                    <span class="project-num">05</span>
+                    <div class="project-overlay">
+                        <a href="https://thamani.shop" class="project-link" target="_blank"><i
+                                class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">E-commerce · Made in Cameroun</span>
+                    <h3 class="project-title">Thamani</h3>
+                    <p class="project-description">Plateforme e-commerce promouvant exclusivement le Made in Cameroun.
+                        Gestion des stocks, entrepôts et livraisons intégrée.</p>
+                    <div class="project-tags">
+                        <span class="tag">NestJS</span>
+                        <span class="tag">ReactJS</span>
+                        <span class="tag" data-i18n="tag_marketplace">E-commerce</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 06 — Assiste-Moi -->
+            <div class="project-card" data-category="mobile">
+                <div class="project-image">
+                    <img src="assets/img/assiste-moi.jpg" width="1000" height="1000" loading="lazy"
+                        alt="Assiste-Moi">
+                    <span class="project-num">06</span>
+                    <div class="project-overlay">
+                        <a href="https://play.google.com/store/apps/details?id=com.assistme.assistemoi"
+                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
+                        <a href="https://apps.apple.com/us/app/assiste-moi/id6504642773" class="project-link"
+                            target="_blank"><i class="fab fa-app-store-ios"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">Mobile · Éducation</span>
+                    <h3 class="project-title">Assiste-Moi</h3>
+                    <p class="project-description" data-i18n="proj_desc_assiste">Plateforme éducative innovante
+                        facilitant l'accès aux ressources pédagogiques. Mission : donner à chaque apprenant les moyens
+                        de réussir.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">GetX</span>
+                        <span class="tag" data-i18n="tag_clean_arch">Clean Arch</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 07 — Hidima -->
+            <div class="project-card" data-category="mobile">
+                <div class="project-image">
+                    <img src="assets/img/hidima.png" width="1000" height="524" loading="lazy" alt="Hidima">
+                    <span class="project-num">07</span>
+                    <div class="project-overlay">
+                        <a href="https://play.google.com/store/apps/details?id=com.empireplus.hidima"
+                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
+                        <a href="https://apps.apple.com/cm/app/hidima/id6596765556" class="project-link"
+                            target="_blank"><i class="fab fa-app-store-ios"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">Mobile · Marketplace</span>
+                    <h3 class="project-title">Hidima</h3>
+                    <p class="project-description" data-i18n="proj_desc_hidima">Plateforme mobile connectant
+                        prestataires de services et clients camerounais. Disponible sur iOS et Android.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">iOS & Android</span>
+                        <span class="tag" data-i18n="tag_marketplace">Marketplace</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 08 — Spideli -->
+            <div class="project-card" data-category="mobile">
+                <div class="project-image">
+                    <img src="assets/img/spideli.jpg" width="1000" height="1000" loading="lazy"
+                        alt="Spideli">
+                    <span class="project-num">08</span>
+                    <div class="project-overlay">
+                        <a href="https://play.google.com/store/apps/details?id=com.app.spideli.customer.services"
+                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
+                        <a href="https://spideli.com" class="project-link" target="_blank"><i
+                                class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">Mobile · Super-app</span>
+                    <h3 class="project-title">Spideli</h3>
+                    <p class="project-description" data-i18n="proj_desc_spideli">Plateforme de livraison multi-services
+                        en Afrique. Une app, mille services : livraison, taxi, restauration, e-commerce.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag" data-i18n="tag_multi_services">Multi-Services</span>
+                        <span class="tag" data-i18n="tag_geo">Géolocalisation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 09 — Spideli Store -->
+            <div class="project-card" data-category="mobile ecommerce">
+                <div class="project-image">
+                    <img src="assets/img/spideli-store.webp" width="240" height="240" loading="lazy" alt="Spideli Store">
+                    <span class="project-num">09</span>
+                    <div class="project-overlay">
+                        <a href="https://play.google.com/store/apps/details?id=com.spideli.business.services"
+                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">Mobile · E-commerce</span>
+                    <h3 class="project-title">Spideli Store</h3>
+                    <p class="project-description" data-i18n="proj_desc_spideli_store">Extension e-commerce de Spideli
+                        permettant aux commerçants de gérer leur boutique et leurs commandes.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">E-commerce</span>
+                        <span class="tag">Dashboard</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10 — Menosi CLI -->
+            <div class="project-card" data-category="web backend">
+                <div class="project-image">
+                    <img src="assets/img/menosi-cli.png" width="1000" height="514" loading="lazy" alt="Menosi CLI">
+                    <span class="project-num">10</span>
+                    <div class="project-overlay">
+                        <a href="https://cli.menosi.net/home" class="project-link" target="_blank"><i
+                                class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">Backend · DevOps · CLI</span>
+                    <h3 class="project-title">Menosi CLI</h3>
+                    <p class="project-description" data-i18n="proj_desc_menosi">Outil en ligne de commande pour la
+                        génération et gestion de projets avec templates personnalisables.</p>
+                    <div class="project-tags">
+                        <span class="tag">CLI Tool</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">FastAPI</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11 — FlexParent -->
+            <div class="project-card" data-category="mobile">
+                <div class="project-image">
+                    <img src="assets/img/flexparent.png" width="449" height="305" loading="lazy" alt="FlexParent">
+                    <span class="project-num">11</span>
+                    <div class="project-overlay">
+                        <a href="https://play.google.com/store/apps/details?id=com.appnashtechflex.com"
+                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">Mobile · Éducation</span>
+                    <h3 class="project-title">FlexParent</h3>
+                    <p class="project-description" data-i18n="proj_desc_flex">Application mobile pour parents permettant
+                        le suivi scolaire, communication avec enseignants et gestion des activités.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Education</span>
+                        <span class="tag" data-i18n="tag_realtime">Real-time</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12 — GSchool -->
+            <div class="project-card" data-category="mobile">
+                <div class="project-image">
+                    <img src="assets/img/gschool.png" width="445" height="312" loading="lazy" alt="GSchool">
+                    <span class="project-num">12</span>
+                    <div class="project-overlay">
+                        <a href="https://play.google.com/store/apps/details?id=com.etsgtech.gschool"
+                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-cat">Mobile · SaaS Scolaire</span>
+                    <h3 class="project-title">GSchool</h3>
+                    <p class="project-description" data-i18n="proj_desc_gschool">Plateforme de gestion scolaire complète
+                        : notes, absences, emplois du temps et communication école-parents.</p>
+                    <div class="project-tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag" data-i18n="tag_school_mgmt">School Mgmt</span>
+                        <span class="tag">API REST</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section-cta">
+            <p>Un projet comparable en tête ?</p>
+            <a href="#contact" class="btn btn-primary">Discuter de votre projet</a>
+            <a href="#offres" class="btn btn-secondary">Voir les forfaits</a>
+        </div>
+    </div>
+</section></div>
 
         <!-- About Section -->
         <div id="about-section"><!-- About Section -->
@@ -301,7 +623,7 @@
             <!-- Left -->
             <div class="about-left">
                 <div class="about-visual">
-                    <img src="https://i.ibb.co/9k0f71Sy/Whats-App-Image-2026-03-13-at-18-01-21-1.jpg" alt="Kevin Tene"
+                    <img src="assets/img/kevin-about.jpg" width="720" height="950" loading="lazy" alt="Kevin Tene"
                         class="about-visual__img">
                     <div class="about-stats">
                         <div class="about-stat">
@@ -341,16 +663,16 @@
                 </h2>
 
                 <p class="about-lead" data-i18n="about_desc_1">
-                    Fort de 7 années d'expérience, j'accompagne les entreprises dans la transformation de visions
-                    complexes en solutions technologiques robustes.
+                    Depuis 7 ans, je transforme des besoins métier en produits qui tournent en production —
+                    pour des banques, des PME et des agences.
                 </p>
 
                 <p class="about-body" data-i18n="about_desc_2">
-                    Expert <strong>Consultant et Développeur Fullstack/Mobile en remote</strong>, j'aide les
-                    multinationales dans leur besoin de digitalisation. Mon expertise inclut l'<strong>automatisation des
-                    processus métiers</strong>, la mise en place de <strong>solutions digitales innovantes</strong>
-                    et la digitalisation des
-                    <strong>produits financiers</strong>.
+                    <strong>Développeur fullstack &amp; mobile indépendant</strong>, je travaille à distance
+                    sur le fuseau de Paris. Mon terrain : l'<strong>automatisation des processus métier</strong>,
+                    les <strong>outils sur mesure</strong> qui remplacent les tableurs et les doubles saisies,
+                    et les <strong>produits financiers digitalisés</strong> — le tout livré à prix fixe,
+                    avec le code sur votre dépôt dès le premier jour.
                 </p>
 
                 <div class="about-pillars">
@@ -358,7 +680,7 @@
                         <i class="fas fa-brain"></i>
                         <div>
                             <strong>IA &amp; Automatisation</strong>
-                            <span>Intégration LLM, agents autonomes, N8N</span>
+                            <span>Intégration LLM, agents autonomes, automatisations métier</span>
                         </div>
                     </div>
                     <div class="about-pillar">
@@ -399,14 +721,14 @@
                     </div>
                     <div class="about-meta__row">
                         <span class="about-meta__k" data-i18n="about_info_availability">Disponibilité</span>
-                        <span class="about-meta__v about-meta__v--green" data-i18n="about_val_availability">CDI /
-                            Freelance / Remote</span>
+                        <span class="about-meta__v about-meta__v--green" data-i18n="about_val_availability">Indépendant
+                            — à distance, fuseau de Paris</span>
                     </div>
                 </div>
 
-                <a href="assets/cv/CV-KevinTENE.pdf" class="btn btn-primary" target="_blank">
-                    <i class="fas fa-arrow-down"></i>
-                    <span data-i18n="about_download_cv">Télécharger mon CV</span>
+                <a href="#contact" class="btn btn-primary">
+                    <span>Discuter de votre projet</span>
+                    <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
 
@@ -414,126 +736,15 @@
     </div>
 </section></div>
 
-        <!-- Skills Section -->
-        <div id="skills-section"><!-- Skills Section -->
-<section id="skills" class="skills">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-eyebrow">Stack technique</div>
-            <h2 class="section-title">Maîtrise technique, <em class="serif">de bout en bout</em></h2>
-            <p class="section-subtitle">Du modèle de données au store, en passant par l'agent IA :
-                une seule personne, toute la chaîne — c'est ce qui rend le prix fixe possible.</p>
-        </div>
-
-        <div class="skills-grid">
-            <!-- IA — priorité absolue -->
-            <div class="skill-block skill-block--hero" data-category="ai">
-                <div class="skill-block__head">
-                    <div class="skill-block__icon"><i class="fas fa-brain"></i></div>
-                    <div>
-                        <h3 class="skill-block__title">IA &amp; Automatisation</h3>
-                        <span class="skill-block__badge">Cœur d'expertise</span>
-                    </div>
-                </div>
-                <p class="skill-block__note">Des agents et des automatisations branchés sur vos
-                    outils réels, avec vos règles métier — pas des démos de chatbot.</p>
-                <div class="skill-tags">
-                    <span class="skill-tag skill-tag--lit">Intégration LLM</span>
-                    <span class="skill-tag skill-tag--lit">Agents autonomes</span>
-                    <span class="skill-tag skill-tag--lit">RAG / Embeddings</span>
-                    <span class="skill-tag">NLP / Vision</span>
-                    <span class="skill-tag">Automatisation de process</span>
-                    <span class="skill-tag">Prompt engineering</span>
-                    <span class="skill-tag">OpenRouter / API Claude &amp; GPT</span>
-                </div>
-            </div>
-
-            <!-- Mobile -->
-            <div class="skill-block" data-category="mobile">
-                <div class="skill-block__head">
-                    <div class="skill-block__icon"><i class="fas fa-mobile-alt"></i></div>
-                    <div>
-                        <h3 class="skill-block__title">Mobile</h3>
-                        <span class="skill-block__badge skill-block__badge--dim">5 apps en stores</span>
-                    </div>
-                </div>
-                <p class="skill-block__note">Du premier écran à la publication App Store &amp; Google Play.</p>
-                <div class="skill-tags">
-                    <span class="skill-tag skill-tag--lit">Flutter &amp; Dart</span>
-                    <span class="skill-tag">Clean Architecture</span>
-                    <span class="skill-tag">GetX</span>
-                    <span class="skill-tag">SDK &amp; paiements</span>
-                    <span class="skill-tag">Publication stores</span>
-                </div>
-            </div>
-
-            <!-- Backend -->
-            <div class="skill-block" data-category="backend">
-                <div class="skill-block__head">
-                    <div class="skill-block__icon"><i class="fas fa-server"></i></div>
-                    <div>
-                        <h3 class="skill-block__title">Backend &amp; SI</h3>
-                        <span class="skill-block__badge skill-block__badge--dim">Éprouvé en banque</span>
-                    </div>
-                </div>
-                <p class="skill-block__note">Des systèmes qui tiennent quand les choses se passent mal.</p>
-                <div class="skill-tags">
-                    <span class="skill-tag skill-tag--lit">Spring Boot</span>
-                    <span class="skill-tag skill-tag--lit">NestJS / Node</span>
-                    <span class="skill-tag">FastAPI / Python</span>
-                    <span class="skill-tag">PostgreSQL</span>
-                    <span class="skill-tag">Sécurité bancaire</span>
-                </div>
-            </div>
-
-            <!-- Frontend -->
-            <div class="skill-block" data-category="frontend">
-                <div class="skill-block__head">
-                    <div class="skill-block__icon"><i class="fas fa-laptop-code"></i></div>
-                    <div>
-                        <h3 class="skill-block__title">Web</h3>
-                        <span class="skill-block__badge skill-block__badge--dim">Senior</span>
-                    </div>
-                </div>
-                <p class="skill-block__note">Sites et applications rapides, propres, mesurables.</p>
-                <div class="skill-tags">
-                    <span class="skill-tag skill-tag--lit">Next.js / React</span>
-                    <span class="skill-tag">TypeScript</span>
-                    <span class="skill-tag">Tailwind</span>
-                    <span class="skill-tag">SEO technique</span>
-                </div>
-            </div>
-
-            <!-- DevOps -->
-            <div class="skill-block" data-category="devops">
-                <div class="skill-block__head">
-                    <div class="skill-block__icon"><i class="fas fa-gears"></i></div>
-                    <div>
-                        <h3 class="skill-block__title">DevOps &amp; Archi</h3>
-                        <span class="skill-block__badge skill-block__badge--dim">Confirmé</span>
-                    </div>
-                </div>
-                <p class="skill-block__note">Livraison continue, hébergement européen, monitoring.</p>
-                <div class="skill-tags">
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">CI/CD</span>
-                    <span class="skill-tag">Microservices</span>
-                    <span class="skill-tag">JWT / OAuth2</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-</div>
-
-        <!-- Experience Section -->
+        <!-- Experience (Références) Section -->
         <div id="experience-section"><!-- Experience Section -->
 <section id="experience" class="experience">
     <div class="container">
         <div class="section-header">
-            <div class="section-eyebrow" data-i18n="experience_eyebrow">Parcours</div>
-            <h2 class="section-title">7 ans à construire <em class="serif">des produits qui comptent</em></h2>
-            <p class="section-subtitle" data-i18n="experience_subtitle">7 ans à construire des produits à fort impact.</p>
+            <div class="section-eyebrow" data-i18n="experience_eyebrow">Références</div>
+            <h2 class="section-title">Les organisations qui <em class="serif">m'ont fait confiance</em></h2>
+            <p class="section-subtitle" data-i18n="experience_subtitle">7 ans de missions livrées — banques,
+                éditeurs et entreprises, à distance sur le fuseau de Paris.</p>
         </div>
 
         <div class="exp-timeline">
@@ -709,320 +920,189 @@
             </div>
 
         </div>
+
+        <div class="section-cta">
+            <p>Votre organisation pourrait être la prochaine.</p>
+            <a href="#contact" class="btn btn-primary">Parler de votre besoin</a>
+        </div>
     </div>
 </section>
 </div>
 
-        <!-- Projects Section -->
-        <div id="projects-section"><!-- Projects Section -->
-<section id="projects" class="projects">
+        <!-- Skills Section -->
+        <div id="skills-section"><!-- Skills Section -->
+<section id="skills" class="skills">
     <div class="container">
         <div class="section-header">
-            <div class="section-eyebrow" data-i18n="projects_title">Projets Récents</div>
-            <h2 class="section-title">Produits livrés, <em class="serif">à fort impact</em></h2>
-            <p class="section-subtitle" data-i18n="projects_subtitle">Découvrez une sélection de mes réalisations les
-                plus marquantes.</p>
+            <div class="section-eyebrow">Stack technique</div>
+            <h2 class="section-title">Maîtrise technique, <em class="serif">de bout en bout</em></h2>
+            <p class="section-subtitle">Du modèle de données au store, en passant par l'agent IA :
+                une seule personne, toute la chaîne — c'est ce qui rend le prix fixe possible.</p>
         </div>
 
-        <div class="projects-grid">
-
-            <!-- 01 — WhatsApp Banking — Featured -->
-            <div class="project-card" data-category="web backend">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/4g8p11J1/487831639-17889982299213811-5251000801365807965-n.jpg"
-                        alt="WhatsApp Banking">
-                    <span class="project-num">01</span>
-                    <span class="stamp project-stamp">30 000+ utilisateurs</span>
-                    <div class="project-overlay">
-                        <a href="https://wa.me/211912442446" class="project-link" target="_blank"
-                            aria-label="WhatsApp direct"><i class="fab fa-whatsapp"></i></a>
+        <div class="skills-grid">
+            <!-- IA — priorité absolue -->
+            <div class="skill-block skill-block--hero" data-category="ai">
+                <div class="skill-block__head">
+                    <div class="skill-block__icon"><i class="fas fa-brain"></i></div>
+                    <div>
+                        <h3 class="skill-block__title">IA &amp; Automatisation</h3>
+                        <span class="skill-block__badge">Cœur d'expertise</span>
                     </div>
                 </div>
-                <div class="project-content">
-                    <span class="project-cat">Banking · FinTech</span>
-                    <h3 class="project-title">WhatsApp Banking</h3>
-                    <p class="project-description" data-i18n="proj_desc_whatsapp">Solution bancaire sur WhatsApp conçue
-                        de A à Z pour Afriland First Bank South Sudan. Plus de 30 000 utilisateurs, avec des couches
-                        strictes de sécurité.</p>
-                    <div class="project-tags">
-                        <span class="tag" data-i18n="tag_chatbot">Chatbot IA</span>
-                        <span class="tag" data-i18n="tag_fintech">FinTech</span>
-                        <span class="tag" data-i18n="tag_security">Sécurité Strict</span>
-                        <span class="tag">Spring Boot</span>
-                    </div>
+                <p class="skill-block__note">Des agents et des automatisations branchés sur vos
+                    outils réels, avec vos règles métier — pas des démos de chatbot.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag skill-tag--lit">Intégration LLM</span>
+                    <span class="skill-tag skill-tag--lit">Agents autonomes</span>
+                    <span class="skill-tag skill-tag--lit">RAG / Embeddings</span>
+                    <span class="skill-tag">NLP / Vision</span>
+                    <span class="skill-tag">Automatisation de process</span>
+                    <span class="skill-tag">Prompt engineering</span>
+                    <span class="skill-tag">OpenRouter / API Claude &amp; GPT</span>
                 </div>
             </div>
 
-            <!-- 02 — First Bank Connect -->
-            <div class="project-card" data-category="mobile backend">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/0pBWdtxg/first-bank-connect.png" alt="First Bank Connect">
-                    <span class="project-num">02</span>
-                    <div class="project-overlay">
-                        <a href="https://play.google.com/store/search?q=first+bank+connect&c=apps" class="project-link"
-                            target="_blank"><i class="fab fa-google-play"></i></a>
+            <!-- Mobile -->
+            <div class="skill-block" data-category="mobile">
+                <div class="skill-block__head">
+                    <div class="skill-block__icon"><i class="fas fa-mobile-alt"></i></div>
+                    <div>
+                        <h3 class="skill-block__title">Mobile</h3>
+                        <span class="skill-block__badge skill-block__badge--dim">5 apps en stores</span>
                     </div>
                 </div>
-                <div class="project-content">
-                    <span class="project-cat">Mobile Banking · Flutter</span>
-                    <h3 class="project-title">First Bank Connect</h3>
-                    <p class="project-description">Application Mobile Banking développée de A à Z pour Afriland First
-                        Bank South Sudan. Authentification sécurisée, virements, consultation de compte en temps réel.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Flutter</span>
-                        <span class="tag" data-i18n="tag_fintech">FinTech</span>
-                        <span class="tag" data-i18n="tag_security">Sécurité</span>
-                        <span class="tag">Spring Boot</span>
-                    </div>
+                <p class="skill-block__note">Du premier écran à la publication App Store &amp; Google Play.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag skill-tag--lit">Flutter &amp; Dart</span>
+                    <span class="skill-tag">Clean Architecture</span>
+                    <span class="skill-tag">GetX</span>
+                    <span class="skill-tag">SDK &amp; paiements</span>
+                    <span class="skill-tag">Publication stores</span>
                 </div>
             </div>
 
-            <!-- 03 — KoriFlow -->
-            <div class="project-card" data-category="web saas ecommerce">
-                <div class="project-image">
-                    <img src="https://koriflow.com/opengraph-image" alt="KoriFlow">
-                    <span class="project-num">03</span>
-                    <div class="project-overlay">
-                        <a href="https://koriflow.com" class="project-link" target="_blank"
-                            aria-label="Voir KoriFlow"><i class="fas fa-external-link-alt"></i></a>
+            <!-- Backend -->
+            <div class="skill-block" data-category="backend">
+                <div class="skill-block__head">
+                    <div class="skill-block__icon"><i class="fas fa-server"></i></div>
+                    <div>
+                        <h3 class="skill-block__title">Backend &amp; SI</h3>
+                        <span class="skill-block__badge skill-block__badge--dim">Éprouvé en banque</span>
                     </div>
                 </div>
-                <div class="project-content">
-                    <span class="project-cat">SaaS · E-commerce · Fondateur</span>
-                    <h3 class="project-title">KoriFlow</h3>
-                    <p class="project-description">SaaS multi-tenant en production, dont je suis le fondateur :
-                        il automatise un business e-commerce de bout en bout — acquisition des clients par campagnes
-                        publicitaires, création de la boutique sur son propre domaine, suivi de stock, jusqu'à la
-                        livraison sur tout le territoire africain.</p>
-                    <div class="project-tags">
-                        <span class="tag">SaaS Multi-tenant</span>
-                        <span class="tag">E-commerce</span>
-                        <span class="tag">Next.js</span>
-                    </div>
+                <p class="skill-block__note">Des systèmes qui tiennent quand les choses se passent mal.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag skill-tag--lit">Spring Boot</span>
+                    <span class="skill-tag skill-tag--lit">NestJS / Node</span>
+                    <span class="skill-tag">FastAPI / Python</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">Sécurité bancaire</span>
                 </div>
             </div>
 
-            <!-- 04 — PosiaCrea -->
-            <div class="project-card" data-category="web ai">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/LDC5xNVx/image.png" alt="PosiaCrea">
-                    <span class="project-num">04</span>
-                    <div class="project-overlay">
-                        <a href="https://posiacrea.com/" class="project-link" target="_blank"><i
-                                class="fas fa-external-link-alt"></i></a>
+            <!-- Frontend -->
+            <div class="skill-block" data-category="frontend">
+                <div class="skill-block__head">
+                    <div class="skill-block__icon"><i class="fas fa-laptop-code"></i></div>
+                    <div>
+                        <h3 class="skill-block__title">Web</h3>
+                        <span class="skill-block__badge skill-block__badge--dim">Senior</span>
                     </div>
                 </div>
-                <div class="project-content">
-                    <span class="project-cat">IA · LinkedIn Automation</span>
-                    <h3 class="project-title">PosiaCrea</h3>
-                    <p class="project-description" data-i18n="proj_desc_posia">Assistant IA pour LinkedIn professionnel.
-                        Génère, planifie et publie automatiquement des posts personnalisés reflétant votre voix unique.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Next.js</span>
-                        <span class="tag" data-i18n="tag_ai_nlpv">IA (NLP/Vision)</span>
-                        <span class="tag" data-i18n="tag_automation">Automation</span>
-                    </div>
+                <p class="skill-block__note">Sites et applications rapides, propres, mesurables.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag skill-tag--lit">Next.js / React</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Tailwind</span>
+                    <span class="skill-tag">SEO technique</span>
                 </div>
             </div>
 
-            <!-- 05 — Thamani -->
-            <div class="project-card" data-category="web ecommerce backend">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/V06dXcg9/thamani.png" alt="Thamani">
-                    <span class="project-num">05</span>
-                    <div class="project-overlay">
-                        <a href="https://thamani.shop" class="project-link" target="_blank"><i
-                                class="fas fa-external-link-alt"></i></a>
+            <!-- DevOps -->
+            <div class="skill-block" data-category="devops">
+                <div class="skill-block__head">
+                    <div class="skill-block__icon"><i class="fas fa-gears"></i></div>
+                    <div>
+                        <h3 class="skill-block__title">DevOps &amp; Archi</h3>
+                        <span class="skill-block__badge skill-block__badge--dim">Confirmé</span>
                     </div>
                 </div>
-                <div class="project-content">
-                    <span class="project-cat">E-commerce · Made in Cameroun</span>
-                    <h3 class="project-title">Thamani</h3>
-                    <p class="project-description">Plateforme e-commerce promouvant exclusivement le Made in Cameroun.
-                        Gestion des stocks, entrepôts et livraisons intégrée.</p>
-                    <div class="project-tags">
-                        <span class="tag">NestJS</span>
-                        <span class="tag">ReactJS</span>
-                        <span class="tag" data-i18n="tag_marketplace">E-commerce</span>
-                    </div>
+                <p class="skill-block__note">Livraison continue, hébergement européen, monitoring.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">CI/CD</span>
+                    <span class="skill-tag">Microservices</span>
+                    <span class="skill-tag">JWT / OAuth2</span>
                 </div>
             </div>
-
-            <!-- 06 — Assiste-Moi -->
-            <div class="project-card" data-category="mobile">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/YTjy6MTq/511280677-590441170769979-3248937549129564709-n.jpg"
-                        alt="Assiste-Moi">
-                    <span class="project-num">06</span>
-                    <div class="project-overlay">
-                        <a href="https://play.google.com/store/apps/details?id=com.assistme.assistemoi"
-                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
-                        <a href="https://apps.apple.com/us/app/assiste-moi/id6504642773" class="project-link"
-                            target="_blank"><i class="fab fa-app-store-ios"></i></a>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <span class="project-cat">Mobile · Éducation</span>
-                    <h3 class="project-title">Assiste-Moi</h3>
-                    <p class="project-description" data-i18n="proj_desc_assiste">Plateforme éducative innovante
-                        facilitant l'accès aux ressources pédagogiques. Mission : donner à chaque apprenant les moyens
-                        de réussir.</p>
-                    <div class="project-tags">
-                        <span class="tag">Flutter</span>
-                        <span class="tag">GetX</span>
-                        <span class="tag" data-i18n="tag_clean_arch">Clean Arch</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 07 — Hidima -->
-            <div class="project-card" data-category="mobile">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/35P5gQJ0/hidima.png" alt="Hidima">
-                    <span class="project-num">07</span>
-                    <div class="project-overlay">
-                        <a href="https://play.google.com/store/apps/details?id=com.empireplus.hidima"
-                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
-                        <a href="https://apps.apple.com/cm/app/hidima/id6596765556" class="project-link"
-                            target="_blank"><i class="fab fa-app-store-ios"></i></a>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <span class="project-cat">Mobile · Marketplace</span>
-                    <h3 class="project-title">Hidima</h3>
-                    <p class="project-description" data-i18n="proj_desc_hidima">Plateforme mobile connectant
-                        prestataires de services et clients camerounais. Disponible sur iOS et Android.</p>
-                    <div class="project-tags">
-                        <span class="tag">Flutter</span>
-                        <span class="tag">iOS & Android</span>
-                        <span class="tag" data-i18n="tag_marketplace">Marketplace</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 08 — Spideli -->
-            <div class="project-card" data-category="mobile">
-                <div class="project-image">
-                    <img src="https://spideli.com/shop/wp-content/uploads/2023/07/spideli-livraison-domicile1.jpg"
-                        alt="Spideli">
-                    <span class="project-num">08</span>
-                    <div class="project-overlay">
-                        <a href="https://play.google.com/store/apps/details?id=com.app.spideli.customer.services"
-                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
-                        <a href="https://spideli.com" class="project-link" target="_blank"><i
-                                class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <span class="project-cat">Mobile · Super-app</span>
-                    <h3 class="project-title">Spideli</h3>
-                    <p class="project-description" data-i18n="proj_desc_spideli">Plateforme de livraison multi-services
-                        en Afrique. Une app, mille services : livraison, taxi, restauration, e-commerce.</p>
-                    <div class="project-tags">
-                        <span class="tag">Flutter</span>
-                        <span class="tag" data-i18n="tag_multi_services">Multi-Services</span>
-                        <span class="tag" data-i18n="tag_geo">Géolocalisation</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 09 — Spideli Store -->
-            <div class="project-card" data-category="mobile ecommerce">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/YTbK2TxL/unnamed.webp" alt="Spideli Store">
-                    <span class="project-num">09</span>
-                    <div class="project-overlay">
-                        <a href="https://play.google.com/store/apps/details?id=com.spideli.business.services"
-                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <span class="project-cat">Mobile · E-commerce</span>
-                    <h3 class="project-title">Spideli Store</h3>
-                    <p class="project-description" data-i18n="proj_desc_spideli_store">Extension e-commerce de Spideli
-                        permettant aux commerçants de gérer leur boutique et leurs commandes.</p>
-                    <div class="project-tags">
-                        <span class="tag">Flutter</span>
-                        <span class="tag">E-commerce</span>
-                        <span class="tag">Dashboard</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 10 — Menosi CLI -->
-            <div class="project-card" data-category="web backend">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/fdKvshJt/Capture.png" alt="Menosi CLI">
-                    <span class="project-num">10</span>
-                    <div class="project-overlay">
-                        <a href="https://cli.menosi.net/home" class="project-link" target="_blank"><i
-                                class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <span class="project-cat">Backend · DevOps · CLI</span>
-                    <h3 class="project-title">Menosi CLI</h3>
-                    <p class="project-description" data-i18n="proj_desc_menosi">Outil en ligne de commande pour la
-                        génération et gestion de projets avec templates personnalisables.</p>
-                    <div class="project-tags">
-                        <span class="tag">CLI Tool</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">FastAPI</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 11 — FlexParent -->
-            <div class="project-card" data-category="mobile">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/k6DhNdtN/Capture.png" alt="FlexParent">
-                    <span class="project-num">11</span>
-                    <div class="project-overlay">
-                        <a href="https://play.google.com/store/apps/details?id=com.appnashtechflex.com"
-                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <span class="project-cat">Mobile · Éducation</span>
-                    <h3 class="project-title">FlexParent</h3>
-                    <p class="project-description" data-i18n="proj_desc_flex">Application mobile pour parents permettant
-                        le suivi scolaire, communication avec enseignants et gestion des activités.</p>
-                    <div class="project-tags">
-                        <span class="tag">Flutter</span>
-                        <span class="tag">Education</span>
-                        <span class="tag" data-i18n="tag_realtime">Real-time</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 12 — GSchool -->
-            <div class="project-card" data-category="mobile">
-                <div class="project-image">
-                    <img src="https://i.ibb.co/zWr384Sw/Capture.png" alt="GSchool">
-                    <span class="project-num">12</span>
-                    <div class="project-overlay">
-                        <a href="https://play.google.com/store/apps/details?id=com.etsgtech.gschool"
-                            class="project-link" target="_blank"><i class="fab fa-google-play"></i></a>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <span class="project-cat">Mobile · SaaS Scolaire</span>
-                    <h3 class="project-title">GSchool</h3>
-                    <p class="project-description" data-i18n="proj_desc_gschool">Plateforme de gestion scolaire complète
-                        : notes, absences, emplois du temps et communication école-parents.</p>
-                    <div class="project-tags">
-                        <span class="tag">Flutter</span>
-                        <span class="tag" data-i18n="tag_school_mgmt">School Mgmt</span>
-                        <span class="tag">API REST</span>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
-</section></div>
+</section>
+</div>
+
+        <!-- FAQ Section -->
+        <div id="faq-section"><!-- FAQ Section — traite les objections avant qu'elles ne bloquent le contact -->
+<section id="faq" class="faq">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-eyebrow">Questions fréquentes</div>
+            <h2 class="section-title">Ce que l'on me demande <em class="serif">avant de signer</em></h2>
+        </div>
+
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>Comment démarre un projet ?</summary>
+                <p>Un échange (WhatsApp, visio ou email) pour cadrer le besoin, puis je vous envoie un
+                    périmètre écrit : ce qui est inclus, ce qui ne l'est pas, la date de livraison.
+                    Vous versez 30 % d'acompte, et le travail commence — vous voyez une démo enregistrée
+                    dès le premier vendredi.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Et si le périmètre bouge en cours de route ?</summary>
+                <p>Le périmètre est écrit et signé avant le premier euro. S'il change, on en parle
+                    <strong>avant</strong>, jamais après : soit l'ajout attend la V2, soit on l'échange
+                    contre un élément du périmètre initial, soit il fait l'objet d'un avenant chiffré.
+                    Aucune surprise sur la facture, c'est la règle.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Comment se passe le paiement ?</summary>
+                <p>30 % à la commande, le solde à la livraison — par virement bancaire (SEPA ou
+                    international). Si je livre en retard sur la date convenue, le solde est offert.
+                    Clients de l'Union européenne : TVA non applicable (autoliquidation).</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>À qui appartient le code ?</summary>
+                <p>À vous, dès le premier jour : le code est poussé sur <strong>votre</strong> dépôt Git
+                    dès le premier commit. Vous n'êtes jamais dépendant de moi — n'importe quel
+                    développeur peut reprendre le projet demain.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Travailler à distance avec Yaoundé, ça se passe comment ?</summary>
+                <p>Comme avec un prestataire parisien : je suis sur le fuseau de Paris (UTC+1),
+                    disponible 9 h – 18 h, réponse sous 24 h ouvrées. Chaque vendredi vous recevez une
+                    démo enregistrée de l'avancement — vous ne vous demandez jamais où en est le projet.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Et après la livraison ?</summary>
+                <p>3 mois de garantie technique inclus : tout dysfonctionnement du périmètre livré est
+                    corrigé sans frais. Ensuite, le forfait Copilote (390 €/mois, sans engagement) couvre
+                    la surveillance, les corrections et une évolution par mois.</p>
+            </details>
+        </div>
+
+        <div class="section-cta">
+            <p>Une question qui n'est pas ici ?</p>
+            <a href="#contact" class="btn btn-primary">Posez-la directement</a>
+        </div>
+    </div>
+</section>
+</div>
 
         <!-- Contact Section -->
         <div id="contact-section"><!-- Contact Section -->
@@ -1075,7 +1155,7 @@
                     <a href="https://www.linkedin.com/in/kevin-tene-371a6b208" target="_blank" class="contact-social-btn" aria-label="LinkedIn">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="https://github.com/kevintene" target="_blank" class="contact-social-btn" aria-label="GitHub">
+                    <a href="https://github.com/Kevjes" target="_blank" class="contact-social-btn" aria-label="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
                     <a href="https://menosi.net" target="_blank" class="contact-social-btn" aria-label="Site web">
@@ -1197,6 +1277,11 @@
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <a class="wa-float" href="https://wa.me/237691231554?text=Bonjour%20Kevin%2C%20je%20vous%20contacte%20depuis%20votre%20portfolio."
+        target="_blank" rel="noopener" aria-label="Discuter sur WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 </footer>
 </div>
 
@@ -1223,10 +1308,11 @@
                 loadSection('navigation-section', 'sections/navigation/navigation.html'),
                 loadSection('hero-section', 'sections/hero/hero.html'),
                 loadSection('offres-section', 'sections/offres/offres.html'),
-                loadSection('about-section', 'sections/about/about.html'),
-                loadSection('skills-section', 'sections/skills/skills.html'),
-                loadSection('experience-section', 'sections/experience/experience.html'),
                 loadSection('projects-section', 'sections/projects/projects.html'),
+                loadSection('about-section', 'sections/about/about.html'),
+                loadSection('experience-section', 'sections/experience/experience.html'),
+                loadSection('skills-section', 'sections/skills/skills.html'),
+                loadSection('faq-section', 'sections/faq/faq.html'),
                 loadSection('contact-section', 'sections/contact/contact.html'),
                 loadSection('footer-section', 'sections/footer/footer.html')
             ]);
@@ -1234,7 +1320,6 @@
             // Now load all JavaScript files after sections are ready
             const scripts = [
                 'assets/js/main.js',
-                'assets/js/i18n.js',
                 'sections/navigation/navigation.js',
                 'sections/hero/hero.js',
                 'sections/about/about.js',
@@ -1255,11 +1340,6 @@
                     document.body.appendChild(script);
                 });
             }
-
-            // Load Firebase portfolio script
-            const firebaseScript = document.createElement('script');
-            firebaseScript.src = 'js/firebase-portfolio.js';
-            document.body.appendChild(firebaseScript);
 
             // Dispatch custom event when everything is loaded
             document.dispatchEvent(new CustomEvent('sectionsLoaded'));

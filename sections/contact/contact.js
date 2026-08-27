@@ -26,6 +26,38 @@
 
         // Add auto-resize for textarea
         autoResizeTextarea();
+
+        // Forfait présélectionné depuis la section Offres
+        initOffrePreselect();
+    }
+
+    // Un clic sur « Démarrer avec ce forfait » amène au formulaire avec le
+    // sujet déjà rempli et un message d'amorce — le visiteur n'a plus qu'à
+    // décrire son besoin.
+    function initOffrePreselect() {
+        document.addEventListener('click', function (e) {
+            const link = e.target.closest('.offre-choose');
+            if (!link) return;
+            const offre = link.dataset.offre || '';
+            const subject = document.getElementById('subject');
+            const message = document.getElementById('message');
+            if (subject) {
+                subject.value = 'Forfait ' + offre;
+                subject.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+            if (message && !message.value.trim()) {
+                message.value = 'Bonjour Kevin,\n\nLe forfait « ' + offre +
+                    ' » m\'intéresse. Voici mon besoin :\n';
+                message.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+            // Après le défilement vers #contact, on place le curseur au bon endroit.
+            setTimeout(function () {
+                if (message) {
+                    message.focus();
+                    message.setSelectionRange(message.value.length, message.value.length);
+                }
+            }, 650);
+        });
     }
 
     // Observe contact elements for scroll animations

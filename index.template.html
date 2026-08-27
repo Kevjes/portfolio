@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://kevintene.menosi.net/">
     <meta property="og:title" content="Kevin Tene — Automatisation IA &amp; développement sur mesure, à prix fixe">
     <meta property="og:description" content="Vos process manuels automatisés et en production en 3 semaines. WhatsApp Banking 30 000+ utilisateurs, 5 apps en stores, SaaS KoriFlow. Prix fixes, délais garantis.">
-    <meta property="og:image" content="https://i.ibb.co/BVfQBGyz/IMG-2821.png">
+    <meta property="og:image" content="https://kevintene.menosi.net/assets/img/kevin-portrait.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -27,7 +27,7 @@
     <title>Kevin Tene — Automatisation IA &amp; développement sur mesure, à prix fixe</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
     <meta name="theme-color" content="#F6F7F4">
 
@@ -36,10 +36,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
     <!-- Global CSS -->
     <link rel="stylesheet" href="assets/css/global.css">
@@ -52,6 +48,7 @@
     <link rel="stylesheet" href="sections/skills/skills.css">
     <link rel="stylesheet" href="sections/experience/experience.css">
     <link rel="stylesheet" href="sections/projects/projects.css">
+    <link rel="stylesheet" href="sections/faq/faq.css">
     <link rel="stylesheet" href="sections/contact/contact.css">
     <link rel="stylesheet" href="sections/footer/footer.css">
 
@@ -96,17 +93,20 @@
         <!-- Offres Section -->
         <div id="offres-section"><!-- @include sections/offres/offres.html --></div>
 
+        <!-- Projects Section — la preuve, juste après les prix -->
+        <div id="projects-section"><!-- @include sections/projects/projects.html --></div>
+
         <!-- About Section -->
         <div id="about-section"><!-- @include sections/about/about.html --></div>
+
+        <!-- Experience (Références) Section -->
+        <div id="experience-section"><!-- @include sections/experience/experience.html --></div>
 
         <!-- Skills Section -->
         <div id="skills-section"><!-- @include sections/skills/skills.html --></div>
 
-        <!-- Experience Section -->
-        <div id="experience-section"><!-- @include sections/experience/experience.html --></div>
-
-        <!-- Projects Section -->
-        <div id="projects-section"><!-- @include sections/projects/projects.html --></div>
+        <!-- FAQ Section -->
+        <div id="faq-section"><!-- @include sections/faq/faq.html --></div>
 
         <!-- Contact Section -->
         <div id="contact-section"><!-- @include sections/contact/contact.html --></div>
@@ -138,10 +138,11 @@
                 loadSection('navigation-section', 'sections/navigation/navigation.html'),
                 loadSection('hero-section', 'sections/hero/hero.html'),
                 loadSection('offres-section', 'sections/offres/offres.html'),
-                loadSection('about-section', 'sections/about/about.html'),
-                loadSection('skills-section', 'sections/skills/skills.html'),
-                loadSection('experience-section', 'sections/experience/experience.html'),
                 loadSection('projects-section', 'sections/projects/projects.html'),
+                loadSection('about-section', 'sections/about/about.html'),
+                loadSection('experience-section', 'sections/experience/experience.html'),
+                loadSection('skills-section', 'sections/skills/skills.html'),
+                loadSection('faq-section', 'sections/faq/faq.html'),
                 loadSection('contact-section', 'sections/contact/contact.html'),
                 loadSection('footer-section', 'sections/footer/footer.html')
             ]);
@@ -149,7 +150,6 @@
             // Now load all JavaScript files after sections are ready
             const scripts = [
                 'assets/js/main.js',
-                'assets/js/i18n.js',
                 'sections/navigation/navigation.js',
                 'sections/hero/hero.js',
                 'sections/about/about.js',
@@ -170,11 +170,6 @@
                     document.body.appendChild(script);
                 });
             }
-
-            // Load Firebase portfolio script
-            const firebaseScript = document.createElement('script');
-            firebaseScript.src = 'js/firebase-portfolio.js';
-            document.body.appendChild(firebaseScript);
 
             // Dispatch custom event when everything is loaded
             document.dispatchEvent(new CustomEvent('sectionsLoaded'));
