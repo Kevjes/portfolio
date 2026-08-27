@@ -84,12 +84,29 @@
             });
         });
 
-        function handleSubmit(e) {
+        // L'endpoint du moteur de prospection (meta contact-endpoint) :
+        // le message est stocké, Kevin est alerté sur Telegram, et le visiteur
+        // reçoit un accusé de réception par email. WhatsApp n'est que le repli
+        // si le serveur est injoignable.
+        function contactEndpoint() {
+            const meta = document.querySelector('meta[name="contact-endpoint"]');
+            return meta && meta.content ? meta.content.replace(/\/+$/, '') : '';
+        }
+
+        function whatsappFallback(name, email, subject, message) {
+            const text = `*NOUVEAU MESSAGE DEPUIS LE PORTFOLIO*\n` +
+                         `👤 ${name}\n📧 ${email}\n🏷️ ${subject}\n\n${message}`;
+            window.open(`https://wa.me/237691231554?text=${encodeURIComponent(text)}`,
+                        '_blank', 'noopener,noreferrer');
+        }
+
+        async function handleSubmit(e) {
             e.preventDefault();
             e.stopPropagation();
 
             let isValid = true;
             inputs.forEach(input => {
+                if (input.name === 'website') return;   // honeypot
                 if (!validateField(input)) isValid = false;
             });
 
@@ -101,32 +118,51 @@
             submitBtn.disabled = true;
             submitBtn.classList.add('loading');
 
-            const name    = form.querySelector('[name="name"]').value.trim();
-            const email   = form.querySelector('[name="email"]').value.trim();
-            const subject = form.querySelector('[name="subject"]').value.trim();
-            const message = form.querySelector('[name="message"]').value.trim();
+            const payload = {
+                name:    form.querySelector('[name="name"]').value.trim(),
+                email:   form.querySelector('[name="email"]').value.trim(),
+                subject: form.querySelector('[name="subject"]').value.trim(),
+                message: form.querySelector('[name="message"]').value.trim(),
+                website: (form.querySelector('[name="website"]') || {}).value || ''
+            };
 
-            const whatsappNumber = "237691231554";
-            const messageText = `*NOUVEAU MESSAGE DEPUIS LE PORTFOLIO*\n` +
-                               `------------------------------------------\n` +
-                               `👤 *Nom:* ${name}\n` +
-                               `📧 *Email:* ${email}\n` +
-                               `🏷️ *Sujet:* ${subject}\n\n` +
-                               `💬 *Message:*\n${message}\n` +
-                               `------------------------------------------\n` +
-                               `_Envoyé depuis le portfolio de Kevin Tene_`;
+            const endpoint = contactEndpoint();
+            let delivered = false;
 
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageText)}`;
+            if (endpoint) {
+                try {
+                    const res = await fetch(endpoint + '/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (res.ok) {
+                        const data = await res.json().catch(() => ({}));
+                        delivered = true;
+                        showFormStatus(
+                            data.accuse_de_reception
+                                ? 'Message envoyé ✔ Un accusé de réception vient de partir vers ' + payload.email + '. Réponse sous 24 h.'
+                                : 'Message envoyé ✔ Je vous réponds sous 24 h.',
+                            'success');
+                        form.reset();
+                        inputs.forEach(input => input.classList.remove('error'));
+                    } else if (res.status === 429) {
+                        showFormStatus('Trop de messages envoyés — réessayez dans une heure.', 'error');
+                        delivered = true;   // pas de repli WhatsApp sur un rate-limit
+                    }
+                } catch (err) {
+                    // réseau injoignable : on tentera le repli
+                }
+            }
 
-            showFormStatus('Redirection vers WhatsApp...', 'success');
-
-            setTimeout(() => {
-                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('loading');
+            if (!delivered) {
+                showFormStatus('Serveur momentanément injoignable — ouverture de WhatsApp…', 'success');
+                whatsappFallback(payload.name, payload.email, payload.subject, payload.message);
                 form.reset();
-                inputs.forEach(input => input.classList.remove('error'));
-            }, 600);
+            }
+
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('loading');
         }
 
         form.addEventListener('submit', handleSubmit);

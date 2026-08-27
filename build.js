@@ -17,7 +17,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = __dirname;
-const SITE_URL = 'https://kevintene.vercel.app'; // à changer avec le futur domaine
+const SITE_URL = 'https://kevintene.menosi.net'; // à changer avec le futur domaine
 
 // ---------- index.html ----------
 const templatePath = path.join(ROOT, 'index.template.html');
