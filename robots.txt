@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kevintene.vercel.app/sitemap.xml
+Sitemap: https://kevintene.menosi.net/sitemap.xml

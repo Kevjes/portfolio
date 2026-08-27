@@ -229,7 +229,7 @@
         ].join(';');
 
         console.log('%c👋 Salut développeur !', styles);
-        console.log('%cExpert IA & Fullstack — kevinjessi10@gmail.com', 'color: #6B6B6B');
+        console.log('%cExpert IA & Fullstack — kevintene@menosi.net', 'color: #6B6B6B');
         console.log('%c⚡ Built by Kevin Tene', 'color: #F59E0B');
     }
 
