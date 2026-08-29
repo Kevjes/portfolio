@@ -161,7 +161,7 @@
             'tag_si_arch': 'Architecture SI',
 
             // Project Descriptions
-            'proj_desc_whatsapp': 'Solution bancaire sur WhatsApp conçue de A à Z pour Afriland First Bank South Sudan. Plus de 30 000 utilisateurs, avec des couches strictes de sécurité.',
+            'proj_desc_whatsapp': 'Solution bancaire sur WhatsApp conçue de A à Z pour Afriland First Bank South Sudan, en production, avec des couches strictes de sécurité.',
             'proj_desc_assiste': 'Plateforme éducative innovante facilitant l\'accès aux ressources pédagogiques. Mission : donner à chaque apprenant les moyens de réussir.',
             'proj_desc_posia': 'Assistant IA pour LinkedIn professionnel. Génère, planifie et publie automatiquement des posts personnalisés reflétant votre voix unique.',
             'proj_desc_hidima': 'Plateforme mobile connectant prestataires de services et clients camerounais. Disponible sur iOS et Android.',
@@ -325,7 +325,7 @@
             'tag_si_arch': 'IS Architecture',
 
             // Project Descriptions
-            'proj_desc_whatsapp': 'WhatsApp banking solution designed from scratch for Afriland First Bank South Sudan. Over 30,000 users, with strict security layers.',
+            'proj_desc_whatsapp': 'WhatsApp banking solution designed from scratch for Afriland First Bank South Sudan, live in production, with strict security layers.',
             'proj_desc_assiste': 'Innovative educational platform facilitating access to teaching resources. Mission: empowering every learner to succeed.',
             'proj_desc_posia': 'AI assistant for professional LinkedIn. Automatically generates, schedules, and publishes personalized posts reflecting your unique voice.',
             'proj_desc_hidima': 'Mobile platform connecting service providers and Cameroonian clients. Available on iOS and Android.',

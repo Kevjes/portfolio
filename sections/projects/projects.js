@@ -8,7 +8,7 @@
             features: [
                 'Conception et développement complet de la solution de A à Z',
                 'Intégration sécurisée avec le Core Banking System d\'Afriland First Bank',
-                '30 000+ utilisateurs actifs avec haute disponibilité',
+                'En production avec haute disponibilité pour un groupe bancaire panafricain',
                 'Couches de sécurité strictes conformes aux standards FinTech',
                 'Architecture backend Spring Boot haute performance'
             ]
