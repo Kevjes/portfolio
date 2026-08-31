@@ -1,11 +1,6 @@
 {
   "version": "0.0.1",
   "configurations": [
-    {
-      "name": "portfolio",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8123", "--directory", "D:/Codage/WEB/portfolio"],
-      "port": 8123
-    }
+    { "name": "portfolio", "runtimeExecutable": "npx", "runtimeArgs": ["-y", "serve", "-l", "8129", "."], "port": 8129 }
   ]
 }
